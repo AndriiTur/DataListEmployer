@@ -7,21 +7,21 @@ namespace DataListEmployer
 {
     public class Employee
     {
-        private int personID;
+        private int emploeeID;
         private string surname;
         private string name;
         private DateTime date_Of_Employment;
-        private int salary;
+        private double salary;
         
-        public int PersonID { get { return personID; } }
+        public int EmploeeID { get { return emploeeID; } }
         public string Surname { get { return surname; } }
         public string Name { get { return name; } }
         public DateTime Date_Of_Employment { get { return date_Of_Employment; } }
-        public int Salary { get { return salary;} set { salary = value; } }
+        public double Salary { get { return salary;} set { salary = value; } }
 
-        public Employee(int personID,string surname, string name, DateTime date_Of_Employment, int salary)
+        public Employee(int emploeeID,string surname, string name, DateTime date_Of_Employment, double salary)
         {
-            this.personID = personID;
+            this.emploeeID = emploeeID;
             this.surname = surname;
             this.name = name;
             this.date_Of_Employment = date_Of_Employment;
