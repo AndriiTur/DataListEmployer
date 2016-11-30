@@ -119,9 +119,9 @@ namespace DataListEmployer
                 resultStr += " " + index.ToString() +
                              " " + employee.Surname.ToString() +
                              " " + employee.Name.ToString() +
-                             " " + date_Of_Employment.Day.ToString() +
-                             "." + date_Of_Employment.Month.ToString() +
-                             "." + date_Of_Employment.Year.ToString() +
+                             " " + employee.Date_Of_Employment.Day.ToString() +
+                             "." + employee.Date_Of_Employment.Month.ToString() +
+                             "." + employee.Date_Of_Employment.Year.ToString() +
                              " " + employee.Salary.ToString() + " " + "$" + "\r\n";
             }
             return resultStr;
@@ -134,12 +134,43 @@ namespace DataListEmployer
                 file.WriteLine(RefreshString());
         }
 
+        private void SurnameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            {
+                e.Handled = true;
+            }
+            if ((SurnameTextBox.Text != "") &&
+                   (NameTextBox.Text != "") &&
+                   (DateTextBox.Text != "") &&
+                   (SalaryTextBox.Text != ""))
+                AddEmployerButton.Visible = true;
+        }
+
+        private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            {
+                e.Handled = true;
+            }
+            if ((SurnameTextBox.Text != "") &&
+                   (NameTextBox.Text != "") &&
+                   (DateTextBox.Text != "") &&
+                   (SalaryTextBox.Text != ""))
+                AddEmployerButton.Visible = true;
+        }
+
         private void DateTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(46) && e.KeyChar != Convert.ToChar(8))
             {
                 e.Handled = true;
             }
+            if ((SurnameTextBox.Text != "") &&
+                   (NameTextBox.Text != "") &&
+                   (DateTextBox.Text != "") &&
+                   (SalaryTextBox.Text != ""))
+                AddEmployerButton.Visible = true;
         }
 
         private void SalaryTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -158,6 +189,42 @@ namespace DataListEmployer
         private void RemoveComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             RemoveButton.Visible = true;
+        }
+
+        private void SurnameTextBox_Enter(object sender, EventArgs e)
+        {
+            ToolTip ttSur = new ToolTip();
+            ttSur.IsBalloon = true;
+            ttSur.InitialDelay = 0;
+            ttSur.ShowAlways = true;
+            ttSur.SetToolTip(SurnameTextBox, "Only Letter");
+        }
+
+        private void NameTextBox_Enter(object sender, EventArgs e)
+        {
+            ToolTip ttName = new ToolTip();
+            ttName.IsBalloon = true;
+            ttName.InitialDelay = 0;
+            ttName.ShowAlways = true;
+            ttName.SetToolTip(NameTextBox, "Only Letter");
+        }
+
+        private void DateTextBox_Enter(object sender, EventArgs e)
+        {
+            ToolTip ttDate = new ToolTip();
+            ttDate.IsBalloon = true;
+            ttDate.InitialDelay = 0;
+            ttDate.ShowAlways = true;
+            ttDate.SetToolTip(DateTextBox, "Enter date 20.12.2000");
+        }
+
+        private void SalaryTextBox_Enter(object sender, EventArgs e)
+        {
+            ToolTip ttSalary = new ToolTip();
+            ttSalary.IsBalloon = true;
+            ttSalary.InitialDelay = 0;
+            ttSalary.ShowAlways = true;
+            ttSalary.SetToolTip(SalaryTextBox, "Enter digit 1,234");
         }
     }
 }

@@ -60,6 +60,8 @@
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.Size = new System.Drawing.Size(174, 20);
             this.SurnameTextBox.TabIndex = 1;
+            this.SurnameTextBox.Enter += new System.EventHandler(this.SurnameTextBox_Enter);
+            this.SurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
             // 
             // NameTextBox
             // 
@@ -67,6 +69,8 @@
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(174, 20);
             this.NameTextBox.TabIndex = 2;
+            this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
+            this.NameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
             // DateTextBox
             // 
@@ -74,6 +78,7 @@
             this.DateTextBox.Name = "DateTextBox";
             this.DateTextBox.Size = new System.Drawing.Size(174, 20);
             this.DateTextBox.TabIndex = 3;
+            this.DateTextBox.Enter += new System.EventHandler(this.DateTextBox_Enter);
             this.DateTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DateTextBox_KeyPress);
             // 
             // SalaryTextBox
@@ -82,6 +87,7 @@
             this.SalaryTextBox.Name = "SalaryTextBox";
             this.SalaryTextBox.Size = new System.Drawing.Size(174, 20);
             this.SalaryTextBox.TabIndex = 4;
+            this.SalaryTextBox.Enter += new System.EventHandler(this.SalaryTextBox_Enter);
             this.SalaryTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SalaryTextBox_KeyPress);
             // 
             // label1
