@@ -164,6 +164,7 @@
             this.RemoveComboBox.TabIndex = 5;
             this.RemoveComboBox.Tag = "";
             this.RemoveComboBox.SelectedIndexChanged += new System.EventHandler(this.RemoveComboBox_SelectedIndexChanged);
+            this.RemoveComboBox.Enter += new System.EventHandler(this.RemoveComboBox_Enter);
             // 
             // Form1
             // 

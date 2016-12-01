@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,126 +13,120 @@ namespace DataListEmployer
 {
     public partial class Form1 : Form
     {
-        public static Employee employee;
-        public static List<Employee> employees;
-        public static int employeeID = 1;
-        public static string surname;
-        public static string name;
-        public static DateTime date_Of_Employment;
-        public static double salary;
+        public Employee employee;
+        public List<Employee> employees;
         
         public Form1()
         {
-            var date_Of_Employment = new DateTime { };
             employees = new List<Employee>();
             InitializeComponent();
             LoadToEmployersList();
-            ResultTextBox.Text = RefreshString();
-            foreach (var employee in employees)
-            {
-                RemoveComboBox.Items.Add(employee.Surname + " " + employee.Name);
-            }
-            RemoveComboBox.Text = "Choice...";
         }
 
-        internal static void LoadToEmployersList()
+        internal void LoadToEmployersList()
         {
             string lineFromFile = "";
             string[] strArray = new string[] { };
-            using (System.IO.StreamReader file =
-               new System.IO.StreamReader(@"D:\job\projects\DataListEmployer\WriteData.txt"))
-                lineFromFile = file.ReadToEnd();
-            strArray = lineFromFile.Split(' ');
-
-            for (int i = 1; i <= strArray.Length - 6; i += 6)
+            if (File.Exists(@"WriteData.txt"))
             {
-                employeeID = int.Parse(strArray[i]);
-                surname = strArray[i + 1];
-                name = strArray[i + 2];
-                date_Of_Employment = DateTime.Parse(strArray[i + 3]);
-                salary = double.Parse(strArray[i + 4]);
-                AddEmployer();
+                using (StreamReader file = new StreamReader(@"WriteData.txt"))
+                      lineFromFile = file.ReadToEnd();
+                if (lineFromFile != "")
+                {
+                    strArray = lineFromFile.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                    for (int i = 0; i < strArray.Length; i++)
+                    {
+                        if (strArray[i] != "")
+                        AddEmployer(strArray[i]);
+                    }
+                    RefreshForm();
+                }
             }
         }
 
-        internal static void AddEmployer()
+        internal void AddEmployer(string employeeStr)
         {
-            employeeID++;
-            employee = new Employee(employeeID, surname, name, date_Of_Employment, salary);
-            employees.Add(employee);
-            RefreshString();
-        }
-
-        private void AddEmployerButton_Click(object sender, EventArgs e)
-        {
-            surname = SurnameTextBox.Text;
-            name = NameTextBox.Text;
-            date_Of_Employment = Convert.ToDateTime(DateTextBox.Text);
-            salary = double.Parse(SalaryTextBox.Text);
-            AddEmployer();
-            SaveToFile();
-            RemoveComboBox.Items.Add(surname + " " + name);
-            RemoveComboBox.Text = "Choice...";
+            employees.Add(Employee.LoadFromString(employeeStr));
             SurnameTextBox.Clear();
             DateTextBox.Clear();
             NameTextBox.Clear();
             SalaryTextBox.Clear();
-            ResultTextBox.Clear();
-            ResultTextBox.Text = RefreshString();
+        }
+
+        private void AddEmployerButton_Click(object sender, EventArgs e)
+        {
+            int employeeID = 1;
+            string surname = "";
+            string name = "";
+            DateTime date_Of_Employment = new DateTime { };
+            double salary = 0;
+            
+            employeeID = employees.Count + 1;
+            surname = SurnameTextBox.Text;
+            name = NameTextBox.Text;
+            date_Of_Employment = DateTime.Parse(DateTextBox.Text);
+            salary = double.Parse(SalaryTextBox.Text);
+            employee = new Employee(employeeID, surname, name, date_Of_Employment, salary);
+            AddEmployer(Employee.SaveToString(employee, Employee.EmployeeToStringMode.store));
+            RefreshForm();
+            SaveToFile();
             AddEmployerButton.Visible = false;
         }
 
-        internal static void RemoveEmployer(object fullEmployeeName)
+        internal void RemoveEmployer(int val)
         {
-            string[] arrSrr = new string[] { };
-            arrSrr = fullEmployeeName.ToString().Split(' ');
-            foreach (var employee in employees)
+            for (int i = 0; i < employees.Count; i++)
             {
-                if (employee.Surname == arrSrr[0])
+                if (i == val)
                 {
-                    employees.Remove(employee);
+                    employees.Remove(employees[i]);
                     break;
                 }
             }
+            RefreshForm();
+            SaveToFile();
+            RemoveButton.Visible = false;
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             if (RemoveComboBox.SelectedItem != null)
             {
-                RemoveEmployer(RemoveComboBox.SelectedItem);
+                RemoveEmployer(RemoveComboBox.SelectedIndex);
                 RemoveComboBox.Items.Remove(RemoveComboBox.SelectedItem);
-                RemoveComboBox.Text = "Choice...";
-                ResultTextBox.Clear();
-                ResultTextBox.Text = RefreshString();
-                SaveToFile();
-                RemoveButton.Visible = false;
             }
         }
 
-        internal static string RefreshString()
+        internal void SaveToFile()
         {
-            string resultStr = "";
-            int index = 0;
+            using (StreamWriter file =
+                new StreamWriter(@"WriteData.txt"))
+            {
+                foreach (var employee in employees)
+                file.WriteLine(Employee.SaveToString(employee,Employee.EmployeeToStringMode.store));
+            }
+        }
+
+        internal void RefreshForm()
+        {
+            RemoveComboBox.Items.Clear();
+            ResultTextBox.Clear();
             foreach (var employee in employees)
             {
-                index++;
-                resultStr += " " + index.ToString() +
-                             " " + employee.Surname.ToString() +
-                             " " + employee.Name.ToString() +
-                             " " + employee.Date_Of_Employment.Day.ToString() +
-                             "." + employee.Date_Of_Employment.Month.ToString() +
-                             "." + employee.Date_Of_Employment.Year.ToString() +
-                             " " + employee.Salary.ToString() + " " + "$" + "\r\n";
+                RemoveComboBox.Items.Add(employee.Surname + " " + employee.Name);
+                ResultTextBox.Text += Employee.SaveToString(employee, Employee.EmployeeToStringMode.displayInfo);
             }
-            return resultStr;
+            RemoveComboBox.Text = "Choice...";
         }
 
-        internal static void SaveToFile()
+        private void EpdateAddButtonVisibility()
         {
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(@"D:\job\projects\DataListEmployer\WriteData.txt"))
-                file.WriteLine(RefreshString());
+            if ((SurnameTextBox.Text != "") &&
+                (NameTextBox.Text != "") &&
+                (DateTextBox.Text != "") &&
+                (SalaryTextBox.Text != "")
+            )
+                AddEmployerButton.Visible = true;
         }
 
         private void SurnameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -140,11 +135,7 @@ namespace DataListEmployer
             {
                 e.Handled = true;
             }
-            if ((SurnameTextBox.Text != "") &&
-                   (NameTextBox.Text != "") &&
-                   (DateTextBox.Text != "") &&
-                   (SalaryTextBox.Text != ""))
-                AddEmployerButton.Visible = true;
+            this.EpdateAddButtonVisibility();
         }
 
         private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -153,24 +144,21 @@ namespace DataListEmployer
             {
                 e.Handled = true;
             }
-            if ((SurnameTextBox.Text != "") &&
-                   (NameTextBox.Text != "") &&
-                   (DateTextBox.Text != "") &&
-                   (SalaryTextBox.Text != ""))
-                AddEmployerButton.Visible = true;
+            this.EpdateAddButtonVisibility();
         }
 
         private void DateTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(46) && e.KeyChar != Convert.ToChar(8))
+            if (!Char.IsDigit(e.KeyChar) 
+                && e.KeyChar != Convert.ToChar(46) 
+                && e.KeyChar != Convert.ToChar(8)
+                && e.KeyChar != Convert.ToChar(32)
+                && e.KeyChar != Convert.ToChar(58)
+               )
             {
                 e.Handled = true;
             }
-            if ((SurnameTextBox.Text != "") &&
-                   (NameTextBox.Text != "") &&
-                   (DateTextBox.Text != "") &&
-                   (SalaryTextBox.Text != ""))
-                AddEmployerButton.Visible = true;
+            this.EpdateAddButtonVisibility();
         }
 
         private void SalaryTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -179,11 +167,7 @@ namespace DataListEmployer
             {
                 e.Handled = true;
             }
-            if ((SurnameTextBox.Text != "") &&
-                   (NameTextBox.Text != "") &&
-                   (DateTextBox.Text != "") &&
-                   (SalaryTextBox.Text != ""))
-                AddEmployerButton.Visible = true;
+            this.EpdateAddButtonVisibility();
         }
 
         private void RemoveComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -193,38 +177,36 @@ namespace DataListEmployer
 
         private void SurnameTextBox_Enter(object sender, EventArgs e)
         {
-            ToolTip ttSur = new ToolTip();
-            ttSur.IsBalloon = true;
-            ttSur.InitialDelay = 0;
-            ttSur.ShowAlways = true;
-            ttSur.SetToolTip(SurnameTextBox, "Only Letter");
+            ToolTipAdd().SetToolTip(SurnameTextBox, "Only Letter");
         }
 
         private void NameTextBox_Enter(object sender, EventArgs e)
         {
-            ToolTip ttName = new ToolTip();
-            ttName.IsBalloon = true;
-            ttName.InitialDelay = 0;
-            ttName.ShowAlways = true;
-            ttName.SetToolTip(NameTextBox, "Only Letter");
+            ToolTipAdd().SetToolTip(NameTextBox, "Only Letter");
         }
 
         private void DateTextBox_Enter(object sender, EventArgs e)
         {
-            ToolTip ttDate = new ToolTip();
-            ttDate.IsBalloon = true;
-            ttDate.InitialDelay = 0;
-            ttDate.ShowAlways = true;
-            ttDate.SetToolTip(DateTextBox, "Enter date 20.12.2000");
+            ToolTipAdd().SetToolTip(DateTextBox, "Enter date DD.MM.Year and time 00:00");
         }
 
         private void SalaryTextBox_Enter(object sender, EventArgs e)
         {
-            ToolTip ttSalary = new ToolTip();
-            ttSalary.IsBalloon = true;
-            ttSalary.InitialDelay = 0;
-            ttSalary.ShowAlways = true;
-            ttSalary.SetToolTip(SalaryTextBox, "Enter digit 1,234");
+            ToolTipAdd().SetToolTip(SalaryTextBox, "Enter digit 1,234");
+        }
+
+        private ToolTip ToolTipAdd()
+        {
+            ToolTip tt = new ToolTip();
+            tt.IsBalloon = true;
+            tt.InitialDelay = 0;
+            tt.ShowAlways = true;
+            return tt;
+        }
+
+        private void RemoveComboBox_Enter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(RemoveComboBox, "Choice employee to remove");
         }
     }
 }
