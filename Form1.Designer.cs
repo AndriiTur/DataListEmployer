@@ -41,6 +41,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ResultTextBox = new System.Windows.Forms.TextBox();
             this.RemoveComboBox = new System.Windows.Forms.ComboBox();
+            this.EmployeeDataGridView = new System.Windows.Forms.DataGridView();
+            this.EmployeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataOfEmployee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // AddEmployerButton
@@ -151,7 +158,7 @@
             this.ResultTextBox.Location = new System.Drawing.Point(12, 188);
             this.ResultTextBox.Multiline = true;
             this.ResultTextBox.Name = "ResultTextBox";
-            this.ResultTextBox.Size = new System.Drawing.Size(523, 157);
+            this.ResultTextBox.Size = new System.Drawing.Size(523, 99);
             this.ResultTextBox.TabIndex = 6;
             this.ResultTextBox.TabStop = false;
             // 
@@ -166,11 +173,78 @@
             this.RemoveComboBox.SelectedIndexChanged += new System.EventHandler(this.RemoveComboBox_SelectedIndexChanged);
             this.RemoveComboBox.Enter += new System.EventHandler(this.RemoveComboBox_Enter);
             // 
+            // EmployeeDataGridView
+            // 
+            this.EmployeeDataGridView.AllowUserToAddRows = false;
+            this.EmployeeDataGridView.AllowUserToDeleteRows = false;
+            this.EmployeeDataGridView.AllowUserToResizeColumns = false;
+            this.EmployeeDataGridView.AllowUserToResizeRows = false;
+            this.EmployeeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.EmployeeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EmployeeID,
+            this.Surname,
+            this.EmployeeName,
+            this.DataOfEmployee,
+            this.Salary});
+            this.EmployeeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.EmployeeDataGridView.Location = new System.Drawing.Point(12, 293);
+            this.EmployeeDataGridView.MultiSelect = false;
+            this.EmployeeDataGridView.Name = "EmployeeDataGridView";
+            this.EmployeeDataGridView.ReadOnly = true;
+            this.EmployeeDataGridView.RowHeadersVisible = false;
+            this.EmployeeDataGridView.RowTemplate.ReadOnly = true;
+            this.EmployeeDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.EmployeeDataGridView.ShowCellErrors = false;
+            this.EmployeeDataGridView.ShowCellToolTips = false;
+            this.EmployeeDataGridView.ShowEditingIcon = false;
+            this.EmployeeDataGridView.ShowRowErrors = false;
+            this.EmployeeDataGridView.Size = new System.Drawing.Size(523, 221);
+            this.EmployeeDataGridView.TabIndex = 7;
+            // 
+            // EmployeeID
+            // 
+            this.EmployeeID.FillWeight = 50F;
+            this.EmployeeID.HeaderText = "ID";
+            this.EmployeeID.Name = "EmployeeID";
+            this.EmployeeID.ReadOnly = true;
+            this.EmployeeID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.EmployeeID.Width = 50;
+            // 
+            // Surname
+            // 
+            this.Surname.HeaderText = "Surname";
+            this.Surname.Name = "Surname";
+            this.Surname.ReadOnly = true;
+            this.Surname.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // EmployeeName
+            // 
+            this.EmployeeName.HeaderText = "Name";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            this.EmployeeName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // DataOfEmployee
+            // 
+            this.DataOfEmployee.FillWeight = 140F;
+            this.DataOfEmployee.HeaderText = "DataOfEmployee";
+            this.DataOfEmployee.Name = "DataOfEmployee";
+            this.DataOfEmployee.ReadOnly = true;
+            this.DataOfEmployee.Width = 140;
+            // 
+            // Salary
+            // 
+            this.Salary.HeaderText = "Salary";
+            this.Salary.Name = "Salary";
+            this.Salary.ReadOnly = true;
+            this.Salary.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 357);
+            this.ClientSize = new System.Drawing.Size(543, 526);
+            this.Controls.Add(this.EmployeeDataGridView);
             this.Controls.Add(this.RemoveComboBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -186,6 +260,7 @@
             this.Controls.Add(this.AddEmployerButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,6 +281,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox ResultTextBox;
         private System.Windows.Forms.ComboBox RemoveComboBox;
+        private System.Windows.Forms.DataGridView EmployeeDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataOfEmployee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Salary;
     }
 }
 
