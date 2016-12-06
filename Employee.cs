@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml;
-namespace DataListEmployer
+namespace ManagerProject
 {
     public class Employee
     {

@@ -1,4 +1,4 @@
-﻿namespace DataListEmployer
+﻿namespace ManagerProject
 {
     partial class Form1
     {
@@ -28,150 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.AddEmployerButton = new System.Windows.Forms.Button();
-            this.SurnameTextBox = new System.Windows.Forms.TextBox();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.DateTextBox = new System.Windows.Forms.TextBox();
-            this.SalaryTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.RemoveButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.ResultTextBox = new System.Windows.Forms.TextBox();
-            this.RemoveComboBox = new System.Windows.Forms.ComboBox();
+            this.components = new System.ComponentModel.Container();
             this.EmployeeDataGridView = new System.Windows.Forms.DataGridView();
-            this.EmployeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataOfEmployee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SettingsPanel = new System.Windows.Forms.Panel();
+            this.AddEmployeeButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.EmployeeDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SurnameTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.SalaryTextBox = new System.Windows.Forms.TextBox();
+            this.DeletePanel = new System.Windows.Forms.Panel();
+            this.RemoveComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).BeginInit();
+            this.SettingsPanel.SuspendLayout();
+            this.DeletePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // AddEmployerButton
-            // 
-            this.AddEmployerButton.Location = new System.Drawing.Point(203, 21);
-            this.AddEmployerButton.Name = "AddEmployerButton";
-            this.AddEmployerButton.Size = new System.Drawing.Size(75, 23);
-            this.AddEmployerButton.TabIndex = 0;
-            this.AddEmployerButton.Text = "AddEmployer";
-            this.AddEmployerButton.UseVisualStyleBackColor = true;
-            this.AddEmployerButton.Visible = false;
-            this.AddEmployerButton.Click += new System.EventHandler(this.AddEmployerButton_Click);
-            // 
-            // SurnameTextBox
-            // 
-            this.SurnameTextBox.Location = new System.Drawing.Point(12, 24);
-            this.SurnameTextBox.Name = "SurnameTextBox";
-            this.SurnameTextBox.Size = new System.Drawing.Size(174, 20);
-            this.SurnameTextBox.TabIndex = 1;
-            this.SurnameTextBox.Enter += new System.EventHandler(this.SurnameTextBox_Enter);
-            this.SurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
-            // 
-            // NameTextBox
-            // 
-            this.NameTextBox.Location = new System.Drawing.Point(12, 67);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(174, 20);
-            this.NameTextBox.TabIndex = 2;
-            this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
-            this.NameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
-            // 
-            // DateTextBox
-            // 
-            this.DateTextBox.Location = new System.Drawing.Point(12, 110);
-            this.DateTextBox.Name = "DateTextBox";
-            this.DateTextBox.Size = new System.Drawing.Size(174, 20);
-            this.DateTextBox.TabIndex = 3;
-            this.DateTextBox.Enter += new System.EventHandler(this.DateTextBox_Enter);
-            this.DateTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DateTextBox_KeyPress);
-            // 
-            // SalaryTextBox
-            // 
-            this.SalaryTextBox.Location = new System.Drawing.Point(12, 152);
-            this.SalaryTextBox.Name = "SalaryTextBox";
-            this.SalaryTextBox.Size = new System.Drawing.Size(174, 20);
-            this.SalaryTextBox.TabIndex = 4;
-            this.SalaryTextBox.Enter += new System.EventHandler(this.SalaryTextBox_Enter);
-            this.SalaryTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SalaryTextBox_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Surname";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 94);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Date";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Salary";
-            // 
-            // RemoveButton
-            // 
-            this.RemoveButton.Location = new System.Drawing.Point(460, 51);
-            this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
-            this.RemoveButton.TabIndex = 0;
-            this.RemoveButton.Text = "Remove";
-            this.RemoveButton.UseVisualStyleBackColor = true;
-            this.RemoveButton.Visible = false;
-            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(379, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "EmployeeID";
-            // 
-            // ResultTextBox
-            // 
-            this.ResultTextBox.Location = new System.Drawing.Point(12, 188);
-            this.ResultTextBox.Multiline = true;
-            this.ResultTextBox.Name = "ResultTextBox";
-            this.ResultTextBox.Size = new System.Drawing.Size(523, 99);
-            this.ResultTextBox.TabIndex = 6;
-            this.ResultTextBox.TabStop = false;
-            // 
-            // RemoveComboBox
-            // 
-            this.RemoveComboBox.FormattingEnabled = true;
-            this.RemoveComboBox.Location = new System.Drawing.Point(382, 21);
-            this.RemoveComboBox.Name = "RemoveComboBox";
-            this.RemoveComboBox.Size = new System.Drawing.Size(153, 21);
-            this.RemoveComboBox.TabIndex = 5;
-            this.RemoveComboBox.Tag = "";
-            this.RemoveComboBox.SelectedIndexChanged += new System.EventHandler(this.RemoveComboBox_SelectedIndexChanged);
-            this.RemoveComboBox.Enter += new System.EventHandler(this.RemoveComboBox_Enter);
             // 
             // EmployeeDataGridView
             // 
@@ -179,15 +62,21 @@
             this.EmployeeDataGridView.AllowUserToDeleteRows = false;
             this.EmployeeDataGridView.AllowUserToResizeColumns = false;
             this.EmployeeDataGridView.AllowUserToResizeRows = false;
+            this.EmployeeDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EmployeeDataGridView.AutoGenerateColumns = false;
+            this.EmployeeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.EmployeeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EmployeeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.EmployeeID,
-            this.Surname,
-            this.EmployeeName,
-            this.DataOfEmployee,
-            this.Salary});
+            this.employeeIDDataGridViewTextBoxColumn,
+            this.surnameDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.dateOfEmploymentDataGridViewTextBoxColumn,
+            this.salaryDataGridViewTextBoxColumn});
+            this.EmployeeDataGridView.DataSource = this.employeeBindingSource;
             this.EmployeeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.EmployeeDataGridView.Location = new System.Drawing.Point(12, 293);
+            this.EmployeeDataGridView.Location = new System.Drawing.Point(0, 267);
             this.EmployeeDataGridView.MultiSelect = false;
             this.EmployeeDataGridView.Name = "EmployeeDataGridView";
             this.EmployeeDataGridView.ReadOnly = true;
@@ -198,95 +87,240 @@
             this.EmployeeDataGridView.ShowCellToolTips = false;
             this.EmployeeDataGridView.ShowEditingIcon = false;
             this.EmployeeDataGridView.ShowRowErrors = false;
-            this.EmployeeDataGridView.Size = new System.Drawing.Size(523, 221);
+            this.EmployeeDataGridView.Size = new System.Drawing.Size(736, 341);
             this.EmployeeDataGridView.TabIndex = 7;
             // 
-            // EmployeeID
+            // SettingsPanel
             // 
-            this.EmployeeID.FillWeight = 50F;
-            this.EmployeeID.HeaderText = "ID";
-            this.EmployeeID.Name = "EmployeeID";
-            this.EmployeeID.ReadOnly = true;
-            this.EmployeeID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.EmployeeID.Width = 50;
+            this.SettingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SettingsPanel.Controls.Add(this.AddEmployeeButton);
+            this.SettingsPanel.Controls.Add(this.label4);
+            this.SettingsPanel.Controls.Add(this.NameTextBox);
+            this.SettingsPanel.Controls.Add(this.EmployeeDateTimePicker);
+            this.SettingsPanel.Controls.Add(this.label3);
+            this.SettingsPanel.Controls.Add(this.label1);
+            this.SettingsPanel.Controls.Add(this.SurnameTextBox);
+            this.SettingsPanel.Controls.Add(this.label2);
+            this.SettingsPanel.Controls.Add(this.SalaryTextBox);
+            this.SettingsPanel.Controls.Add(this.DeletePanel);
+            this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SettingsPanel.Location = new System.Drawing.Point(0, 0);
+            this.SettingsPanel.Name = "SettingsPanel";
+            this.SettingsPanel.Size = new System.Drawing.Size(737, 268);
+            this.SettingsPanel.TabIndex = 8;
             // 
-            // Surname
+            // AddEmployeeButton
             // 
-            this.Surname.HeaderText = "Surname";
-            this.Surname.Name = "Surname";
-            this.Surname.ReadOnly = true;
-            this.Surname.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.AddEmployeeButton.Location = new System.Drawing.Point(13, 223);
+            this.AddEmployeeButton.Name = "AddEmployeeButton";
+            this.AddEmployeeButton.Size = new System.Drawing.Size(173, 23);
+            this.AddEmployeeButton.TabIndex = 18;
+            this.AddEmployeeButton.Text = "Add";
+            this.AddEmployeeButton.UseVisualStyleBackColor = true;
+            this.AddEmployeeButton.Visible = false;
+            this.AddEmployeeButton.Click += new System.EventHandler(this.AddEmployeeButton_Click);
             // 
-            // EmployeeName
+            // label4
             // 
-            this.EmployeeName.HeaderText = "Name";
-            this.EmployeeName.Name = "EmployeeName";
-            this.EmployeeName.ReadOnly = true;
-            this.EmployeeName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Salary";
             // 
-            // DataOfEmployee
+            // NameTextBox
             // 
-            this.DataOfEmployee.FillWeight = 140F;
-            this.DataOfEmployee.HeaderText = "DataOfEmployee";
-            this.DataOfEmployee.Name = "DataOfEmployee";
-            this.DataOfEmployee.ReadOnly = true;
-            this.DataOfEmployee.Width = 140;
+            this.NameTextBox.Location = new System.Drawing.Point(13, 31);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(174, 20);
+            this.NameTextBox.TabIndex = 17;
+            this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
+            this.NameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
-            // Salary
+            // EmployeeDateTimePicker
             // 
-            this.Salary.HeaderText = "Salary";
-            this.Salary.Name = "Salary";
-            this.Salary.ReadOnly = true;
-            this.Salary.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.EmployeeDateTimePicker.Checked = false;
+            this.EmployeeDateTimePicker.CustomFormat = "dd:MM:yy  HH:mm";
+            this.EmployeeDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.EmployeeDateTimePicker.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.EmployeeDateTimePicker.Location = new System.Drawing.Point(12, 133);
+            this.EmployeeDateTimePicker.Name = "EmployeeDateTimePicker";
+            this.EmployeeDateTimePicker.Size = new System.Drawing.Size(174, 20);
+            this.EmployeeDateTimePicker.TabIndex = 15;
+            this.EmployeeDateTimePicker.Value = new System.DateTime(2016, 12, 5, 17, 48, 56, 0);
+            this.EmployeeDateTimePicker.Enter += new System.EventHandler(this.EmployeeDateTimePicker_Enter);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 117);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Date";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Surname";
+            // 
+            // SurnameTextBox
+            // 
+            this.SurnameTextBox.Location = new System.Drawing.Point(12, 80);
+            this.SurnameTextBox.Name = "SurnameTextBox";
+            this.SurnameTextBox.Size = new System.Drawing.Size(174, 20);
+            this.SurnameTextBox.TabIndex = 12;
+            this.SurnameTextBox.Enter += new System.EventHandler(this.SurnameTextBox_Enter);
+            this.SurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Name";
+            // 
+            // SalaryTextBox
+            // 
+            this.SalaryTextBox.Location = new System.Drawing.Point(13, 185);
+            this.SalaryTextBox.Name = "SalaryTextBox";
+            this.SalaryTextBox.Size = new System.Drawing.Size(174, 20);
+            this.SalaryTextBox.TabIndex = 11;
+            this.SalaryTextBox.Enter += new System.EventHandler(this.SalaryTextBox_Enter);
+            this.SalaryTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SalaryTextBox_KeyPress);
+            // 
+            // DeletePanel
+            // 
+            this.DeletePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DeletePanel.Controls.Add(this.RemoveComboBox);
+            this.DeletePanel.Controls.Add(this.label5);
+            this.DeletePanel.Controls.Add(this.RemoveButton);
+            this.DeletePanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.DeletePanel.Location = new System.Drawing.Point(517, 0);
+            this.DeletePanel.Name = "DeletePanel";
+            this.DeletePanel.Size = new System.Drawing.Size(218, 266);
+            this.DeletePanel.TabIndex = 9;
+            // 
+            // RemoveComboBox
+            // 
+            this.RemoveComboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.RemoveComboBox.FormattingEnabled = true;
+            this.RemoveComboBox.Location = new System.Drawing.Point(23, 30);
+            this.RemoveComboBox.Name = "RemoveComboBox";
+            this.RemoveComboBox.Size = new System.Drawing.Size(153, 21);
+            this.RemoveComboBox.TabIndex = 8;
+            this.RemoveComboBox.Tag = "";
+            this.RemoveComboBox.SelectedIndexChanged += new System.EventHandler(this.RemoveComboBox_SelectedIndexChanged);
+            this.RemoveComboBox.Enter += new System.EventHandler(this.RemoveComboBox_Enter);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "EmployeeID";
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.RemoveButton.Location = new System.Drawing.Point(23, 63);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(153, 23);
+            this.RemoveButton.TabIndex = 6;
+            this.RemoveButton.Text = "Remove";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Visible = false;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
+            // employeeIDDataGridViewTextBoxColumn
+            // 
+            this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
+            this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // surnameDataGridViewTextBoxColumn
+            // 
+            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
+            this.surnameDataGridViewTextBoxColumn.HeaderText = "Surname";
+            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
+            this.surnameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateOfEmploymentDataGridViewTextBoxColumn
+            // 
+            this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // salaryDataGridViewTextBoxColumn
+            // 
+            this.salaryDataGridViewTextBoxColumn.DataPropertyName = "Salary";
+            this.salaryDataGridViewTextBoxColumn.HeaderText = "Salary";
+            this.salaryDataGridViewTextBoxColumn.Name = "salaryDataGridViewTextBoxColumn";
+            this.salaryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // employeeBindingSource
+            // 
+            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 526);
+            this.ClientSize = new System.Drawing.Size(737, 608);
+            this.Controls.Add(this.SettingsPanel);
             this.Controls.Add(this.EmployeeDataGridView);
-            this.Controls.Add(this.RemoveComboBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.ResultTextBox);
-            this.Controls.Add(this.SalaryTextBox);
-            this.Controls.Add(this.DateTextBox);
-            this.Controls.Add(this.NameTextBox);
-            this.Controls.Add(this.SurnameTextBox);
-            this.Controls.Add(this.RemoveButton);
-            this.Controls.Add(this.AddEmployerButton);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).EndInit();
+            this.SettingsPanel.ResumeLayout(false);
+            this.SettingsPanel.PerformLayout();
+            this.DeletePanel.ResumeLayout(false);
+            this.DeletePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button AddEmployerButton;
-        private System.Windows.Forms.TextBox SurnameTextBox;
-        private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.TextBox DateTextBox;
-        private System.Windows.Forms.TextBox SalaryTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button RemoveButton;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox ResultTextBox;
-        private System.Windows.Forms.ComboBox RemoveComboBox;
         private System.Windows.Forms.DataGridView EmployeeDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Surname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataOfEmployee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Salary;
+        private System.Windows.Forms.Panel SettingsPanel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.DateTimePicker EmployeeDateTimePicker;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox SurnameTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox SalaryTextBox;
+        private System.Windows.Forms.Panel DeletePanel;
+        private System.Windows.Forms.ComboBox RemoveComboBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button RemoveButton;
+        private System.Windows.Forms.Button AddEmployeeButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salaryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource employeeBindingSource;
     }
 }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataListEmployer.Properties
+namespace ManagerProject.Properties
 {
 
 

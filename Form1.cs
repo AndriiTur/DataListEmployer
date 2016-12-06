@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace DataListEmployer
+namespace ManagerProject
 {
     public partial class Form1 : Form
     {
@@ -20,12 +20,12 @@ namespace DataListEmployer
         {
             employees = new List<Employee>();
             InitializeComponent();
-            LoadToEmployersList();
+            LoadToEmployeesList();
         }
 
         internal int GenerateNewEmployeeID()
         {
-            int iD = -1;
+            int iD = 0;
             for (int i = 0; i < employees.Count; i++)
             {
                 if (employees[i].EmployeeID >= iD)
@@ -34,58 +34,63 @@ namespace DataListEmployer
             return iD += 1;
         }
 
-        internal void LoadToEmployersList()
+        internal void LoadToEmployeesList()
         {
-            try
+            if (File.Exists("WriteData.xml"))
             {
-                XmlDocument employeeDoc = new XmlDocument();
-                employeeDoc.Load("WriteData.xml");
-
-                foreach (XmlNode node in employeeDoc)
+                try
                 {
-                    if ("employees".Equals(node.Name))
+                    XmlDocument employeeDoc = new XmlDocument();
+                    employeeDoc.Load("WriteData.xml");
+
+                    foreach (XmlNode node in employeeDoc)
                     {
-                        for (XmlNode employeeNode = node.FirstChild; employeeNode != null; employeeNode = employeeNode.NextSibling)
+                        if ("employees".Equals(node.Name))
                         {
-                            var employee = new Employee();
-                            if ("employee".Equals(employeeNode.Name))
+                            for (XmlNode employeeNode = node.FirstChild; employeeNode != null; employeeNode = employeeNode.NextSibling)
                             {
-                                employee.LoadFromNode(employeeNode);
-                                AddEmployer(employee);
+                                var employee = new Employee();
+                                if ("employee".Equals(employeeNode.Name))
+                                {
+                                    employee.LoadFromNode(employeeNode);
+                                    AddEmployee(employee);
+                                }
                             }
                         }
                     }
                 }
+                catch (Exception e) { MessageBox.Show("exeption" + e.Message); }
+                RefreshForm();
             }
-            catch (Exception e) { MessageBox.Show("exeption" + e.Message); }
-            RefreshForm();
         }
 
-        internal void AddEmployer(Employee employee)
+        internal void AddEmployee(Employee employee)
         {
             employees.Add(employee);
             SurnameTextBox.Clear();
-            DateTextBox.Clear();
+            DateTime result = DateTime.Today.Subtract(TimeSpan.FromDays(0));
+            EmployeeDateTimePicker.Value = result;
+           
             NameTextBox.Clear();
             SalaryTextBox.Clear();
         }
 
-        private void AddEmployerButton_Click(object sender, EventArgs e)
+        private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
             int employeeID = GenerateNewEmployeeID();
             string surname = SurnameTextBox.Text;
             string name = NameTextBox.Text;
-            DateTime date_Of_Employment = DateTime.Parse(DateTextBox.Text);
+            DateTime date_Of_Employment = DateTime.Parse(EmployeeDateTimePicker.Value.ToString("dd MM yy HH:mm"));
             double salary = double.Parse(SalaryTextBox.Text);
             var employee = new Employee(employeeID, surname, name, date_Of_Employment, salary);
 
-            AddEmployer(employee);
+            AddEmployee(employee);
             RefreshForm();
             SaveToFile();
-            AddEmployerButton.Visible = false;
+            AddEmployeeButton.Visible = false;
         }
 
-        internal void RemoveEmployer(int val)
+        internal void RemoveEmployee(int val)
         {
             for (int i = 0; i < employees.Count; i++)
             {
@@ -104,7 +109,7 @@ namespace DataListEmployer
         {
             if (RemoveComboBox.SelectedItem != null)
             {
-                RemoveEmployer(RemoveComboBox.SelectedIndex);
+                RemoveEmployee(RemoveComboBox.SelectedIndex);
                 RemoveComboBox.Items.Remove(RemoveComboBox.SelectedItem);
             }
         }
@@ -144,28 +149,25 @@ namespace DataListEmployer
 
         internal void RefreshForm()
         {
+            if (EmployeeDataGridView.Rows.Count > 0)
             EmployeeDataGridView.Rows.Clear();
             RemoveComboBox.Items.Clear();
-            ResultTextBox.Clear();
             foreach (var employee in employees)
             {
                 RemoveComboBox.Items.Add(employee.Surname + " " + employee.Name);
-                ResultTextBox.Text += employee.SaveToString(employee, Employee.EmployeeToStringMode.displayInfo);
-                EmployeeDataGridView.Rows.Add(employee.EmployeeID.ToString(), employee.Surname, employee.Name,
-                    employee.Date_Of_Employment.ToString("ddd dd MMMM yyyy HH:mm"),
-                    employee.Salary.ToString("$ #,###"));
+                employeeBindingSource.Add(employee);
             }
             RemoveComboBox.Text = "Choice...";
         }
 
-        private void EpdateAddButtonVisibility()
+        private void UpdateAddButtonVisibility()
         {
             if ((SurnameTextBox.Text != "") &&
                 (NameTextBox.Text != "") &&
-                (DateTextBox.Text != "") &&
                 (SalaryTextBox.Text != "")
                 )
-                AddEmployerButton.Visible = true;
+                
+                AddEmployeeButton.Visible = true;
         }
 
         private void SurnameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -174,7 +176,7 @@ namespace DataListEmployer
             {
                 e.Handled = true;
             }
-            this.EpdateAddButtonVisibility();
+            this.UpdateAddButtonVisibility();
         }
 
         private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -183,21 +185,7 @@ namespace DataListEmployer
             {
                 e.Handled = true;
             }
-            this.EpdateAddButtonVisibility();
-        }
-
-        private void DateTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar)
-                && e.KeyChar != Convert.ToChar(46)
-                && e.KeyChar != Convert.ToChar(8)
-                && e.KeyChar != Convert.ToChar(32)
-                && e.KeyChar != Convert.ToChar(58)
-                )
-            {
-                e.Handled = true;
-            }
-            this.EpdateAddButtonVisibility();
+            this.UpdateAddButtonVisibility();
         }
 
         private void SalaryTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -208,7 +196,7 @@ namespace DataListEmployer
             {
                 e.Handled = true;
             }
-            this.EpdateAddButtonVisibility();
+            this.UpdateAddButtonVisibility();
         }
 
         private void RemoveComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -226,9 +214,9 @@ namespace DataListEmployer
             ToolTipAdd().SetToolTip(NameTextBox, "Only Letter");
         }
 
-        private void DateTextBox_Enter(object sender, EventArgs e)
+        private void EmployeeDateTimePicker_Enter(object sender, EventArgs e)
         {
-            ToolTipAdd().SetToolTip(DateTextBox, "Enter date DD.MM.Year and time 00:00");
+            ToolTipAdd().SetToolTip(EmployeeDateTimePicker, "Enter date DD.MM.Year and time 00:00");
         }
 
         private void SalaryTextBox_Enter(object sender, EventArgs e)
