@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A639A4EB-1B10-4E44-A9B9-C5F28408A068}</ProjectGuid>
+    <ProjectGuid>{6642124A-9E51-450C-814E-BD831B19BC7F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataListEmployer</RootNamespace>
