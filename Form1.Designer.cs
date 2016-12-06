@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.EmployeeDataGridView = new System.Windows.Forms.DataGridView();
+            this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,16 +50,16 @@
             this.RemoveComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.RemoveButton = new System.Windows.Forms.Button();
-            this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.EmployeeTabPage = new System.Windows.Forms.TabPage();
+            this.CustomerTabPage = new System.Windows.Forms.TabPage();
+            this.ProjectTabPage = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.SettingsPanel.SuspendLayout();
             this.DeletePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.EmployeeTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // EmployeeDataGridView
@@ -76,7 +82,8 @@
             this.salaryDataGridViewTextBoxColumn});
             this.EmployeeDataGridView.DataSource = this.employeeBindingSource;
             this.EmployeeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.EmployeeDataGridView.Location = new System.Drawing.Point(0, 267);
+            this.EmployeeDataGridView.Location = new System.Drawing.Point(3, 262);
+            this.EmployeeDataGridView.MinimumSize = new System.Drawing.Size(408, 59);
             this.EmployeeDataGridView.MultiSelect = false;
             this.EmployeeDataGridView.Name = "EmployeeDataGridView";
             this.EmployeeDataGridView.ReadOnly = true;
@@ -87,8 +94,47 @@
             this.EmployeeDataGridView.ShowCellToolTips = false;
             this.EmployeeDataGridView.ShowEditingIcon = false;
             this.EmployeeDataGridView.ShowRowErrors = false;
-            this.EmployeeDataGridView.Size = new System.Drawing.Size(736, 341);
+            this.EmployeeDataGridView.Size = new System.Drawing.Size(681, 334);
             this.EmployeeDataGridView.TabIndex = 7;
+            // 
+            // employeeIDDataGridViewTextBoxColumn
+            // 
+            this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
+            this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // surnameDataGridViewTextBoxColumn
+            // 
+            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
+            this.surnameDataGridViewTextBoxColumn.HeaderText = "Surname";
+            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
+            this.surnameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateOfEmploymentDataGridViewTextBoxColumn
+            // 
+            this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // salaryDataGridViewTextBoxColumn
+            // 
+            this.salaryDataGridViewTextBoxColumn.DataPropertyName = "Salary";
+            this.salaryDataGridViewTextBoxColumn.HeaderText = "Salary";
+            this.salaryDataGridViewTextBoxColumn.Name = "salaryDataGridViewTextBoxColumn";
+            this.salaryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // employeeBindingSource
+            // 
+            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
             // 
             // SettingsPanel
             // 
@@ -104,9 +150,10 @@
             this.SettingsPanel.Controls.Add(this.SalaryTextBox);
             this.SettingsPanel.Controls.Add(this.DeletePanel);
             this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SettingsPanel.Location = new System.Drawing.Point(0, 0);
+            this.SettingsPanel.Location = new System.Drawing.Point(3, 3);
+            this.SettingsPanel.MinimumSize = new System.Drawing.Size(408, 260);
             this.SettingsPanel.Name = "SettingsPanel";
-            this.SettingsPanel.Size = new System.Drawing.Size(737, 268);
+            this.SettingsPanel.Size = new System.Drawing.Size(681, 260);
             this.SettingsPanel.TabIndex = 8;
             // 
             // AddEmployeeButton
@@ -198,21 +245,23 @@
             // 
             // DeletePanel
             // 
+            this.DeletePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DeletePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DeletePanel.Controls.Add(this.RemoveComboBox);
             this.DeletePanel.Controls.Add(this.label5);
             this.DeletePanel.Controls.Add(this.RemoveButton);
-            this.DeletePanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.DeletePanel.Location = new System.Drawing.Point(517, 0);
+            this.DeletePanel.Location = new System.Drawing.Point(475, 0);
+            this.DeletePanel.MinimumSize = new System.Drawing.Size(218, 258);
             this.DeletePanel.Name = "DeletePanel";
-            this.DeletePanel.Size = new System.Drawing.Size(218, 266);
+            this.DeletePanel.Size = new System.Drawing.Size(218, 258);
             this.DeletePanel.TabIndex = 9;
             // 
             // RemoveComboBox
             // 
             this.RemoveComboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.RemoveComboBox.FormattingEnabled = true;
-            this.RemoveComboBox.Location = new System.Drawing.Point(23, 30);
+            this.RemoveComboBox.Location = new System.Drawing.Point(23, 26);
             this.RemoveComboBox.Name = "RemoveComboBox";
             this.RemoveComboBox.Size = new System.Drawing.Size(153, 21);
             this.RemoveComboBox.TabIndex = 8;
@@ -232,7 +281,7 @@
             // RemoveButton
             // 
             this.RemoveButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.RemoveButton.Location = new System.Drawing.Point(23, 63);
+            this.RemoveButton.Location = new System.Drawing.Point(23, 59);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(153, 23);
             this.RemoveButton.TabIndex = 6;
@@ -241,60 +290,69 @@
             this.RemoveButton.Visible = false;
             this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // employeeIDDataGridViewTextBoxColumn
+            // tabControl1
             // 
-            this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
-            this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
-            this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
-            this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.EmployeeTabPage);
+            this.tabControl1.Controls.Add(this.CustomerTabPage);
+            this.tabControl1.Controls.Add(this.ProjectTabPage);
+            this.tabControl1.Location = new System.Drawing.Point(0, 3);
+            this.tabControl1.MinimumSize = new System.Drawing.Size(422, 356);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(695, 631);
+            this.tabControl1.TabIndex = 19;
             // 
-            // surnameDataGridViewTextBoxColumn
+            // EmployeeTabPage
             // 
-            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
-            this.surnameDataGridViewTextBoxColumn.HeaderText = "Surname";
-            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
-            this.surnameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.EmployeeTabPage.Controls.Add(this.SettingsPanel);
+            this.EmployeeTabPage.Controls.Add(this.EmployeeDataGridView);
+            this.EmployeeTabPage.Location = new System.Drawing.Point(4, 22);
+            this.EmployeeTabPage.Name = "EmployeeTabPage";
+            this.EmployeeTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.EmployeeTabPage.Size = new System.Drawing.Size(687, 605);
+            this.EmployeeTabPage.TabIndex = 0;
+            this.EmployeeTabPage.Text = "Employees";
+            this.EmployeeTabPage.UseVisualStyleBackColor = true;
             // 
-            // nameDataGridViewTextBoxColumn
+            // CustomerTabPage
             // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.CustomerTabPage.Location = new System.Drawing.Point(4, 22);
+            this.CustomerTabPage.Name = "CustomerTabPage";
+            this.CustomerTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.CustomerTabPage.Size = new System.Drawing.Size(682, 577);
+            this.CustomerTabPage.TabIndex = 1;
+            this.CustomerTabPage.Text = "Customers";
+            this.CustomerTabPage.UseVisualStyleBackColor = true;
             // 
-            // dateOfEmploymentDataGridViewTextBoxColumn
+            // ProjectTabPage
             // 
-            this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // salaryDataGridViewTextBoxColumn
-            // 
-            this.salaryDataGridViewTextBoxColumn.DataPropertyName = "Salary";
-            this.salaryDataGridViewTextBoxColumn.HeaderText = "Salary";
-            this.salaryDataGridViewTextBoxColumn.Name = "salaryDataGridViewTextBoxColumn";
-            this.salaryDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // employeeBindingSource
-            // 
-            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
+            this.ProjectTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ProjectTabPage.Name = "ProjectTabPage";
+            this.ProjectTabPage.Size = new System.Drawing.Size(682, 577);
+            this.ProjectTabPage.TabIndex = 2;
+            this.ProjectTabPage.Text = "Projects";
+            this.ProjectTabPage.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 608);
-            this.Controls.Add(this.SettingsPanel);
-            this.Controls.Add(this.EmployeeDataGridView);
+            this.ClientSize = new System.Drawing.Size(697, 632);
+            this.Controls.Add(this.tabControl1);
+            this.MinimumSize = new System.Drawing.Size(440, 396);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.DeletePanel.ResumeLayout(false);
             this.DeletePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.EmployeeTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -321,6 +379,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn salaryDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource employeeBindingSource;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage EmployeeTabPage;
+        private System.Windows.Forms.TabPage CustomerTabPage;
+        private System.Windows.Forms.TabPage ProjectTabPage;
     }
 }
 
