@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.EmployeeDataGridView = new System.Windows.Forms.DataGridView();
+            this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DeleteButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,10 +42,6 @@
             this.SurnameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SalaryTextBox = new System.Windows.Forms.TextBox();
-            this.DeletePanel = new System.Windows.Forms.Panel();
-            this.RemoveComboBox = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.RemoveButton = new System.Windows.Forms.Button();
             this.MenegerTabControl = new System.Windows.Forms.TabControl();
             this.EmployeeTabPage = new System.Windows.Forms.TabPage();
             this.CustomerTabPage = new System.Windows.Forms.TabPage();
@@ -54,7 +52,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.RemoveCustomerButton = new System.Windows.Forms.Button();
             this.AddCutomerButton = new System.Windows.Forms.Button();
             this.AgreementDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.CustomerSurnameTextBox = new System.Windows.Forms.TextBox();
@@ -62,9 +59,11 @@
             this.CountryTextBox = new System.Windows.Forms.TextBox();
             this.CustomerNameTextBox = new System.Windows.Forms.TextBox();
             this.ProjectTabPage = new System.Windows.Forms.TabPage();
+            this.CustomerEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CustomerDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -77,7 +76,6 @@
             this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).BeginInit();
             this.SettingsPanel.SuspendLayout();
-            this.DeletePanel.SuspendLayout();
             this.MenegerTabControl.SuspendLayout();
             this.EmployeeTabPage.SuspendLayout();
             this.CustomerTabPage.SuspendLayout();
@@ -98,13 +96,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.EmployeeDataGridView.AutoGenerateColumns = false;
             this.EmployeeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.EmployeeDataGridView.CausesValidation = false;
             this.EmployeeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EmployeeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.employeeIDDataGridViewTextBoxColumn,
-            this.surnameDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
+            this.surnameDataGridViewTextBoxColumn,
             this.dateOfEmploymentDataGridViewTextBoxColumn,
-            this.salaryDataGridViewTextBoxColumn});
+            this.salaryDataGridViewTextBoxColumn,
+            this.Edit,
+            this.DeleteButton});
             this.EmployeeDataGridView.DataSource = this.employeeBindingSource;
             this.EmployeeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.EmployeeDataGridView.GridColor = System.Drawing.SystemColors.Control;
@@ -123,6 +124,33 @@
             this.EmployeeDataGridView.ShowRowErrors = false;
             this.EmployeeDataGridView.Size = new System.Drawing.Size(561, 216);
             this.EmployeeDataGridView.TabIndex = 7;
+            this.EmployeeDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EmployeeDataGridView_CellClick);
+            // 
+            // Edit
+            // 
+            this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Edit.FillWeight = 40F;
+            this.Edit.Frozen = true;
+            this.Edit.HeaderText = "Edit";
+            this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
+            this.Edit.Text = "Edit";
+            this.Edit.UseColumnTextForButtonValue = true;
+            this.Edit.Width = 40;
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeleteButton.FillWeight = 50F;
+            this.DeleteButton.Frozen = true;
+            this.DeleteButton.HeaderText = "Delete";
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.ReadOnly = true;
+            this.DeleteButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DeleteButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseColumnTextForButtonValue = true;
+            this.DeleteButton.Width = 50;
             // 
             // SettingsPanel
             // 
@@ -136,7 +164,6 @@
             this.SettingsPanel.Controls.Add(this.SurnameTextBox);
             this.SettingsPanel.Controls.Add(this.label2);
             this.SettingsPanel.Controls.Add(this.SalaryTextBox);
-            this.SettingsPanel.Controls.Add(this.DeletePanel);
             this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.SettingsPanel.Location = new System.Drawing.Point(3, 3);
             this.SettingsPanel.MinimumSize = new System.Drawing.Size(408, 260);
@@ -231,53 +258,6 @@
             this.SalaryTextBox.Enter += new System.EventHandler(this.SalaryTextBox_Enter);
             this.SalaryTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SalaryTextBox_KeyPress);
             // 
-            // DeletePanel
-            // 
-            this.DeletePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeletePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DeletePanel.Controls.Add(this.RemoveComboBox);
-            this.DeletePanel.Controls.Add(this.label5);
-            this.DeletePanel.Controls.Add(this.RemoveButton);
-            this.DeletePanel.Location = new System.Drawing.Point(352, 0);
-            this.DeletePanel.MinimumSize = new System.Drawing.Size(218, 258);
-            this.DeletePanel.Name = "DeletePanel";
-            this.DeletePanel.Size = new System.Drawing.Size(218, 258);
-            this.DeletePanel.TabIndex = 9;
-            // 
-            // RemoveComboBox
-            // 
-            this.RemoveComboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.RemoveComboBox.FormattingEnabled = true;
-            this.RemoveComboBox.Location = new System.Drawing.Point(23, 26);
-            this.RemoveComboBox.Name = "RemoveComboBox";
-            this.RemoveComboBox.Size = new System.Drawing.Size(153, 21);
-            this.RemoveComboBox.TabIndex = 8;
-            this.RemoveComboBox.Tag = "";
-            this.RemoveComboBox.SelectedIndexChanged += new System.EventHandler(this.RemoveComboBox_SelectedIndexChanged);
-            this.RemoveComboBox.Enter += new System.EventHandler(this.RemoveComboBox_Enter);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 14);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "EmployeeID";
-            // 
-            // RemoveButton
-            // 
-            this.RemoveButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.RemoveButton.Location = new System.Drawing.Point(23, 59);
-            this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(153, 23);
-            this.RemoveButton.TabIndex = 6;
-            this.RemoveButton.Text = "Remove";
-            this.RemoveButton.UseVisualStyleBackColor = true;
-            this.RemoveButton.Visible = false;
-            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
-            // 
             // MenegerTabControl
             // 
             this.MenegerTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -292,7 +272,7 @@
             this.MenegerTabControl.SelectedIndex = 0;
             this.MenegerTabControl.Size = new System.Drawing.Size(572, 507);
             this.MenegerTabControl.TabIndex = 19;
-            this.MenegerTabControl.Click += new System.EventHandler(this.MenegerTabControl_Click);
+            this.MenegerTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MenegerTabControl_Selecting);
             // 
             // EmployeeTabPage
             // 
@@ -341,7 +321,9 @@
             this.surnameDataGridViewTextBoxColumn1,
             this.countryDataGridViewTextBoxColumn,
             this.dateAgreementDataGridViewTextBoxColumn,
-            this.moneyDataGridViewTextBoxColumn});
+            this.moneyDataGridViewTextBoxColumn,
+            this.CustomerEdit,
+            this.CustomerDelete});
             this.CustomerDataGridView.DataSource = this.customerBindingSource;
             this.CustomerDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.CustomerDataGridView.EnableHeadersVisualStyles = false;
@@ -371,7 +353,6 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.RemoveCustomerButton);
             this.panel1.Controls.Add(this.AddCutomerButton);
             this.panel1.Controls.Add(this.AgreementDateTimePicker);
             this.panel1.Controls.Add(this.CustomerSurnameTextBox);
@@ -429,17 +410,6 @@
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "Name";
-            // 
-            // RemoveCustomerButton
-            // 
-            this.RemoveCustomerButton.Location = new System.Drawing.Point(20, 165);
-            this.RemoveCustomerButton.Name = "RemoveCustomerButton";
-            this.RemoveCustomerButton.Size = new System.Drawing.Size(171, 23);
-            this.RemoveCustomerButton.TabIndex = 2;
-            this.RemoveCustomerButton.Text = "RemoveCustomer";
-            this.RemoveCustomerButton.UseVisualStyleBackColor = true;
-            this.RemoveCustomerButton.Visible = false;
-            this.RemoveCustomerButton.Click += new System.EventHandler(this.RemoveCustomerButton_Click);
             // 
             // AddCutomerButton
             // 
@@ -503,40 +473,76 @@
             this.ProjectTabPage.Text = "Projects";
             this.ProjectTabPage.UseVisualStyleBackColor = true;
             // 
+            // CustomerEdit
+            // 
+            this.CustomerEdit.HeaderText = "Edit";
+            this.CustomerEdit.Name = "CustomerEdit";
+            this.CustomerEdit.ReadOnly = true;
+            this.CustomerEdit.Text = "Edit";
+            this.CustomerEdit.UseColumnTextForButtonValue = true;
+            // 
+            // CustomerDelete
+            // 
+            this.CustomerDelete.HeaderText = "Delete";
+            this.CustomerDelete.Name = "CustomerDelete";
+            this.CustomerDelete.ReadOnly = true;
+            this.CustomerDelete.Text = "Delete";
+            this.CustomerDelete.UseColumnTextForButtonValue = true;
+            // 
             // employeeIDDataGridViewTextBoxColumn
             // 
+            this.employeeIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.FillWeight = 20F;
+            this.employeeIDDataGridViewTextBoxColumn.Frozen = true;
             this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
             this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
             this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // surnameDataGridViewTextBoxColumn
-            // 
-            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
-            this.surnameDataGridViewTextBoxColumn.HeaderText = "Surname";
-            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
-            this.surnameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.employeeIDDataGridViewTextBoxColumn.Width = 75;
             // 
             // nameDataGridViewTextBoxColumn
             // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.nameDataGridViewTextBoxColumn.Frozen = true;
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 98;
+            // 
+            // surnameDataGridViewTextBoxColumn
+            // 
+            this.surnameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
+            this.surnameDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.surnameDataGridViewTextBoxColumn.Frozen = true;
+            this.surnameDataGridViewTextBoxColumn.HeaderText = "Surname";
+            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
+            this.surnameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.surnameDataGridViewTextBoxColumn.Width = 99;
             // 
             // dateOfEmploymentDataGridViewTextBoxColumn
             // 
+            this.dateOfEmploymentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.dateOfEmploymentDataGridViewTextBoxColumn.Frozen = true;
             this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
             this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
             this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateOfEmploymentDataGridViewTextBoxColumn.Width = 98;
             // 
             // salaryDataGridViewTextBoxColumn
             // 
+            this.salaryDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.salaryDataGridViewTextBoxColumn.DataPropertyName = "Salary";
+            this.salaryDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.salaryDataGridViewTextBoxColumn.Frozen = true;
             this.salaryDataGridViewTextBoxColumn.HeaderText = "Salary";
             this.salaryDataGridViewTextBoxColumn.Name = "salaryDataGridViewTextBoxColumn";
             this.salaryDataGridViewTextBoxColumn.ReadOnly = true;
+            this.salaryDataGridViewTextBoxColumn.Width = 98;
             // 
             // employeeBindingSource
             // 
@@ -599,8 +605,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).EndInit();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
-            this.DeletePanel.ResumeLayout(false);
-            this.DeletePanel.PerformLayout();
             this.MenegerTabControl.ResumeLayout(false);
             this.EmployeeTabPage.ResumeLayout(false);
             this.CustomerTabPage.ResumeLayout(false);
@@ -624,16 +628,7 @@
         private System.Windows.Forms.TextBox SurnameTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox SalaryTextBox;
-        private System.Windows.Forms.Panel DeletePanel;
-        private System.Windows.Forms.ComboBox RemoveComboBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Button AddEmployeeButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn salaryDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource employeeBindingSource;
         private System.Windows.Forms.TabControl MenegerTabControl;
         private System.Windows.Forms.TabPage EmployeeTabPage;
@@ -641,7 +636,6 @@
         private System.Windows.Forms.TabPage ProjectTabPage;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView CustomerDataGridView;
-        private System.Windows.Forms.Button AddCutomerButton;
         private System.Windows.Forms.DateTimePicker AgreementDateTimePicker;
         private System.Windows.Forms.TextBox CustomerSurnameTextBox;
         private System.Windows.Forms.TextBox MoneyTextBox;
@@ -652,7 +646,14 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button RemoveCustomerButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salaryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn Edit;
+        private System.Windows.Forms.DataGridViewButtonColumn DeleteButton;
+        private System.Windows.Forms.Button AddCutomerButton;
         private System.Windows.Forms.BindingSource customerBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
@@ -660,6 +661,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateAgreementDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn moneyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn CustomerEdit;
+        private System.Windows.Forms.DataGridViewButtonColumn CustomerDelete;
     }
 }
 

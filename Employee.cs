@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Xml;
 namespace ManagerProject
 {
@@ -7,16 +8,16 @@ namespace ManagerProject
         public enum EmployeeToStringMode { store, displayInfo }
 
         public int EmployeeID { get; private set; }
-        public string Surname { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public DateTime Date_Of_Employment { get; private set; }
         public double Salary { get; set; }
 
-        public Employee(int emploeeID, string surname, string name, DateTime date_Of_Employment, double salary)
+        public Employee(int emploeeID, string name, string surname, DateTime date_Of_Employment, double salary)
         {
             this.EmployeeID = emploeeID;
-            this.Surname = surname;
             this.Name = name;
+            this.Surname = surname;
             this.Date_Of_Employment = date_Of_Employment;
             this.Salary = salary;
         }
@@ -24,8 +25,8 @@ namespace ManagerProject
         public Employee()
         {
             this.EmployeeID = 0;
-            this.Surname = "";
             this.Name = "";
+            this.Surname = "";
             this.Date_Of_Employment = new DateTime { };
             this.Salary = 0;
         }
@@ -35,19 +36,19 @@ namespace ManagerProject
             string[] result = new string[] { };
             result = employeeStr.Split('\t');
             this.EmployeeID = int.Parse(result[0]);
-            this.Surname = result[1];
             this.Name = result[2];
+            this.Surname = result[1];
             this.Date_Of_Employment = DateTime.Parse(result[3]);
-            this.Salary = int.Parse(result[4]);
+            this.Salary = double.Parse(result[4]);
         }
 
         public void LoadFromNode(XmlNode employeeNode)
         {
             this.EmployeeID = int.Parse(employeeNode.Attributes[0].Value);
-            this.Surname = employeeNode.Attributes[1].Value;
             this.Name = employeeNode.Attributes[2].Value;
+            this.Surname = employeeNode.Attributes[1].Value;
             this.Date_Of_Employment = DateTime.Parse(employeeNode.Attributes[3].Value);
-            this.Salary = int.Parse(employeeNode.Attributes[4].Value);
+            this.Salary = double.Parse(employeeNode.Attributes[4].Value);
         }
 
         public XmlNode LoadToNode(Employee employee)
@@ -55,24 +56,38 @@ namespace ManagerProject
             XmlDocument document = new XmlDocument();
             document.Load("WriteData.xml");
             XmlNode employeElement = document.CreateElement("employee");
-            document.DocumentElement.AppendChild(employeElement);
-            XmlAttribute employeeID = document.CreateAttribute("employeeID");
-            employeeID.Value = employee.EmployeeID.ToString();
-            employeElement.Attributes.Append(employeeID);
-            XmlAttribute surname = document.CreateAttribute("surname");
-            surname.Value = employee.Surname;
-            employeElement.Attributes.Append(surname);
-            XmlAttribute name = document.CreateAttribute("name");
-            name.Value = employee.Name;
-            employeElement.Attributes.Append(name);
-            XmlAttribute date = document.CreateAttribute("date");
-            date.Value = employee.Date_Of_Employment.ToString("dd.MM.yyyy HH: mm");
-            employeElement.Attributes.Append(date);
-            XmlAttribute salary = document.CreateAttribute("salary");
-            salary.Value = employee.Salary.ToString();
-            employeElement.Attributes.Append(salary);
-            employeElement = employeElement.NextSibling;
-            document.Save("WriteData.xml");
+            XmlNodeList nodes = document.ChildNodes;
+
+            foreach (XmlNode employeesnode in nodes)
+            {
+                if ("Manager".Equals(employeesnode.Name))
+                {
+                    for (XmlNode employeenode = employeesnode.FirstChild; employeenode != null; employeenode = employeenode.NextSibling)
+                    {
+                        if ("employees".Equals(employeenode.Name))
+                        {
+                            employeenode.AppendChild(employeElement);
+                            XmlAttribute employeeID = document.CreateAttribute("employeeID");
+                            employeeID.Value = employee.EmployeeID.ToString();
+                            employeElement.Attributes.Append(employeeID);
+                            XmlAttribute name = document.CreateAttribute("name");
+                            name.Value = employee.Name;
+                            employeElement.Attributes.Append(name);
+                            XmlAttribute surname = document.CreateAttribute("surname");
+                            surname.Value = employee.Surname;
+                            employeElement.Attributes.Append(surname);
+                            XmlAttribute date = document.CreateAttribute("date");
+                            date.Value = employee.Date_Of_Employment.ToString("dd.MM.yyyy HH:mm");
+                            employeElement.Attributes.Append(date);
+                            XmlAttribute salary = document.CreateAttribute("salary");
+                            salary.Value = employee.Salary.ToString();
+                            employeElement.Attributes.Append(salary);
+                            employeElement = employeElement.NextSibling;
+                            document.Save("WriteData.xml");
+                        }
+                    }
+                }
+            }
             return employeElement;
         }
 
