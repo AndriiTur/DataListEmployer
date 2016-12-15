@@ -19,15 +19,21 @@ namespace ManagerProject
 
         public Customer customer;
         public List<Customer> customers;
+
+        public Project project;
+        public List<Project> projects;
         int curentRowIndex = -1;
+        int curentIndex = 0;
 
         public Form1()
         {
             employees = new List<Employee>();
             customers = new List<Customer>();
+            projects = new List<Project>();
             InitializeComponent();
             LoadToEmployeesList();
             LoadToCustomerList();
+            LoadProjectToList();
             EmployeeDataGridView.SelectionChanged += PrintText;
         }
 
@@ -63,6 +69,7 @@ namespace ManagerProject
                 writer.WriteStartElement("Manager");
                 writer.WriteElementString("employees", "");
                 writer.WriteElementString("customers", "");
+                writer.WriteElementString("projects", "");
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
                 writer.Flush();
@@ -71,12 +78,16 @@ namespace ManagerProject
                 foreach (var employee in employees)
                 {
                     employee.LoadToNode(employee);
-
                 }
 
                 foreach (var customer in customers)
                 {
                     customer.LoadToNode(customer);
+                }
+
+                foreach (var project in projects)
+                {
+                    project.LoadToNode(project);
                 }
             }
             catch (Exception) { }
@@ -121,10 +132,6 @@ namespace ManagerProject
         internal void AddEmployee(Employee employee)
         {
             employees.Add(employee);
-            SurnameTextBox.Clear();
-            EmployeeDateTimePicker.Value = DateTime.Now;
-            NameTextBox.Clear();
-            SalaryTextBox.Clear();
         }
 
         private void AddEmployeeButton_Click(object sender, EventArgs e)
@@ -157,9 +164,11 @@ namespace ManagerProject
             {
                 employeeBindingSource.Add(employee);
             }
-            EmployeeDataGridView.DataSource =
-                           employeeBindingSource;
+            NameTextBox.Clear();
+            SurnameTextBox.Clear();
             EmployeeDateTimePicker.Value = DateTime.Now;
+            SalaryTextBox.Clear();
+            EmployeeDataGridView.ClearSelection();
         }
 
         private void EmployeeDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -373,11 +382,6 @@ namespace ManagerProject
         internal void AddCustomer(Customer customer)
         {
             customers.Add(customer);
-            CustomerSurnameTextBox.Clear();
-            CountryTextBox.Clear();
-            AgreementDateTimePicker.Value = DateTime.Now;
-            CustomerNameTextBox.Clear();
-            MoneyTextBox.Clear();
         }
 
         private void AddCutomerButton_Click(object sender, EventArgs e)
@@ -412,8 +416,11 @@ namespace ManagerProject
             {
                 customerBindingSource.Add(customer);
             }
-            DateTime result = DateTime.Now;
-            AgreementDateTimePicker.Value = result;
+            CustomerNameTextBox.Clear();
+            CustomerSurnameTextBox.Clear();
+            CountryTextBox.Clear();
+            MoneyTextBox.Clear();
+            AgreementDateTimePicker.Value = DateTime.Now;
             CustomerDataGridView.ClearSelection();
         }
 
@@ -470,7 +477,6 @@ namespace ManagerProject
             }
             else
                 CustomerDataGridView.ReadOnly = true;
-
         }
 
         internal void SaveEditCellCustomerTable(int rowIndex)
@@ -485,7 +491,7 @@ namespace ManagerProject
                 XmlDocument CustomerDoc = new XmlDocument();
                 CustomerDoc.Load("WriteData.xml");
                 XmlNodeList nodes = CustomerDoc.ChildNodes;
-                foreach (XmlNode node in CustomerDoc)
+                foreach (XmlNode node in nodes)
                 {
                     if ("Manager".Equals(node.Name))
                     {
@@ -556,23 +562,261 @@ namespace ManagerProject
 
         private void UpdateAddCustomerButtonVisibility()
         {
-            if (CustomerDataGridView.RowHeadersVisible == false)
-            {
-                if ((CustomerSurnameTextBox.Text != "") &&
-                    (CustomerNameTextBox.Text != "") &&
-                    (CountryTextBox.Text != "") &&
-                    (MoneyTextBox.Text != "")
-                    )
-                    AddCutomerButton.Visible = true;
-            }
+            if ((CustomerSurnameTextBox.Text != "") &&
+                (CustomerNameTextBox.Text != "") &&
+                (CountryTextBox.Text != "") &&
+                (MoneyTextBox.Text != "")
+                )
+                AddCutomerButton.Visible = true;
         }
 
         private void MenegerTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            EmployeeDataGridView.ClearSelection();
-            CustomerDataGridView.ClearSelection();
+            RefreshTabCustomer();
+            RefreshTabEmployee();
+            RefreshTabProject();
             AddCutomerButton.Visible = false;
             AddEmployeeButton.Visible = false;
+        }
+
+        private void UpdateAddProjectButtonVisibility()
+        {
+            if (ProjectEditButton.Text == "ProjectEdit")
+            {
+                if ((ProjectNameTextBox.Text != "") &&
+                    (ProjectCostTextBox.Text != "")
+                    )
+                    AddProjectButton.Visible = true;
+            }
+        }
+
+        private void ProjectNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            { e.Handled = true; }
+            UpdateAddProjectButtonVisibility();
+        }
+
+        private void ProjectCostTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar)
+                && e.KeyChar != Convert.ToChar(44)
+                && e.KeyChar != Convert.ToChar(8))
+            { e.Handled = true; }
+            UpdateAddProjectButtonVisibility();
+        }
+
+        private void DeleteProjectButton_Click(object sender, EventArgs e)
+        {
+            RemoveProject(ProjectInfoComboBox.SelectedIndex);
+            DeleteProjectButton.Visible = false;
+        }
+
+        internal void RemoveProject(int val)
+        {
+            projects.Remove(projects[val]);
+            RefreshTabProject();
+            SaveAllToFile();
+        }
+
+        internal int GenerateNewProjectID()
+        {
+            int iD = 0;
+            for (int i = 0; i < projects.Count; i++)
+            {
+                if (projects[i].ProjectID >= iD)
+                    iD = projects[i].ProjectID;
+            }
+            return iD += 1;
+        }
+
+        internal void AddProject(Project project)
+        {
+            projects.Add(project);
+            RefreshTabProject();
+        }
+
+        private void AddProjectButton_Click(object sender, EventArgs e)
+        {
+            int projectsID = GenerateNewProjectID();
+            string name = ProjectNameTextBox.Text;
+            DateTime dateAgreement = DateTime.Parse(ProjectDateTimePicker.Text);
+            double cost = double.Parse(ProjectCostTextBox.Text);
+            Project.ProjestStatus status = (Project.ProjestStatus)Enum.Parse(typeof(Project.ProjestStatus), StatusComboBox.Text.ToString());
+            int customID = customers[ProjectCustomerComboBox.SelectedIndex].CustomerID;
+            var project = new Project(projectsID, name, dateAgreement, cost, status, customID);
+
+            AddProject(project);
+            SaveAllToFile();
+            RefreshTabProject();
+            AddProjectButton.Visible = false;
+        }
+
+        private void ProjectInfoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteProjectButton.Visible = true;
+            ProjectEditButton.Visible = true;
+        }
+        internal void RefreshTabProject()
+        {
+            if (ProjectCustomerComboBox.Items.Count > 0)
+                ProjectCustomerComboBox.Items.Clear();
+            if (ProjectInfoComboBox.Items.Count > 0)
+                ProjectInfoComboBox.Items.Clear();
+            projestStatusBindingSource.Clear();
+            foreach (var customer in customers)
+            {
+                ProjectCustomerComboBox.Items.Add(customer.CustomerID + " " 
+                                                      + customer.Name + " "
+                                                      + customer.Surname);
+            }
+            foreach (var project in projects)
+            {
+                ProjectInfoComboBox.Items.Add("ID=" + project.ProjectID + " " 
+                                            + "Proj=" + project.Name + " " 
+                                            + "Date=" + project.DateAgreement + " " 
+                                            + "Cust=" + project.CustomerID + " "
+                                            //+ customers[ProjectCustomerComboBox.SelectedIndex].Name + " "
+                                            //+ customers[ProjectCustomerComboBox.SelectedIndex].Surname + " "
+                                            + "Cost= $" + project.Cost + " "
+                                            + "St=" + project.Status);
+            }
+
+            projestStatusBindingSource.Add(Project.ProjestStatus.start);
+            projestStatusBindingSource.Add(Project.ProjestStatus.active);
+            projestStatusBindingSource.Add(Project.ProjestStatus.suspended);
+            projestStatusBindingSource.Add(Project.ProjestStatus.done);
+            ProjectDateTimePicker.Value = DateTime.Now;
+            ProjectNameTextBox.Clear();
+            ProjectCostTextBox.Clear();
+            ProjectCustomerComboBox.Text = "Choise...";
+            StatusComboBox.Text = "Choise...";
+            ProjectInfoComboBox.Text = "Choise...";
+        }
+
+        internal void EditProjectInfo(int SelIndex)
+        {
+            ProjectEditButton.Text = "SaveChanges";
+            ProjectCustomerComboBox.Text = "";
+            foreach (var customer in customers)
+            {
+                if (customer.CustomerID == projects[SelIndex].CustomerID)
+                    ProjectCustomerComboBox.SelectedText = customer.CustomerID.ToString() + " "
+                                                           + customer.Name + " "
+                                                           + customer.Surname;
+            }
+            ProjectNameTextBox.Text = projects[SelIndex].Name;
+            ProjectCostTextBox.Text = projects[SelIndex].Cost.ToString();
+            ProjectDateTimePicker.Value = DateTime.Parse(projects[SelIndex].DateAgreement.ToString());
+            StatusComboBox.Text = "";
+            StatusComboBox.SelectedText = projects[SelIndex].Status.ToString();
+            DeleteProjectButton.Enabled = false;
+            ProjectInfoComboBox.Enabled = false;
+        }
+
+        private void ProjectEditButton_Click(object sender, EventArgs e)
+        {
+            if (ProjectEditButton.Text == "ProjectEdit")
+            {
+                curentIndex = ProjectInfoComboBox.SelectedIndex;
+                EditProjectInfo(curentIndex);
+            }
+            else
+            if (ProjectEditButton.Text == "SaveChanges")
+            {
+                SaveEditProject(curentIndex);
+                ProjectEditButton.Text = "ProjectEdit";
+                RefreshTabProject();
+            }
+        }
+
+        internal void SaveEditProject(int Index)
+        {
+            projects[Index].Name = ProjectNameTextBox.Text;
+            projects[Index].Cost = double.Parse(ProjectCostTextBox.Text);
+            projects[Index].Status = (Project.ProjestStatus)Enum.Parse(typeof(Project.ProjestStatus), StatusComboBox.SelectedItem.ToString());
+            projects[Index].CustomerID = customers[ProjectCustomerComboBox.SelectedIndex].CustomerID;
+
+            try
+            {
+                XmlDocument projectDoc = new XmlDocument();
+                projectDoc.Load("WriteData.xml");
+                XmlNodeList nodes = projectDoc.ChildNodes;
+                foreach (XmlNode node in nodes)
+                {
+                    if ("Manager".Equals(node.Name))
+                    {
+                        for (XmlNode projectsNode = node.FirstChild; projectsNode != null; projectsNode = projectsNode.NextSibling)
+                        {
+                            if ("projects".Equals(projectsNode.Name))
+                            {
+                                for (XmlNode projectNode = projectsNode.FirstChild; projectNode != null; projectNode = projectNode.NextSibling)
+                                {
+                                    if (("project".Equals(projectNode.Name)) && (int.Parse(projectNode.Attributes.GetNamedItem("projectID").Value).Equals(projects[Index].ProjectID)))
+                                    {
+                                        if (!projectNode.Attributes.GetNamedItem("name").Value.Equals(projects[Index].Name))
+                                        {
+                                            projectNode.Attributes.SetNamedItem(projectNode.Attributes.GetNamedItem("name")).Value = projects[Index].Name;
+                                        }
+                                        if (!projectNode.Attributes.GetNamedItem("status").Value.Equals(projects[Index].Status))
+                                        {
+                                            projectNode.Attributes.GetNamedItem("status").Value = projects[Index].Status.ToString();
+                                        }
+                                        if (!projectNode.Attributes.GetNamedItem("projectcustID").Value.Equals(projects[Index].CustomerID))
+                                        {
+                                            projectNode.Attributes.GetNamedItem("projectcustID").Value = projects[Index].CustomerID.ToString();
+                                        }
+                                        if (!double.Parse(projectNode.Attributes.GetNamedItem("cost").Value).Equals(projects[Index].Cost))
+                                        {
+                                            projectNode.Attributes.GetNamedItem("cost").Value = projects[Index].Cost.ToString();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                projectDoc.Save("WriteData.xml");
+                DeleteProjectButton.Enabled = true;
+                ProjectInfoComboBox.Enabled = true;
+            }
+            catch (Exception e) { MessageBox.Show("exeption" + e.Message); }
+        }
+
+        internal void LoadProjectToList()
+        {
+            if (File.Exists("WriteData.xml"))
+            {
+                try
+                {
+                    XmlDocument projectDoc = new XmlDocument();
+                    projectDoc.Load("WriteData.xml");
+                    XmlNodeList nodes = projectDoc.ChildNodes;
+                    foreach (XmlNode node in nodes)
+                    {
+                        if ("Manager".Equals(node.Name))
+                        {
+                            for (XmlNode projectsNode = node.FirstChild; projectsNode != null; projectsNode = projectsNode.NextSibling)
+                            {
+                                if ("projects".Equals(projectsNode.Name))
+                                {
+                                    for (XmlNode projectNode = projectsNode.FirstChild; projectNode != null; projectNode = projectNode.NextSibling)
+                                    {
+                                        var project = new Project();
+                                        if ("project".Equals(projectNode.Name))
+                                        {
+                                            project.LoadFromNode(projectNode);
+                                            AddProject(project);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e) { MessageBox.Show("exeption" + e.Message); }
+            }
+            RefreshTabProject();
         }
     }
 }
