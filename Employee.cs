@@ -51,11 +51,11 @@ namespace ManagerProject
             this.Salary = double.Parse(employeeNode.Attributes[4].Value);
         }
 
-        public XmlNode LoadToNode(Employee employee)
+        public XmlNode LoadToNode(Employee employee,string pathToFile)
         {
             XmlDocument document = new XmlDocument();
-            document.Load("WriteData.xml");
-            XmlNode employeElement = document.CreateElement("employee");
+            document.Load(pathToFile);
+            XmlNode employeElement = document.CreateElement("Employee");
             XmlNodeList nodes = document.ChildNodes;
 
             foreach (XmlNode employeesnode in nodes)
@@ -64,7 +64,7 @@ namespace ManagerProject
                 {
                     for (XmlNode employeenode = employeesnode.FirstChild; employeenode != null; employeenode = employeenode.NextSibling)
                     {
-                        if ("employees".Equals(employeenode.Name))
+                        if ("Employees".Equals(employeenode.Name))
                         {
                             employeenode.AppendChild(employeElement);
                             XmlAttribute employeeID = document.CreateAttribute("employeeID");
@@ -83,7 +83,7 @@ namespace ManagerProject
                             salary.Value = employee.Salary.ToString();
                             employeElement.Attributes.Append(salary);
                             employeElement = employeElement.NextSibling;
-                            document.Save("WriteData.xml");
+                            document.Save(pathToFile);
                         }
                     }
                 }

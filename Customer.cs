@@ -10,17 +10,15 @@ namespace ManagerProject
         public string Surname { get; set; }
         public string Country { get; set; }
         public DateTime DateAgreement { get; private set; }
-        public double Money { get; set; }
-
+        
         public Customer(int customerID, string name, string surname, string country,
-                        DateTime dateAgreement, double money)
+                        DateTime dateAgreement)
         {
             this.CustomerID = customerID;
             this.Name = name;
             this.Surname = surname;
             this.Country = country;
             this.DateAgreement = dateAgreement;
-            this.Money = money;
         }
 
         public Customer()
@@ -30,7 +28,6 @@ namespace ManagerProject
             this.Surname = "";
             this.Country = "";
             this.DateAgreement = new DateTime { };
-            this.Money = 0;
         }
 
         public void LoadFromNode(XmlNode customerNode)
@@ -40,14 +37,13 @@ namespace ManagerProject
             this.Surname = customerNode.Attributes[2].Value;
             this.Country = customerNode.Attributes[3].Value;
             this.DateAgreement = DateTime.Parse(customerNode.Attributes[4].Value);
-            this.Money = double.Parse(customerNode.Attributes[5].Value);
         }
 
-        public XmlNode LoadToNode(Customer customer)
+        public XmlNode LoadToNode(Customer customer,string pathToFile)
         {
             XmlDocument customerdocument = new XmlDocument();
-            customerdocument.Load("WriteData.xml");
-            XmlNode customerElement = customerdocument.CreateElement("customer");
+            customerdocument.Load(pathToFile);
+            XmlNode customerElement = customerdocument.CreateElement("Customer");
             XmlNodeList nodes = customerdocument.ChildNodes;
 
             foreach (XmlNode customersnode in nodes)
@@ -56,7 +52,7 @@ namespace ManagerProject
                 {
                     for (XmlNode customernode = customersnode.FirstChild; customernode != null; customernode = customernode.NextSibling)
                     {
-                        if ("customers".Equals(customernode.Name))
+                        if ("Customers".Equals(customernode.Name))
                         {
                             customernode.AppendChild(customerElement);
                             XmlAttribute customerID = customerdocument.CreateAttribute("customerID");
@@ -74,11 +70,8 @@ namespace ManagerProject
                             XmlAttribute dateAgreement = customerdocument.CreateAttribute("dateAgreement");
                             dateAgreement.Value = customer.DateAgreement.ToString("dd.MM.yyyy HH:mm");
                             customerElement.Attributes.Append(dateAgreement);
-                            XmlAttribute money = customerdocument.CreateAttribute("money");
-                            money.Value = customer.Money.ToString();
-                            customerElement.Attributes.Append(money);
                             customerElement = customerElement.NextSibling;
-                            customerdocument.Save("WriteData.xml");
+                            customerdocument.Save(pathToFile);
                         }
                     }
                 }

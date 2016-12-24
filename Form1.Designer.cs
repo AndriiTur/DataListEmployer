@@ -30,14 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.EmployeeDataGridView = new System.Windows.Forms.DataGridView();
-            this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.DeleteButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.EditEmployeeButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DeleteEmployeeButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,55 +46,67 @@
             this.EmployeeTabPage = new System.Windows.Forms.TabPage();
             this.CustomerTabPage = new System.Windows.Forms.TabPage();
             this.CustomerDataGridView = new System.Windows.Forms.DataGridView();
-            this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surnameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateAgreementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.moneyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomerEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CustomerDelete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.AddCutomerButton = new System.Windows.Forms.Button();
             this.AgreementDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.CustomerSurnameTextBox = new System.Windows.Forms.TextBox();
-            this.MoneyTextBox = new System.Windows.Forms.TextBox();
             this.CountryTextBox = new System.Windows.Forms.TextBox();
             this.CustomerNameTextBox = new System.Windows.Forms.TextBox();
             this.ProjectTabPage = new System.Windows.Forms.TabPage();
-            this.ProjectEditButton = new System.Windows.Forms.Button();
-            this.DeleteProjectButton = new System.Windows.Forms.Button();
-            this.AddProjectButton = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.ProjectDataGridView = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.ProjectInfoComboBox = new System.Windows.Forms.ComboBox();
-            this.StatusComboBox = new System.Windows.Forms.ComboBox();
-            this.projestStatusBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ProjectCustomerComboBox = new System.Windows.Forms.ComboBox();
-            this.ProjectCostTextBox = new System.Windows.Forms.TextBox();
-            this.ProjectNameTextBox = new System.Windows.Forms.TextBox();
             this.ProjectDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.AddProjectButton = new System.Windows.Forms.Button();
+            this.ProjectNameTextBox = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ProjectCostTextBox = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.ProjectCustomerComboBox = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.StatusComboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ProjectIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectDataColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectCostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectStatusColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ProjectCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.EditEmployeeInProject = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProjectEditColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProjectDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameEmployeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SurnameEmployeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalaryEmployeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SurnameCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountryCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateAgreementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.SettingsPanel.SuspendLayout();
             this.MenegerTabControl.SuspendLayout();
             this.EmployeeTabPage.SuspendLayout();
             this.CustomerTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.ProjectTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.projestStatusBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProjectDataGridView)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // EmployeeDataGridView
@@ -118,17 +124,17 @@
             this.EmployeeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EmployeeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.employeeIDDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.surnameDataGridViewTextBoxColumn,
+            this.NameEmployeeDataGridViewTextBoxColumn,
+            this.SurnameEmployeeDataGridViewTextBoxColumn,
             this.dateOfEmploymentDataGridViewTextBoxColumn,
-            this.salaryDataGridViewTextBoxColumn,
-            this.Edit,
-            this.DeleteButton});
+            this.SalaryEmployeeDataGridViewTextBoxColumn,
+            this.EditEmployeeButton,
+            this.DeleteEmployeeButton});
             this.EmployeeDataGridView.DataSource = this.employeeBindingSource;
             this.EmployeeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.EmployeeDataGridView.GridColor = System.Drawing.SystemColors.Control;
-            this.EmployeeDataGridView.Location = new System.Drawing.Point(3, 262);
-            this.EmployeeDataGridView.MinimumSize = new System.Drawing.Size(411, 150);
+            this.EmployeeDataGridView.Location = new System.Drawing.Point(3, 173);
+            this.EmployeeDataGridView.MinimumSize = new System.Drawing.Size(411, 125);
             this.EmployeeDataGridView.MultiSelect = false;
             this.EmployeeDataGridView.Name = "EmployeeDataGridView";
             this.EmployeeDataGridView.ReadOnly = true;
@@ -140,84 +146,33 @@
             this.EmployeeDataGridView.ShowCellToolTips = false;
             this.EmployeeDataGridView.ShowEditingIcon = false;
             this.EmployeeDataGridView.ShowRowErrors = false;
-            this.EmployeeDataGridView.Size = new System.Drawing.Size(430, 150);
+            this.EmployeeDataGridView.Size = new System.Drawing.Size(423, 210);
             this.EmployeeDataGridView.TabIndex = 7;
             this.EmployeeDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EmployeeDataGridView_CellClick);
             // 
-            // employeeIDDataGridViewTextBoxColumn
+            // EditEmployeeButton
             // 
-            this.employeeIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
-            this.employeeIDDataGridViewTextBoxColumn.FillWeight = 20F;
-            this.employeeIDDataGridViewTextBoxColumn.Frozen = true;
-            this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
-            this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
-            this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.employeeIDDataGridViewTextBoxColumn.Width = 75;
+            this.EditEmployeeButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.EditEmployeeButton.FillWeight = 40F;
+            this.EditEmployeeButton.HeaderText = "Edit";
+            this.EditEmployeeButton.Name = "EditEmployeeButton";
+            this.EditEmployeeButton.ReadOnly = true;
+            this.EditEmployeeButton.Text = "Edit";
+            this.EditEmployeeButton.UseColumnTextForButtonValue = true;
+            this.EditEmployeeButton.Width = 40;
             // 
-            // nameDataGridViewTextBoxColumn
+            // DeleteEmployeeButton
             // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.FillWeight = 26.0761F;
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // surnameDataGridViewTextBoxColumn
-            // 
-            this.surnameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
-            this.surnameDataGridViewTextBoxColumn.FillWeight = 26.0761F;
-            this.surnameDataGridViewTextBoxColumn.HeaderText = "Surname";
-            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
-            this.surnameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dateOfEmploymentDataGridViewTextBoxColumn
-            // 
-            this.dateOfEmploymentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.FillWeight = 26.0761F;
-            this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // salaryDataGridViewTextBoxColumn
-            // 
-            this.salaryDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.salaryDataGridViewTextBoxColumn.DataPropertyName = "Salary";
-            this.salaryDataGridViewTextBoxColumn.FillWeight = 26.0761F;
-            this.salaryDataGridViewTextBoxColumn.HeaderText = "Salary";
-            this.salaryDataGridViewTextBoxColumn.Name = "salaryDataGridViewTextBoxColumn";
-            this.salaryDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Edit
-            // 
-            this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Edit.FillWeight = 40F;
-            this.Edit.HeaderText = "Edit";
-            this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
-            this.Edit.Text = "Edit";
-            this.Edit.UseColumnTextForButtonValue = true;
-            this.Edit.Width = 40;
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeleteButton.FillWeight = 50F;
-            this.DeleteButton.HeaderText = "Delete";
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.ReadOnly = true;
-            this.DeleteButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DeleteButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DeleteButton.Text = "Delete";
-            this.DeleteButton.UseColumnTextForButtonValue = true;
-            this.DeleteButton.Width = 50;
-            // 
-            // employeeBindingSource
-            // 
-            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
+            this.DeleteEmployeeButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeleteEmployeeButton.FillWeight = 50F;
+            this.DeleteEmployeeButton.HeaderText = "Delete";
+            this.DeleteEmployeeButton.Name = "DeleteEmployeeButton";
+            this.DeleteEmployeeButton.ReadOnly = true;
+            this.DeleteEmployeeButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DeleteEmployeeButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DeleteEmployeeButton.Text = "Delete";
+            this.DeleteEmployeeButton.UseColumnTextForButtonValue = true;
+            this.DeleteEmployeeButton.Width = 50;
             // 
             // SettingsPanel
             // 
@@ -233,16 +188,16 @@
             this.SettingsPanel.Controls.Add(this.SalaryTextBox);
             this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.SettingsPanel.Location = new System.Drawing.Point(3, 3);
-            this.SettingsPanel.MinimumSize = new System.Drawing.Size(408, 260);
+            this.SettingsPanel.MinimumSize = new System.Drawing.Size(423, 168);
             this.SettingsPanel.Name = "SettingsPanel";
-            this.SettingsPanel.Size = new System.Drawing.Size(423, 260);
+            this.SettingsPanel.Size = new System.Drawing.Size(423, 168);
             this.SettingsPanel.TabIndex = 8;
             // 
             // AddEmployeeButton
             // 
-            this.AddEmployeeButton.Location = new System.Drawing.Point(13, 223);
+            this.AddEmployeeButton.Location = new System.Drawing.Point(12, 123);
             this.AddEmployeeButton.Name = "AddEmployeeButton";
-            this.AddEmployeeButton.Size = new System.Drawing.Size(173, 23);
+            this.AddEmployeeButton.Size = new System.Drawing.Size(393, 23);
             this.AddEmployeeButton.TabIndex = 18;
             this.AddEmployeeButton.Text = "Add";
             this.AddEmployeeButton.UseVisualStyleBackColor = true;
@@ -252,7 +207,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 169);
+            this.label4.Location = new System.Drawing.Point(228, 64);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 16;
@@ -273,7 +228,7 @@
             this.EmployeeDateTimePicker.CustomFormat = "dd:MM:yy  HH:mm";
             this.EmployeeDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.EmployeeDateTimePicker.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.EmployeeDateTimePicker.Location = new System.Drawing.Point(12, 133);
+            this.EmployeeDateTimePicker.Location = new System.Drawing.Point(231, 31);
             this.EmployeeDateTimePicker.Name = "EmployeeDateTimePicker";
             this.EmployeeDateTimePicker.Size = new System.Drawing.Size(174, 20);
             this.EmployeeDateTimePicker.TabIndex = 15;
@@ -283,7 +238,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 117);
+            this.label3.Location = new System.Drawing.Point(228, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 14;
@@ -318,7 +273,7 @@
             // 
             // SalaryTextBox
             // 
-            this.SalaryTextBox.Location = new System.Drawing.Point(13, 185);
+            this.SalaryTextBox.Location = new System.Drawing.Point(231, 80);
             this.SalaryTextBox.Name = "SalaryTextBox";
             this.SalaryTextBox.Size = new System.Drawing.Size(174, 20);
             this.SalaryTextBox.TabIndex = 11;
@@ -339,7 +294,7 @@
             this.MenegerTabControl.SelectedIndex = 0;
             this.MenegerTabControl.Size = new System.Drawing.Size(437, 414);
             this.MenegerTabControl.TabIndex = 19;
-            this.MenegerTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MenegerTabControl_Selecting);
+            this.MenegerTabControl.SelectedIndexChanged += new System.EventHandler(this.MenegerTabControl_SelectedIndexChanged);
             // 
             // EmployeeTabPage
             // 
@@ -384,17 +339,18 @@
             this.CustomerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CustomerDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.customerIDDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn1,
-            this.surnameDataGridViewTextBoxColumn1,
-            this.countryDataGridViewTextBoxColumn,
+            this.NameCustomerDataGridViewTextBoxColumn,
+            this.SurnameCustomerDataGridViewTextBoxColumn,
+            this.CountryCustomerDataGridViewTextBoxColumn,
             this.dateAgreementDataGridViewTextBoxColumn,
-            this.moneyDataGridViewTextBoxColumn,
+            this.CustomerQuantity,
+            this.CustomerMoney,
             this.CustomerEdit,
             this.CustomerDelete});
             this.CustomerDataGridView.DataSource = this.customerBindingSource;
             this.CustomerDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.CustomerDataGridView.EnableHeadersVisualStyles = false;
-            this.CustomerDataGridView.Location = new System.Drawing.Point(3, 200);
+            this.CustomerDataGridView.Location = new System.Drawing.Point(3, 163);
             this.CustomerDataGridView.MinimumSize = new System.Drawing.Size(414, 94);
             this.CustomerDataGridView.MultiSelect = false;
             this.CustomerDataGridView.Name = "CustomerDataGridView";
@@ -407,128 +363,78 @@
             this.CustomerDataGridView.ShowCellToolTips = false;
             this.CustomerDataGridView.ShowEditingIcon = false;
             this.CustomerDataGridView.ShowRowErrors = false;
-            this.CustomerDataGridView.Size = new System.Drawing.Size(429, 179);
+            this.CustomerDataGridView.Size = new System.Drawing.Size(421, 219);
             this.CustomerDataGridView.StandardTab = true;
             this.CustomerDataGridView.TabIndex = 6;
             this.CustomerDataGridView.TabStop = false;
             this.CustomerDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CustomerDataGridView_CellClick);
             // 
-            // customerIDDataGridViewTextBoxColumn
+            // CustomerQuantity
             // 
-            this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "CustomerID";
-            this.customerIDDataGridViewTextBoxColumn.FillWeight = 60.65695F;
-            this.customerIDDataGridViewTextBoxColumn.HeaderText = "CustomerID";
-            this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
-            this.customerIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.CustomerQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CustomerQuantity.FillWeight = 20F;
+            this.CustomerQuantity.HeaderText = "QuantityProject";
+            this.CustomerQuantity.Name = "CustomerQuantity";
+            this.CustomerQuantity.ReadOnly = true;
+            this.CustomerQuantity.Width = 20;
             // 
-            // nameDataGridViewTextBoxColumn1
+            // CustomerMoney
             // 
-            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn1.FillWeight = 60.65695F;
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // surnameDataGridViewTextBoxColumn1
-            // 
-            this.surnameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.surnameDataGridViewTextBoxColumn1.DataPropertyName = "Surname";
-            this.surnameDataGridViewTextBoxColumn1.FillWeight = 60.65695F;
-            this.surnameDataGridViewTextBoxColumn1.HeaderText = "Surname";
-            this.surnameDataGridViewTextBoxColumn1.Name = "surnameDataGridViewTextBoxColumn1";
-            this.surnameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // countryDataGridViewTextBoxColumn
-            // 
-            this.countryDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
-            this.countryDataGridViewTextBoxColumn.FillWeight = 60.65695F;
-            this.countryDataGridViewTextBoxColumn.HeaderText = "Country";
-            this.countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
-            this.countryDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dateAgreementDataGridViewTextBoxColumn
-            // 
-            this.dateAgreementDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dateAgreementDataGridViewTextBoxColumn.DataPropertyName = "DateAgreement";
-            this.dateAgreementDataGridViewTextBoxColumn.FillWeight = 60.65695F;
-            this.dateAgreementDataGridViewTextBoxColumn.HeaderText = "DateAgreement";
-            this.dateAgreementDataGridViewTextBoxColumn.Name = "dateAgreementDataGridViewTextBoxColumn";
-            this.dateAgreementDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // moneyDataGridViewTextBoxColumn
-            // 
-            this.moneyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.moneyDataGridViewTextBoxColumn.DataPropertyName = "Money";
-            this.moneyDataGridViewTextBoxColumn.FillWeight = 60.65695F;
-            this.moneyDataGridViewTextBoxColumn.HeaderText = "Money";
-            this.moneyDataGridViewTextBoxColumn.Name = "moneyDataGridViewTextBoxColumn";
-            this.moneyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.CustomerMoney.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CustomerMoney.FillWeight = 40F;
+            this.CustomerMoney.HeaderText = "Money";
+            this.CustomerMoney.Name = "CustomerMoney";
+            this.CustomerMoney.ReadOnly = true;
+            this.CustomerMoney.Width = 40;
             // 
             // CustomerEdit
             // 
-            this.CustomerEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CustomerEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.CustomerEdit.FillWeight = 50F;
             this.CustomerEdit.HeaderText = "Edit";
             this.CustomerEdit.Name = "CustomerEdit";
             this.CustomerEdit.ReadOnly = true;
             this.CustomerEdit.Text = "Edit";
             this.CustomerEdit.UseColumnTextForButtonValue = true;
-            this.CustomerEdit.Width = 50;
+            this.CustomerEdit.Width = 29;
             // 
             // CustomerDelete
             // 
-            this.CustomerDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CustomerDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.CustomerDelete.FillWeight = 60F;
             this.CustomerDelete.HeaderText = "Delete";
             this.CustomerDelete.Name = "CustomerDelete";
             this.CustomerDelete.ReadOnly = true;
             this.CustomerDelete.Text = "Delete";
             this.CustomerDelete.UseColumnTextForButtonValue = true;
-            this.CustomerDelete.Width = 60;
-            // 
-            // customerBindingSource
-            // 
-            this.customerBindingSource.DataSource = typeof(ManagerProject.Customer);
+            this.CustomerDelete.Width = 42;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.AddCutomerButton);
             this.panel1.Controls.Add(this.AgreementDateTimePicker);
             this.panel1.Controls.Add(this.CustomerSurnameTextBox);
-            this.panel1.Controls.Add(this.MoneyTextBox);
             this.panel1.Controls.Add(this.CountryTextBox);
             this.panel1.Controls.Add(this.CustomerNameTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.MinimumSize = new System.Drawing.Size(424, 200);
+            this.panel1.MinimumSize = new System.Drawing.Size(423, 157);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(424, 200);
+            this.panel1.Size = new System.Drawing.Size(423, 157);
             this.panel1.TabIndex = 0;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 105);
+            this.label10.Location = new System.Drawing.Point(221, 55);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(81, 13);
             this.label10.TabIndex = 7;
             this.label10.Text = "DateAgreement";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(221, 55);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Money";
             // 
             // label8
             // 
@@ -559,9 +465,9 @@
             // 
             // AddCutomerButton
             // 
-            this.AddCutomerButton.Location = new System.Drawing.Point(224, 118);
+            this.AddCutomerButton.Location = new System.Drawing.Point(20, 119);
             this.AddCutomerButton.Name = "AddCutomerButton";
-            this.AddCutomerButton.Size = new System.Drawing.Size(171, 23);
+            this.AddCutomerButton.Size = new System.Drawing.Size(375, 23);
             this.AddCutomerButton.TabIndex = 2;
             this.AddCutomerButton.Text = "AddCutomer";
             this.AddCutomerButton.UseVisualStyleBackColor = true;
@@ -572,7 +478,7 @@
             // 
             this.AgreementDateTimePicker.CustomFormat = "dd:MM:yy HH:mm";
             this.AgreementDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.AgreementDateTimePicker.Location = new System.Drawing.Point(20, 121);
+            this.AgreementDateTimePicker.Location = new System.Drawing.Point(224, 71);
             this.AgreementDateTimePicker.Name = "AgreementDateTimePicker";
             this.AgreementDateTimePicker.Size = new System.Drawing.Size(171, 20);
             this.AgreementDateTimePicker.TabIndex = 5;
@@ -585,14 +491,6 @@
             this.CustomerSurnameTextBox.Size = new System.Drawing.Size(171, 20);
             this.CustomerSurnameTextBox.TabIndex = 2;
             this.CustomerSurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CuustomerSurnameTextBox_KeyPress);
-            // 
-            // MoneyTextBox
-            // 
-            this.MoneyTextBox.Location = new System.Drawing.Point(224, 71);
-            this.MoneyTextBox.Name = "MoneyTextBox";
-            this.MoneyTextBox.Size = new System.Drawing.Size(171, 20);
-            this.MoneyTextBox.TabIndex = 4;
-            this.MoneyTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MoneyTextBox_KeyPress);
             // 
             // CountryTextBox
             // 
@@ -612,21 +510,8 @@
             // 
             // ProjectTabPage
             // 
-            this.ProjectTabPage.Controls.Add(this.ProjectEditButton);
-            this.ProjectTabPage.Controls.Add(this.DeleteProjectButton);
-            this.ProjectTabPage.Controls.Add(this.AddProjectButton);
-            this.ProjectTabPage.Controls.Add(this.label14);
-            this.ProjectTabPage.Controls.Add(this.label15);
-            this.ProjectTabPage.Controls.Add(this.label13);
-            this.ProjectTabPage.Controls.Add(this.label12);
-            this.ProjectTabPage.Controls.Add(this.label11);
-            this.ProjectTabPage.Controls.Add(this.label5);
-            this.ProjectTabPage.Controls.Add(this.ProjectInfoComboBox);
-            this.ProjectTabPage.Controls.Add(this.StatusComboBox);
-            this.ProjectTabPage.Controls.Add(this.ProjectCustomerComboBox);
-            this.ProjectTabPage.Controls.Add(this.ProjectCostTextBox);
-            this.ProjectTabPage.Controls.Add(this.ProjectNameTextBox);
-            this.ProjectTabPage.Controls.Add(this.ProjectDateTimePicker);
+            this.ProjectTabPage.Controls.Add(this.ProjectDataGridView);
+            this.ProjectTabPage.Controls.Add(this.panel2);
             this.ProjectTabPage.Location = new System.Drawing.Point(4, 22);
             this.ProjectTabPage.Name = "ProjectTabPage";
             this.ProjectTabPage.Size = new System.Drawing.Size(429, 388);
@@ -634,31 +519,84 @@
             this.ProjectTabPage.Text = "Projects";
             this.ProjectTabPage.UseVisualStyleBackColor = true;
             // 
-            // ProjectEditButton
+            // ProjectDataGridView
             // 
-            this.ProjectEditButton.Location = new System.Drawing.Point(17, 245);
-            this.ProjectEditButton.Name = "ProjectEditButton";
-            this.ProjectEditButton.Size = new System.Drawing.Size(360, 23);
-            this.ProjectEditButton.TabIndex = 4;
-            this.ProjectEditButton.Text = "ProjectEdit";
-            this.ProjectEditButton.UseVisualStyleBackColor = true;
-            this.ProjectEditButton.Visible = false;
-            this.ProjectEditButton.Click += new System.EventHandler(this.ProjectEditButton_Click);
+            this.ProjectDataGridView.AllowDrop = true;
+            this.ProjectDataGridView.AllowUserToAddRows = false;
+            this.ProjectDataGridView.AllowUserToDeleteRows = false;
+            this.ProjectDataGridView.AllowUserToResizeColumns = false;
+            this.ProjectDataGridView.AllowUserToResizeRows = false;
+            this.ProjectDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProjectDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ProjectDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProjectDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProjectIDColumn,
+            this.ProjectNameColumn,
+            this.ProjectDataColumn,
+            this.ProjectCostColumn,
+            this.ProjectStatusColumn,
+            this.ProjectCustomerColumn,
+            this.EditEmployeeInProject,
+            this.ProjectEditColumn,
+            this.ProjectDeleteColumn});
+            this.ProjectDataGridView.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ProjectDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.ProjectDataGridView.Location = new System.Drawing.Point(3, 185);
+            this.ProjectDataGridView.MultiSelect = false;
+            this.ProjectDataGridView.Name = "ProjectDataGridView";
+            this.ProjectDataGridView.RowHeadersVisible = false;
+            this.ProjectDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.ProjectDataGridView.ShowCellErrors = false;
+            this.ProjectDataGridView.ShowCellToolTips = false;
+            this.ProjectDataGridView.ShowEditingIcon = false;
+            this.ProjectDataGridView.ShowRowErrors = false;
+            this.ProjectDataGridView.Size = new System.Drawing.Size(426, 200);
+            this.ProjectDataGridView.TabIndex = 7;
+            this.ProjectDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProjectDataGridView_CellClick);
             // 
-            // DeleteProjectButton
+            // panel2
             // 
-            this.DeleteProjectButton.Location = new System.Drawing.Point(17, 274);
-            this.DeleteProjectButton.Name = "DeleteProjectButton";
-            this.DeleteProjectButton.Size = new System.Drawing.Size(360, 23);
-            this.DeleteProjectButton.TabIndex = 4;
-            this.DeleteProjectButton.Text = "Delete";
-            this.DeleteProjectButton.UseVisualStyleBackColor = true;
-            this.DeleteProjectButton.Visible = false;
-            this.DeleteProjectButton.Click += new System.EventHandler(this.DeleteProjectButton_Click);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.ProjectDateTimePicker);
+            this.panel2.Controls.Add(this.AddProjectButton);
+            this.panel2.Controls.Add(this.ProjectNameTextBox);
+            this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.ProjectCostTextBox);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.ProjectCustomerComboBox);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.StatusComboBox);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(429, 179);
+            this.panel2.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "ProjectName";
+            // 
+            // ProjectDateTimePicker
+            // 
+            this.ProjectDateTimePicker.CustomFormat = " dd.MM.yy  HH:mm";
+            this.ProjectDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ProjectDateTimePicker.Location = new System.Drawing.Point(16, 69);
+            this.ProjectDateTimePicker.Name = "ProjectDateTimePicker";
+            this.ProjectDateTimePicker.Size = new System.Drawing.Size(156, 20);
+            this.ProjectDateTimePicker.TabIndex = 1;
+            this.ProjectDateTimePicker.Value = new System.DateTime(2016, 12, 14, 13, 56, 35, 0);
             // 
             // AddProjectButton
             // 
-            this.AddProjectButton.Location = new System.Drawing.Point(17, 142);
+            this.AddProjectButton.Location = new System.Drawing.Point(16, 140);
             this.AddProjectButton.Name = "AddProjectButton";
             this.AddProjectButton.Size = new System.Drawing.Size(360, 23);
             this.AddProjectButton.TabIndex = 4;
@@ -667,116 +605,256 @@
             this.AddProjectButton.Visible = false;
             this.AddProjectButton.Click += new System.EventHandler(this.AddProjectButton_Click);
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(14, 177);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 13);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "ProjectInfo";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(218, 99);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(37, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "Status";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(218, 55);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 13);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Customer";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(218, 11);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(61, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "ProjectCost";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(17, 55);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(108, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "DateAgrementProject";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "ProjectName";
-            // 
-            // ProjectInfoComboBox
-            // 
-            this.ProjectInfoComboBox.FormattingEnabled = true;
-            this.ProjectInfoComboBox.Location = new System.Drawing.Point(17, 193);
-            this.ProjectInfoComboBox.Name = "ProjectInfoComboBox";
-            this.ProjectInfoComboBox.Size = new System.Drawing.Size(360, 21);
-            this.ProjectInfoComboBox.TabIndex = 2;
-            this.ProjectInfoComboBox.Text = "Choise...";
-            this.ProjectInfoComboBox.SelectedIndexChanged += new System.EventHandler(this.ProjectInfoComboBox_SelectedIndexChanged);
-            // 
-            // StatusComboBox
-            // 
-            this.StatusComboBox.DataSource = this.projestStatusBindingSource;
-            this.StatusComboBox.FormattingEnabled = true;
-            this.StatusComboBox.Location = new System.Drawing.Point(221, 115);
-            this.StatusComboBox.Name = "StatusComboBox";
-            this.StatusComboBox.Size = new System.Drawing.Size(156, 21);
-            this.StatusComboBox.TabIndex = 2;
-            // 
-            // projestStatusBindingSource
-            // 
-            this.projestStatusBindingSource.DataSource = typeof(ManagerProject.Project.ProjestStatus);
-            // 
-            // ProjectCustomerComboBox
-            // 
-            this.ProjectCustomerComboBox.Location = new System.Drawing.Point(221, 70);
-            this.ProjectCustomerComboBox.Name = "ProjectCustomerComboBox";
-            this.ProjectCustomerComboBox.Size = new System.Drawing.Size(156, 21);
-            this.ProjectCustomerComboBox.TabIndex = 2;
-            this.ProjectCustomerComboBox.Text = "Choise...";
-            // 
-            // ProjectCostTextBox
-            // 
-            this.ProjectCostTextBox.Location = new System.Drawing.Point(221, 30);
-            this.ProjectCostTextBox.Name = "ProjectCostTextBox";
-            this.ProjectCostTextBox.Size = new System.Drawing.Size(156, 20);
-            this.ProjectCostTextBox.TabIndex = 0;
-            this.ProjectCostTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProjectCostTextBox_KeyPress);
-            // 
             // ProjectNameTextBox
             // 
-            this.ProjectNameTextBox.Location = new System.Drawing.Point(17, 30);
+            this.ProjectNameTextBox.Location = new System.Drawing.Point(16, 28);
             this.ProjectNameTextBox.Name = "ProjectNameTextBox";
             this.ProjectNameTextBox.Size = new System.Drawing.Size(156, 20);
             this.ProjectNameTextBox.TabIndex = 0;
             this.ProjectNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProjectNameTextBox_KeyPress);
             // 
-            // ProjectDateTimePicker
+            // label15
             // 
-            this.ProjectDateTimePicker.CustomFormat = " dd.MM.yy  HH:mm";
-            this.ProjectDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ProjectDateTimePicker.Location = new System.Drawing.Point(17, 71);
-            this.ProjectDateTimePicker.Name = "ProjectDateTimePicker";
-            this.ProjectDateTimePicker.Size = new System.Drawing.Size(156, 20);
-            this.ProjectDateTimePicker.TabIndex = 1;
-            this.ProjectDateTimePicker.Value = new System.DateTime(2016, 12, 14, 13, 56, 35, 0);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(217, 97);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(37, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Status";
+            // 
+            // ProjectCostTextBox
+            // 
+            this.ProjectCostTextBox.Location = new System.Drawing.Point(220, 28);
+            this.ProjectCostTextBox.Name = "ProjectCostTextBox";
+            this.ProjectCostTextBox.Size = new System.Drawing.Size(156, 20);
+            this.ProjectCostTextBox.TabIndex = 0;
+            this.ProjectCostTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProjectCostTextBox_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(217, 53);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Customer";
+            // 
+            // ProjectCustomerComboBox
+            // 
+            this.ProjectCustomerComboBox.Location = new System.Drawing.Point(220, 68);
+            this.ProjectCustomerComboBox.Name = "ProjectCustomerComboBox";
+            this.ProjectCustomerComboBox.Size = new System.Drawing.Size(156, 21);
+            this.ProjectCustomerComboBox.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(217, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "ProjectCost";
+            // 
+            // StatusComboBox
+            // 
+            this.StatusComboBox.FormattingEnabled = true;
+            this.StatusComboBox.Location = new System.Drawing.Point(220, 113);
+            this.StatusComboBox.Name = "StatusComboBox";
+            this.StatusComboBox.Size = new System.Drawing.Size(156, 21);
+            this.StatusComboBox.TabIndex = 2;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 53);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "DateAgrementProject";
+            // 
+            // ProjectIDColumn
+            // 
+            this.ProjectIDColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ProjectIDColumn.FillWeight = 30F;
+            this.ProjectIDColumn.HeaderText = "ID:";
+            this.ProjectIDColumn.Name = "ProjectIDColumn";
+            this.ProjectIDColumn.ToolTipText = "ID:";
+            this.ProjectIDColumn.Width = 30;
+            // 
+            // ProjectNameColumn
+            // 
+            this.ProjectNameColumn.FillWeight = 75.52312F;
+            this.ProjectNameColumn.HeaderText = "Name";
+            this.ProjectNameColumn.Name = "ProjectNameColumn";
+            // 
+            // ProjectDataColumn
+            // 
+            this.ProjectDataColumn.FillWeight = 75.52312F;
+            this.ProjectDataColumn.HeaderText = "DataAgrement";
+            this.ProjectDataColumn.Name = "ProjectDataColumn";
+            // 
+            // ProjectCostColumn
+            // 
+            this.ProjectCostColumn.FillWeight = 75.52312F;
+            this.ProjectCostColumn.HeaderText = "Cost";
+            this.ProjectCostColumn.Name = "ProjectCostColumn";
+            // 
+            // ProjectStatusColumn
+            // 
+            this.ProjectStatusColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProjectStatusColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.ProjectStatusColumn.FillWeight = 75.52312F;
+            this.ProjectStatusColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectStatusColumn.HeaderText = "Status";
+            this.ProjectStatusColumn.Name = "ProjectStatusColumn";
+            this.ProjectStatusColumn.Width = 43;
+            // 
+            // ProjectCustomerColumn
+            // 
+            this.ProjectCustomerColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProjectCustomerColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.ProjectCustomerColumn.FillWeight = 75.52312F;
+            this.ProjectCustomerColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectCustomerColumn.HeaderText = "Customer";
+            this.ProjectCustomerColumn.Name = "ProjectCustomerColumn";
+            this.ProjectCustomerColumn.Width = 57;
+            // 
+            // EditEmployeeInProject
+            // 
+            this.EditEmployeeInProject.HeaderText = "EditEmployee";
+            this.EditEmployeeInProject.Name = "EditEmployeeInProject";
+            this.EditEmployeeInProject.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.EditEmployeeInProject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.EditEmployeeInProject.Text = "EditEmployee";
+            this.EditEmployeeInProject.UseColumnTextForButtonValue = true;
+            // 
+            // ProjectEditColumn
+            // 
+            this.ProjectEditColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ProjectEditColumn.FillWeight = 40F;
+            this.ProjectEditColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectEditColumn.HeaderText = "Edit";
+            this.ProjectEditColumn.Name = "ProjectEditColumn";
+            this.ProjectEditColumn.ReadOnly = true;
+            this.ProjectEditColumn.Text = "Edit";
+            this.ProjectEditColumn.UseColumnTextForButtonValue = true;
+            this.ProjectEditColumn.Width = 31;
+            // 
+            // ProjectDeleteColumn
+            // 
+            this.ProjectDeleteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ProjectDeleteColumn.FillWeight = 60F;
+            this.ProjectDeleteColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectDeleteColumn.HeaderText = "Delete";
+            this.ProjectDeleteColumn.Name = "ProjectDeleteColumn";
+            this.ProjectDeleteColumn.Text = "Delete";
+            this.ProjectDeleteColumn.UseColumnTextForButtonValue = true;
+            this.ProjectDeleteColumn.Width = 60;
+            // 
+            // employeeIDDataGridViewTextBoxColumn
+            // 
+            this.employeeIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.FillWeight = 20F;
+            this.employeeIDDataGridViewTextBoxColumn.Frozen = true;
+            this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
+            this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
+            this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.employeeIDDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // NameEmployeeDataGridViewTextBoxColumn
+            // 
+            this.NameEmployeeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameEmployeeDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.NameEmployeeDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.NameEmployeeDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.NameEmployeeDataGridViewTextBoxColumn.Name = "NameEmployeeDataGridViewTextBoxColumn";
+            this.NameEmployeeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // SurnameEmployeeDataGridViewTextBoxColumn
+            // 
+            this.SurnameEmployeeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SurnameEmployeeDataGridViewTextBoxColumn.DataPropertyName = "Surname";
+            this.SurnameEmployeeDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.SurnameEmployeeDataGridViewTextBoxColumn.HeaderText = "Surname";
+            this.SurnameEmployeeDataGridViewTextBoxColumn.Name = "SurnameEmployeeDataGridViewTextBoxColumn";
+            this.SurnameEmployeeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateOfEmploymentDataGridViewTextBoxColumn
+            // 
+            this.dateOfEmploymentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
+            this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // SalaryEmployeeDataGridViewTextBoxColumn
+            // 
+            this.SalaryEmployeeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SalaryEmployeeDataGridViewTextBoxColumn.DataPropertyName = "Salary";
+            this.SalaryEmployeeDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.SalaryEmployeeDataGridViewTextBoxColumn.HeaderText = "Salary";
+            this.SalaryEmployeeDataGridViewTextBoxColumn.Name = "SalaryEmployeeDataGridViewTextBoxColumn";
+            this.SalaryEmployeeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // employeeBindingSource
+            // 
+            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
+            // 
+            // customerIDDataGridViewTextBoxColumn
+            // 
+            this.customerIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "CustomerID";
+            this.customerIDDataGridViewTextBoxColumn.FillWeight = 20F;
+            this.customerIDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
+            this.customerIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.customerIDDataGridViewTextBoxColumn.Width = 20;
+            // 
+            // NameCustomerDataGridViewTextBoxColumn
+            // 
+            this.NameCustomerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NameCustomerDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.NameCustomerDataGridViewTextBoxColumn.FillWeight = 60.65695F;
+            this.NameCustomerDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.NameCustomerDataGridViewTextBoxColumn.Name = "NameCustomerDataGridViewTextBoxColumn";
+            this.NameCustomerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.NameCustomerDataGridViewTextBoxColumn.Width = 58;
+            // 
+            // SurnameCustomerDataGridViewTextBoxColumn
+            // 
+            this.SurnameCustomerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.SurnameCustomerDataGridViewTextBoxColumn.DataPropertyName = "Surname";
+            this.SurnameCustomerDataGridViewTextBoxColumn.FillWeight = 60.65695F;
+            this.SurnameCustomerDataGridViewTextBoxColumn.HeaderText = "Surname";
+            this.SurnameCustomerDataGridViewTextBoxColumn.Name = "SurnameCustomerDataGridViewTextBoxColumn";
+            this.SurnameCustomerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.SurnameCustomerDataGridViewTextBoxColumn.Width = 72;
+            // 
+            // CountryCustomerDataGridViewTextBoxColumn
+            // 
+            this.CountryCustomerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CountryCustomerDataGridViewTextBoxColumn.DataPropertyName = "Country";
+            this.CountryCustomerDataGridViewTextBoxColumn.FillWeight = 60.65695F;
+            this.CountryCustomerDataGridViewTextBoxColumn.HeaderText = "Country";
+            this.CountryCustomerDataGridViewTextBoxColumn.Name = "CountryCustomerDataGridViewTextBoxColumn";
+            this.CountryCustomerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.CountryCustomerDataGridViewTextBoxColumn.Width = 66;
+            // 
+            // dateAgreementDataGridViewTextBoxColumn
+            // 
+            this.dateAgreementDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dateAgreementDataGridViewTextBoxColumn.DataPropertyName = "DateAgreement";
+            this.dateAgreementDataGridViewTextBoxColumn.FillWeight = 60.65695F;
+            this.dateAgreementDataGridViewTextBoxColumn.HeaderText = "DateAgreement";
+            this.dateAgreementDataGridViewTextBoxColumn.Name = "dateAgreementDataGridViewTextBoxColumn";
+            this.dateAgreementDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateAgreementDataGridViewTextBoxColumn.Width = 104;
+            // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(ManagerProject.Customer);
             // 
             // Form1
             // 
@@ -787,20 +865,22 @@
             this.MinimumSize = new System.Drawing.Size(455, 454);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.MenegerTabControl.ResumeLayout(false);
             this.EmployeeTabPage.ResumeLayout(false);
             this.CustomerTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ProjectTabPage.ResumeLayout(false);
-            this.ProjectTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.projestStatusBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProjectDataGridView)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -826,47 +906,52 @@
         private System.Windows.Forms.DataGridView CustomerDataGridView;
         private System.Windows.Forms.DateTimePicker AgreementDateTimePicker;
         private System.Windows.Forms.TextBox CustomerSurnameTextBox;
-        private System.Windows.Forms.TextBox MoneyTextBox;
         private System.Windows.Forms.TextBox CountryTextBox;
         private System.Windows.Forms.TextBox CustomerNameTextBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button AddCutomerButton;
         private System.Windows.Forms.BindingSource customerBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateAgreementDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn moneyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn CustomerEdit;
-        private System.Windows.Forms.DataGridViewButtonColumn CustomerDelete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn salaryDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn Edit;
-        private System.Windows.Forms.DataGridViewButtonColumn DeleteButton;
         private System.Windows.Forms.TextBox ProjectCostTextBox;
         private System.Windows.Forms.TextBox ProjectNameTextBox;
         private System.Windows.Forms.DateTimePicker ProjectDateTimePicker;
         private System.Windows.Forms.Button AddProjectButton;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox ProjectInfoComboBox;
         private System.Windows.Forms.ComboBox ProjectCustomerComboBox;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox StatusComboBox;
-        private System.Windows.Forms.BindingSource projestStatusBindingSource;
-        private System.Windows.Forms.Button DeleteProjectButton;
-        private System.Windows.Forms.Button ProjectEditButton;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView ProjectDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameEmployeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameEmployeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalaryEmployeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn EditEmployeeButton;
+        private System.Windows.Forms.DataGridViewButtonColumn DeleteEmployeeButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameCustomerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameCustomerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCustomerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateAgreementDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerMoney;
+        private System.Windows.Forms.DataGridViewButtonColumn CustomerEdit;
+        private System.Windows.Forms.DataGridViewButtonColumn CustomerDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectIDColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectDataColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectCostColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ProjectStatusColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ProjectCustomerColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn EditEmployeeInProject;
+        private System.Windows.Forms.DataGridViewButtonColumn ProjectEditColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn ProjectDeleteColumn;
     }
 }
 

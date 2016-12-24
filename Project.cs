@@ -34,7 +34,7 @@ namespace ManagerProject
             this.DateAgreement = new DateTime { };
             this.Cost = 0;
             this.Status = new ProjestStatus { };
-            this.CustomerID = 1;
+            this.CustomerID = 0;
         }
 
         public void LoadFromNode(XmlNode projectNode)
@@ -47,11 +47,11 @@ namespace ManagerProject
             this.CustomerID = int.Parse(projectNode.Attributes[5].Value);
         }
 
-        public XmlNode LoadToNode(Project project)
+        public XmlNode LoadToNode(Project project,string pathToFile)
         {
             XmlDocument projectdocument = new XmlDocument();
-            projectdocument.Load("WriteData.xml");
-            XmlNode projectElement = projectdocument.CreateElement("project");
+            projectdocument.Load(pathToFile);
+            XmlNode projectElement = projectdocument.CreateElement("Project");
             XmlNodeList nodes = projectdocument.ChildNodes;
 
             foreach (XmlNode projectsnode in nodes)
@@ -60,7 +60,7 @@ namespace ManagerProject
                 {
                     for (XmlNode projectnode = projectsnode.FirstChild; projectnode != null; projectnode = projectnode.NextSibling)
                     {
-                        if ("projects".Equals(projectnode.Name))
+                        if ("Projects".Equals(projectnode.Name))
                         {
                             projectnode.AppendChild(projectElement);
                             XmlAttribute projectID = projectdocument.CreateAttribute("projectID");
@@ -78,11 +78,11 @@ namespace ManagerProject
                             XmlAttribute status = projectdocument.CreateAttribute("status");
                             status.Value = project.Status.ToString();
                             projectElement.Attributes.Append(status);
-                            XmlAttribute projectcustID = projectdocument.CreateAttribute("projectcustID");
+                            XmlAttribute projectcustID = projectdocument.CreateAttribute("customer");
                             projectcustID.Value = project.CustomerID.ToString();
                             projectElement.Attributes.Append(projectcustID);
                             projectElement = projectElement.NextSibling;
-                            projectdocument.Save("WriteData.xml");
+                            projectdocument.Save(pathToFile);
                         }
                     }
                 }
