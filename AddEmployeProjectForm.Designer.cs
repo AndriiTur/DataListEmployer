@@ -1,6 +1,6 @@
 ﻿namespace ManagerProject
 {
-    partial class Form2
+    partial class AddEmployeProjectForm
     {
         /// <summary>
         /// Required designer variable.
@@ -147,7 +147,6 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.EmployesInProjectDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

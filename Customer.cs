@@ -3,8 +3,16 @@ using System.Xml;
 
 namespace ManagerProject
 {
-    public class Customer
+    public class Customer : ManagerBase
     {
+        public const string XMLNodeCustomer = "Customer";
+        public const string XMLCustomerAtributeID = "customerID";
+        public const string XMLCustomerAtributeName = "name";
+        public const string XMLCustomerAtributeSurname = "surname";
+        public const string XMLCustomerAtributeCountry = "country";
+        public const string XMLCustomerAtributeDate = "dateAgreement";
+        public const string DateFormat = "dd.MM.yyyy HH:mm";
+
         public int CustomerID { get; private set; }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -12,7 +20,7 @@ namespace ManagerProject
         public DateTime DateAgreement { get; private set; }
         
         public Customer(int customerID, string name, string surname, string country,
-                        DateTime dateAgreement)
+                        DateTime dateAgreement, Manager manager) : base(manager)
         {
             this.CustomerID = customerID;
             this.Name = name;
@@ -21,7 +29,7 @@ namespace ManagerProject
             this.DateAgreement = dateAgreement;
         }
 
-        public Customer()
+        public Customer(Manager manager) : base(manager)
         {
             this.CustomerID = 1;
             this.Name = "";
@@ -32,51 +40,20 @@ namespace ManagerProject
 
         public void LoadFromNode(XmlNode customerNode)
         {
-            this.CustomerID = int.Parse(customerNode.Attributes[0].Value);
-            this.Name = customerNode.Attributes[1].Value;
-            this.Surname = customerNode.Attributes[2].Value;
-            this.Country = customerNode.Attributes[3].Value;
-            this.DateAgreement = DateTime.Parse(customerNode.Attributes[4].Value);
+            this.CustomerID = int.Parse(customerNode.Attributes.GetNamedItem(XMLCustomerAtributeID).Value);
+            this.Name = customerNode.Attributes.GetNamedItem(XMLCustomerAtributeName).Value;
+            this.Surname = customerNode.Attributes.GetNamedItem(XMLCustomerAtributeSurname).Value;
+            this.Country = customerNode.Attributes.GetNamedItem(XMLCustomerAtributeCountry).Value;
+            this.DateAgreement = DateTime.Parse(customerNode.Attributes.GetNamedItem(XMLCustomerAtributeDate).Value);
         }
 
-        public XmlNode LoadToNode(Customer customer,string pathToFile)
+        public void SaveToNode(XmlNode customerNode)
         {
-            XmlDocument customerdocument = new XmlDocument();
-            customerdocument.Load(pathToFile);
-            XmlNode customerElement = customerdocument.CreateElement("Customer");
-            XmlNodeList nodes = customerdocument.ChildNodes;
-
-            foreach (XmlNode customersnode in nodes)
-            {
-                if ("Manager".Equals(customersnode.Name))
-                {
-                    for (XmlNode customernode = customersnode.FirstChild; customernode != null; customernode = customernode.NextSibling)
-                    {
-                        if ("Customers".Equals(customernode.Name))
-                        {
-                            customernode.AppendChild(customerElement);
-                            XmlAttribute customerID = customerdocument.CreateAttribute("customerID");
-                            customerID.Value = customer.CustomerID.ToString();
-                            customerElement.Attributes.Append(customerID);
-                            XmlAttribute name = customerdocument.CreateAttribute("name");
-                            name.Value = customer.Name;
-                            customerElement.Attributes.Append(name);
-                            XmlAttribute surname = customerdocument.CreateAttribute("surname");
-                            surname.Value = customer.Surname;
-                            customerElement.Attributes.Append(surname);
-                            XmlAttribute country = customerdocument.CreateAttribute("country");
-                            country.Value = customer.Country;
-                            customerElement.Attributes.Append(country);
-                            XmlAttribute dateAgreement = customerdocument.CreateAttribute("dateAgreement");
-                            dateAgreement.Value = customer.DateAgreement.ToString("dd.MM.yyyy HH:mm");
-                            customerElement.Attributes.Append(dateAgreement);
-                            customerElement = customerElement.NextSibling;
-                            customerdocument.Save(pathToFile);
-                        }
-                    }
-                }
-            }
-            return customerElement;
+            XmlNodeHelper.SetNodeAtribute(customerNode, XMLCustomerAtributeID, this.CustomerID.ToString());
+            XmlNodeHelper.SetNodeAtribute(customerNode, XMLCustomerAtributeName, this.Name);
+            XmlNodeHelper.SetNodeAtribute(customerNode, XMLCustomerAtributeSurname, this.Surname);
+            XmlNodeHelper.SetNodeAtribute(customerNode, XMLCustomerAtributeCountry, this.Country);
+            XmlNodeHelper.SetNodeAtribute(customerNode, XMLCustomerAtributeDate, this.DateAgreement.ToString(DateFormat));
         }
     }
 }
