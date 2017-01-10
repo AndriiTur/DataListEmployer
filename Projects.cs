@@ -11,20 +11,18 @@ namespace ManagerProject
     {
         public const string XMLNodeProjects = "Projects";
 
-        private List<Project> listProjects;
-
-        public int Count { get { return listProjects.Count; } }
+        private List<Project> ListProjects { get; set; }
+        public int Count { get { return ListProjects.Count; } }
+        public Project this[int index] { get { return ListProjects[index]; } }
 
         public Projects(Manager manager) : base (manager) 
         {
-            listProjects = new List<Project>();
+            ListProjects = new List<Project>();
         }
-
-        public Project this[int index] { get { return listProjects[index]; } }
 
         public Project GetProjectByID(int projectID)
         {
-            foreach (var project in listProjects)
+            foreach (var project in ListProjects)
                 if (project.ProjectID == projectID)
                     return project;
             return null;
@@ -32,20 +30,20 @@ namespace ManagerProject
 
         public void Add(Project project)
         {
-            listProjects.Add(project);
+            ListProjects.Add(project);
         }
 
         public void Remove(Project project)
         {
-            listProjects.Remove(project);
+            ListProjects.Remove(project);
         }
 
         public int IndexOf(Project project)
         {
-            return listProjects.IndexOf(project); 
+            return ListProjects.IndexOf(project); 
         }
 
-        internal void LoadFromFile(XmlNode projectsNode)
+        internal void LoadFromNode(XmlNode projectsNode)
         {
             XmlNodeList xmlProjectList = projectsNode.SelectNodes(Project.XMLNodeProject);
             foreach (XmlNode projectNode in xmlProjectList)
@@ -70,15 +68,20 @@ namespace ManagerProject
             }
         }
 
-        internal void SaveToFile(XmlNode projectsNode)
+        internal void SaveToNode(XmlNode projectsNode)
         {
-            for (var i = 0; i < this.Count; i++)
+            if (this.Count != 0)
             {
-                Project project = this[i];
-                XmlNode projectNode = XmlNodeHelper.RequiredNode(projectsNode, Project.XMLNodeProject,
-                    Project.XMLNodeAttributeID, project.ProjectID.ToString());                
-                project.SaveToNode(projectNode);
+                for (var i = 0; i < this.Count; i++)
+                {
+                    Project project = this[i];
+                    XmlNode projectNode = XmlNodeHelper.RequiredNode(projectsNode, Project.XMLNodeProject,
+                        Project.XMLNodeAttributeID, project.ProjectID.ToString());
+                    project.SaveToNode(projectNode);
+                }
             }
+            else
+                projectsNode = null;
         }
     }
 }

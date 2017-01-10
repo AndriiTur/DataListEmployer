@@ -11,20 +11,18 @@ namespace ManagerProject
     {
         public const string XMLNodeCustomers = "Customers";
 
-        public List<Customer> listCustomers;
-
-        public int Count { get { return listCustomers.Count; } private set { } }
+        public List<Customer> ListCustomers { get; set; }
+        public int Count { get { return ListCustomers.Count; } private set { } }
+        public Customer this[int index] { get { return ListCustomers[index]; } }
 
         public Customers(Manager manager) : base(manager)
         {
-            listCustomers = new List<Customer>();
+            ListCustomers = new List<Customer>();
         }
-
-        public Customer this[int index] { get { return listCustomers[index]; } }
 
         public Customer GetCustomerByID(int customerID)
         {
-            foreach (var customer in listCustomers)
+            foreach (var customer in ListCustomers)
                 if (customer.CustomerID == customerID)
                     return customer;
             return null;
@@ -32,20 +30,20 @@ namespace ManagerProject
 
         public void Add(Customer customer)
         {
-            listCustomers.Add(customer);
+            ListCustomers.Add(customer);
         }
 
         public void Remove(Customer customer)
         {
-            listCustomers.Remove(customer);
+            ListCustomers.Remove(customer);
         }
 
         public int IndexOf(Customer customer)
         {
-            return listCustomers.IndexOf(customer);
+            return ListCustomers.IndexOf(customer);
         }
 
-        internal void LoadFromFile(XmlNode customersNode)
+        internal void LoadFromNode(XmlNode customersNode)
         {
             XmlNodeList xmlCustomerList = customersNode.SelectNodes(Customer.XMLNodeCustomer);
             foreach (XmlNode projectNode in xmlCustomerList)
@@ -70,15 +68,21 @@ namespace ManagerProject
             }
         }
 
-        internal void SaveToFile(XmlNode customersNode)
+        internal void SaveToNode(XmlNode customersNode)
         {
-            for (var i = 0; i < this.Count; i++)
+            if (this.Count != 0)
             {
-                Customer customer = this[i];
-                XmlNode customerNode = XmlNodeHelper.RequiredNode(customersNode, Customer.XMLNodeCustomer,
-                    Customer.XMLCustomerAtributeID, customer.CustomerID.ToString());
-                customer.SaveToNode(customerNode);
+                for (var i = 0; i < this.Count; i++)
+                {
+                    Customer customer = this[i];
+                    XmlNode customerNode = XmlNodeHelper.RequiredNode(customersNode, Customer.XMLNodeCustomer,
+                        Customer.XMLCustomerAtributeID, customer.CustomerID.ToString());
+                    customer.SaveToNode(customerNode);
+                }
             }
+            else
+                customersNode = null;
+
         }
     }
 }

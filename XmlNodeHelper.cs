@@ -25,11 +25,45 @@ namespace ManagerProject
             return res;
         }
 
-        public static void SetNodeAtribute(XmlNode node,string atributeName,string atributeValue)
+        public static void SetNodeAtribute(XmlNode node, string atributeName, string value, string defaultValue = "")
         {
-            XmlAttribute atribute = node.OwnerDocument.CreateAttribute(atributeName);
-            atribute.Value = atributeValue;
-            node.Attributes.Append(atribute);
+            if (node == null)
+                return;
+
+            if (value == defaultValue)
+                return;
+
+            if (value != "")
+            {
+                XmlAttribute atribute = node.OwnerDocument.CreateAttribute(atributeName);
+                atribute.Value = value;
+                node.Attributes.Append(atribute);
+            }
+        }
+
+        public static void SetNodeAtributeI(XmlNode node, string atributeName, int value, int defaultValue = 0)
+        {
+            SetNodeAtribute(node, atributeName, value.ToString());
+        }
+
+        public static string GetNodeAtribute(XmlNode node, string atributeName, string defaultValue = "")
+        {
+            if (node == null)
+                return defaultValue;
+
+            XmlNode attributeID = node.Attributes.GetNamedItem(Customer.XMLCustomerAtributeID);
+            if (attributeID == null)
+                return defaultValue;
+            return attributeID.Value;
+        }
+
+              public static int GetNodeAtributeI(XmlNode node, string atributeName, int defaultValue = 0)
+        {
+            int intValue;
+            string strValue = GetNodeAtribute(node, atributeName, defaultValue.ToString());
+            if (int.TryParse(strValue, out intValue))
+                return intValue;
+            return defaultValue;
         }
     }
 }

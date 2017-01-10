@@ -23,38 +23,12 @@ namespace ManagerProject
         public const string MesageDeleteShow = "Delete";
         public const string ExeptionError = "Error";
 
-        public const string XMLNodeManager = "Manager";
-        public const string XMLNodeEmployees = "Employees";
-        public const string XMLNodeEmployee = "Employee";
-        public const string XMLEmployeeAtributeID = "employeeID";
-        public const string XMLEmployeeAtributeName = "name";
-        public const string XMLEmployeeAtributeSurname = "surname";
-        public const string XMLEmployeeAtributeSalary = "salary";
-        public const string XMLNodeCustomers = "Customers";
-        public const string XMLNodeCustomer = "Customer";
-        public const string XMLCustomerAtributeID = "customerID";
-        public const string XMLCustomerAtributeName = "name";
-        public const string XMLCustomerAtributeSurname = "surname";
-        public const string XMLCustomerAtributeCountry = "country";
-        public const string XMLNodeProjects = "Projects";
-        public const string XMLNodeProject = "Project";
-        public const string XMLProjectAtributeID = "projectID";
-        public const string XMLProjectAtributeName = "name";
-        public const string XMLProjectAtributeCost = "cost";
-        public const string XMLProjectAtributeStatus = "status";
-        public const string XMLProjectAtributeCustomer = "customer";
-
         public Manager manager;
-
-
         List<int> customerIDList;
-
         int curentRowIndex = -1;
-        public int ProjectCurentID;
 
         public MainForm()
         {
-            ProjectCurentID = 0;
             manager = new Manager();
             customerIDList = new List<int> { };
             InitializeComponent();
@@ -71,32 +45,6 @@ namespace ManagerProject
         void PrintText(object sender, EventArgs e)
         {
             // MessageBox.Show(sender.ToString());
-        }
-
-        internal int GetIDByCustomer(Customer customerFromProject)
-        {
-            return customerFromProject.CustomerID;
-        }
-
-        internal Employee GetEmployeesFromID(int employeeID)
-        {
-            for (int i = 0; i < manager.Employees.Count; i++)
-                if (manager.Employees[i].EmployeeID == employeeID)
-                    return manager.Employees[i];
-            return null;
-        }
-
-        internal Customer GetCustomer(int customerID)
-        {
-            for (int i = 0; i < manager.Customers.Count; i++)
-                if (manager.Customers[i].CustomerID == customerID)
-                    return manager.Customers[i];
-            return null;
-        }
-
-        internal int GetIDFromEmployee(Employee employeeFromProject)
-        {
-            return employeeFromProject.EmployeeID;
         }
 
         internal int GenerateNewemployeeID()
@@ -136,14 +84,14 @@ namespace ManagerProject
         {
             XmlDocument Doc = new XmlDocument();
             Doc.Load(PathToFile);
-            manager.SaveToFile(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
+            manager.SaveToNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
         }
 
         internal void LoadToManager()
         {
             XmlDocument Doc = new XmlDocument();
             Doc.Load(PathToFile);
-            manager.LoadFromFile(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
+            manager.LoadFromNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
             RefreshTabEmployee();
             RefreshTabProject();
             RefreshTabCustomer();

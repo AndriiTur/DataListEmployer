@@ -23,10 +23,11 @@ namespace ManagerProject
         public const string XMLNodeProject = "Project";
         public const string XMLProjectAtributeID = "projectID";
         public const string XMLEmployeeProject = "Employee";
-        
-        public Project CurentProject { get; set; }
+
         List<string> employeeComboBoxList;
         List<int> employeeIDComboBoxList;
+
+        public Project CurentProject { get; set; }
         
         public AddEmployeProjectForm()
         {
@@ -39,9 +40,9 @@ namespace ManagerProject
         private void AddEmployeToProjectButton_Click(object sender, EventArgs e)
         {
             string[] words = EmployeesComboBox.Text.Split(' ');
-            int employeeID = int.Parse(words[0]);
-            string name = words[1];
-            string surname = words[2];
+            int employeeID = employeeIDComboBoxList[employeeComboBoxList.IndexOf(EmployeesComboBox.SelectedValue.ToString())];
+            string name = words[0];
+            string surname = words[1];
             RefreshForm2();
         }
 
@@ -92,24 +93,10 @@ namespace ManagerProject
             {
                 EmployesInProjectDataGridView.Rows.Add();
                 EmployesInProjectDataGridView[EmployeeIDProject.Index, row].Value = employeeID.ToString();
-                EmployesInProjectDataGridView[EployeeNameProject.Index, row].Value = GetEmployee(employeeID).Name;
-                EmployesInProjectDataGridView[EmployeSurnameProject.Index, row].Value = GetEmployee(employeeID).Surname;
+                EmployesInProjectDataGridView[EployeeNameProject.Index, row].Value = CurentProject.Manager.Employees.GetEmployeeByID(employeeID).Name;
+                EmployesInProjectDataGridView[EmployeSurnameProject.Index, row].Value = CurentProject.Manager.Employees.GetEmployeeByID(employeeID).Surname;
                 row++;
             }
-        }
-
-        internal Employee GetEmployee(int employeeID)
-        {
-            Employee resultEmployee = new Employee(CurentProject.Manager);
-            for (int i = 0; i < CurentProject.Manager.Employees.Count; i++)
-            {
-                if (CurentProject.Manager.Employees[i].EmployeeID == employeeID)
-                {
-                    resultEmployee = CurentProject.Manager.Employees[i];
-                    break;
-                }
-            }
-            return resultEmployee;
         }
 
         internal bool FindEmployeeFromID(int employeeID)

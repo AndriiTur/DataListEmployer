@@ -12,7 +12,7 @@ namespace ManagerProject
         public const string XMLEmployeeAtributeName = "name";
         public const string XMLEmployeeAtributeSurname = "surname";
         public const string XMLEmployeeAtributeSalary = "salary";
-        public const string XMLEmployeeAtributeDate = "date";
+        public const string XMLEmployeeAtributeDateOfEmployeement = "dateOfEmployeement";
         public const string XMLNodeEmployee = "Employee";
         public const string DateFormat = "dd.MM.yyyy HH:mm";
 
@@ -40,23 +40,12 @@ namespace ManagerProject
             this.Salary = 0;
         }
 
-        public void LoadFromString(string employeeStr)
-        {
-            string[] result = new string[] { };
-            result = employeeStr.Split('\t');
-            this.EmployeeID = int.Parse(result[0]);
-            this.Name = result[2];
-            this.Surname = result[1];
-            this.Date_Of_Employment = DateTime.Parse(result[3]);
-            this.Salary = double.Parse(result[4]);
-        }
-
         public void LoadFromNode(XmlNode employeeNode)
         {
             this.EmployeeID = int.Parse(employeeNode.Attributes.GetNamedItem(XMLEmployeeAtributeID).Value);
             this.Name = employeeNode.Attributes.GetNamedItem(XMLEmployeeAtributeName).Value;
             this.Surname = employeeNode.Attributes.GetNamedItem(XMLEmployeeAtributeSurname).Value;
-            this.Date_Of_Employment = DateTime.Parse(employeeNode.Attributes.GetNamedItem(XMLEmployeeAtributeDate).Value);
+            this.Date_Of_Employment = DateTime.Parse(employeeNode.Attributes.GetNamedItem(XMLEmployeeAtributeDateOfEmployeement).Value);
             this.Salary = double.Parse(employeeNode.Attributes.GetNamedItem(XMLEmployeeAtributeSalary).Value);
         }
 
@@ -65,34 +54,9 @@ namespace ManagerProject
             XmlNodeHelper.SetNodeAtribute(employeeNode, XMLEmployeeAtributeID, this.EmployeeID.ToString());
             XmlNodeHelper.SetNodeAtribute(employeeNode, XMLEmployeeAtributeName, this.Name);
             XmlNodeHelper.SetNodeAtribute(employeeNode, XMLEmployeeAtributeSurname, this.Surname);
-            XmlNodeHelper.SetNodeAtribute(employeeNode, XMLEmployeeAtributeDate, this.Date_Of_Employment.ToString(DateFormat));
+            XmlNodeHelper.SetNodeAtribute(employeeNode, XMLEmployeeAtributeDateOfEmployeement, this.Date_Of_Employment.ToString(DateFormat));
             XmlNodeHelper.SetNodeAtribute(employeeNode, XMLEmployeeAtributeSalary, this.Salary.ToString());
 
         }
-
-        //public string SaveToString(Employee employee, EmployeeToStringMode mode = EmployeeToStringMode.store)
-        //{
-        //    string resultStr = "";
-        //    if (mode == EmployeeToStringMode.displayInfo)
-        //    {
-        //        resultStr += employee.EmployeeID.ToString() +
-        //            "\t" + employee.Surname.ToString() +
-        //            " " + employee.Name.ToString() +
-        //            "\t" + string.Format("{0:ddd} {1:dd MMMM yyyy}y. Time{2:HH:mm}",
-        //            employee.Date_Of_Employment,
-        //            employee.Date_Of_Employment,
-        //            employee.Date_Of_Employment) +
-        //            "\t" + string.Format("${0:#,###}", employee.Salary) + "\r\n";
-        //    }
-        //    else
-        //    {
-        //        resultStr += employee.EmployeeID.ToString() +
-        //            "\t" + employee.Surname.ToString() +
-        //            "\t" + employee.Name.ToString() +
-        //            "\t" + string.Format("{0:dd.MM.yyyy HH:mm}", employee.Date_Of_Employment) +
-        //            "\t" + employee.Salary.ToString() + "\r\n";
-        //    }
-        //    return resultStr;
-        //}
     }
 }

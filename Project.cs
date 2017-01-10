@@ -18,7 +18,7 @@ namespace ManagerProject
         public const string XMLProjectAtributeCost = "cost";
         public const string XMLProjectAtributeStatus = "status";
         public const string XMLProjectAtributeCustomer = "customer";
-        public const string XMLProjectAtributeDate = "dateAgreement";
+        public const string XMLProjectAtributeDateAgreement = "dateAgreement";
         public const string DateFormat = "dd.MM.yyyy HH:mm";
         public const string XMLNodeEmployee = "Employee";
         public const string XMLEmployeeAtributeID = "employeeID";
@@ -59,7 +59,7 @@ namespace ManagerProject
         {
             this.ProjectID= int.Parse(projectNode.Attributes.GetNamedItem(XMLNodeAttributeID).Value);
             this.Name = projectNode.Attributes.GetNamedItem(XMLProjectAtributeName).Value;
-            this.DateAgreement = DateTime.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeDate).Value);
+            this.DateAgreement = DateTime.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeDateAgreement).Value);
             this.Cost = double.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeCost).Value);
             this.Status = (ProjestStatus)Enum.Parse(typeof(ProjestStatus), projectNode.Attributes.GetNamedItem(XMLProjectAtributeStatus).Value.ToString());
             this.CustomerID = int.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeCustomer).Value);
@@ -71,7 +71,7 @@ namespace ManagerProject
         {
             XmlNodeHelper.SetNodeAtribute(projectNode, XMLNodeAttributeID, this.ProjectID.ToString());
             XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeName, this.Name);
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeDate, this.DateAgreement.ToString(DateFormat));
+            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeDateAgreement, this.DateAgreement.ToString(DateFormat));
             XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeCost, this.Cost.ToString());
             XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeStatus, this.Status.ToString());
             XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeCustomer, this.CustomerID.ToString());

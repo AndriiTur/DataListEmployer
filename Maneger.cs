@@ -11,8 +11,8 @@ namespace ManagerProject
     public class Manager : ManagerBase
     {
         public const string XMLNodeManager = "Manager";
-
         public const string PathToFile = "WriteData.xml";
+
         public Employees Employees { get; internal set; }
         public Customers Customers { get; internal set; }
         public Projects Projects { get; internal set; }
@@ -24,28 +24,28 @@ namespace ManagerProject
             Projects = new Projects(this);
         }
 
-        public void LoadFromFile(XmlNode managerNode)
+        public void LoadFromNode(XmlNode managerNode)
         {
             XmlNode employeesNode = XmlNodeHelper.RequiredNode(managerNode, Employees.XMLNodeEmployees);
-            Employees.LoadFromFile(employeesNode);
+            Employees.LoadFromNode(employeesNode);
 
             XmlNode customersNode = XmlNodeHelper.RequiredNode(managerNode, Customers.XMLNodeCustomers);
-            Customers.LoadFromFile(customersNode);
+            Customers.LoadFromNode(customersNode);
 
             XmlNode projectsNode = XmlNodeHelper.RequiredNode(managerNode, Projects.XMLNodeProjects);
-            Projects.LoadFromFile(projectsNode);
+            Projects.LoadFromNode(projectsNode);
         }
 
-        public void SaveToFile(XmlNode managerNode)
+        public void SaveToNode(XmlNode managerNode)
         {
             XmlNode employeesNode = XmlNodeHelper.RequiredNode(managerNode, Employees.XMLNodeEmployees);
-            Employees.SaveToFile(employeesNode);
+            Employees.SaveToNode(employeesNode);
 
             XmlNode customersNode = XmlNodeHelper.RequiredNode(managerNode, Customers.XMLNodeCustomers);
-            Customers.SaveToFile(customersNode);
+            Customers.SaveToNode(customersNode);
 
             XmlNode projectsNode = XmlNodeHelper.RequiredNode(managerNode, Projects.XMLNodeProjects);
-            Projects.SaveToFile(projectsNode);
+            Projects.SaveToNode(projectsNode);
         }
     }
 }

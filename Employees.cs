@@ -12,20 +12,18 @@ namespace ManagerProject
     {
         public const string XMLNodeEmployees = "Employees";
         
-        private List<Employee> listEmployees;
-
-        public int Count { get { return listEmployees.Count; } private set { } }
+        private List<Employee> ListEmployees { get; set; }
+        public int Count { get { return ListEmployees.Count; } private set { } }
+        public Employee this[int index] { get { return ListEmployees[index]; } }
 
         public Employees(Manager manager) : base (manager) 
         {
-            listEmployees = new List<Employee>();
+            ListEmployees = new List<Employee>();
         }
-
-        public Employee this[int index] { get { return listEmployees[index]; } }
 
         public Employee GetEmployeeByID(int employeeID)
         {
-            foreach (var employee in listEmployees)
+            foreach (var employee in ListEmployees)
                 if (employee.EmployeeID == employeeID)
                     return employee;
             return null;
@@ -33,15 +31,15 @@ namespace ManagerProject
 
         public void Add(Employee employee)
         {
-            listEmployees.Add(employee);
+            ListEmployees.Add(employee);
         }
 
         public void Remove(Employee employee)
         {
-            listEmployees.Remove(employee);
+            ListEmployees.Remove(employee);
         }
 
-        internal void LoadFromFile(XmlNode employeesNode)
+        internal void LoadFromNode(XmlNode employeesNode)
         {
             XmlNodeList xmlEmployeeList = employeesNode.SelectNodes(Employee.XMLNodeEmployee);
             foreach (XmlNode employeeNode in xmlEmployeeList)
@@ -66,7 +64,7 @@ namespace ManagerProject
             }
         }
 
-        internal void SaveToFile(XmlNode employeesNode)
+        internal void SaveToNode(XmlNode employeesNode)
         {
             for (var i = 0; i < this.Count; i++)
             {
