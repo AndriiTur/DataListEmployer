@@ -10,7 +10,7 @@ namespace ManagerProject
             string newXPath = xPath;
             if (attribute != "")
                 newXPath = newXPath + String.Format("[@{0}='{1}']", attribute, value);
-            var res = parentNode.SelectSingleNode(xPath);
+            var res = parentNode.SelectSingleNode(newXPath);
             if (res == null)
             {
                 res = parentNode.OwnerDocument.CreateElement(xPath);
@@ -25,7 +25,7 @@ namespace ManagerProject
             return res;
         }
 
-        public static void SetNodeAtribute(XmlNode node, string atributeName, string value, string defaultValue = "")
+        public static void SetNodeAttribute(XmlNode node, string attributeName, string value, string defaultValue = "")
         {
             if (node == null)
                 return;
@@ -33,34 +33,34 @@ namespace ManagerProject
             if (value == defaultValue)
                 return;
 
-            if (value != "")
+            if ((defaultValue == null) || (value != defaultValue))
             {
-                XmlAttribute atribute = node.OwnerDocument.CreateAttribute(atributeName);
+                XmlAttribute atribute = node.OwnerDocument.CreateAttribute(attributeName);
                 atribute.Value = value;
                 node.Attributes.Append(atribute);
             }
         }
 
-        public static void SetNodeAtributeI(XmlNode node, string atributeName, int value, int defaultValue = 0)
+        public static void SetNodeAttributeI(XmlNode node, string attributeName, int value, int defaultValue = 0)
         {
-            SetNodeAtribute(node, atributeName, value.ToString());
+            SetNodeAttribute(node, attributeName, value.ToString());
         }
 
-        public static string GetNodeAtribute(XmlNode node, string atributeName, string defaultValue = "")
+        public static string GetNodeAttribute(XmlNode node, string attributeName, string defaultValue = "")
         {
             if (node == null)
                 return defaultValue;
 
-            XmlNode attributeID = node.Attributes.GetNamedItem(Customer.XMLCustomerAtributeID);
-            if (attributeID == null)
+            XmlNode attribute = node.Attributes.GetNamedItem(attributeName);
+            if (attribute == null)
                 return defaultValue;
-            return attributeID.Value;
+            return attribute.Value;
         }
 
-              public static int GetNodeAtributeI(XmlNode node, string atributeName, int defaultValue = 0)
+        public static int GetNodeAttributeI(XmlNode node, string attributeName, int defaultValue = 0)
         {
             int intValue;
-            string strValue = GetNodeAtribute(node, atributeName, defaultValue.ToString());
+            string strValue = GetNodeAttribute(node, attributeName, defaultValue.ToString());
             if (int.TryParse(strValue, out intValue))
                 return intValue;
             return defaultValue;

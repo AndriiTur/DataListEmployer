@@ -11,8 +11,7 @@ namespace ManagerProject
     public class Manager : ManagerBase
     {
         public const string XMLNodeManager = "Manager";
-        public const string PathToFile = "WriteData.xml";
-
+        
         public Employees Employees { get; internal set; }
         public Customers Customers { get; internal set; }
         public Projects Projects { get; internal set; }

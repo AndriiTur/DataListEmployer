@@ -44,8 +44,8 @@ namespace ManagerProject
             XmlNodeList xmlEmployeeList = employeesNode.SelectNodes(Employee.XMLNodeEmployee);
             foreach (XmlNode employeeNode in xmlEmployeeList)
             {
-                XmlNode attributeID = employeeNode.Attributes.GetNamedItem(Employee.XMLEmployeeAtributeID);
-                Employee employee = this.GetEmployeeByID(int.Parse(attributeID.Value));
+                var attributeID = XmlNodeHelper.GetNodeAttribute(employeeNode, Employee.XMLEmployeeAttributeID);
+                Employee employee = this.GetEmployeeByID(int.Parse(attributeID));
                 if (employee == null)
                 {
                     employee = new Employee(this.Manager);
@@ -54,10 +54,10 @@ namespace ManagerProject
                 employee.LoadFromNode(employeeNode);
             }
 
-            for (int i = 0; i < this.Count; i++)
+            for (int i = this.Count - 1; i >= 0 ; i--)
             {
                 var employee = this[i];
-                string xPath = Employee.XMLNodeEmployee + String.Format("[@{0}='{1}']", Employee.XMLEmployeeAtributeID, employee.EmployeeID.ToString());
+                string xPath = Employee.XMLNodeEmployee + String.Format("[@{0}='{1}']", Employee.XMLEmployeeAttributeID, employee.EmployeeID.ToString());
                 var res = employeesNode.SelectSingleNode(xPath);
                 if (res == null)
                     this.Remove(employee);
@@ -66,11 +66,21 @@ namespace ManagerProject
 
         internal void SaveToNode(XmlNode employeesNode)
         {
+            XmlNodeList xmlEmployeesList = employeesNode.SelectNodes(Employee.XMLNodeEmployee);
+            foreach (XmlNode node in xmlEmployeesList)
+            {
+                int employeeID = int.Parse(XmlNodeHelper.GetNodeAttribute(node, Employee.XMLEmployeeAttributeID));
+                if (this.ListEmployees.IndexOf(this.GetEmployeeByID(employeeID)) < 0)
+                {
+                    node.ParentNode.RemoveChild(node);
+                }
+            }
+
             for (var i = 0; i < this.Count; i++)
             {
                 Employee employee = this[i];
                 XmlNode employeeNode = XmlNodeHelper.RequiredNode(employeesNode, Employee.XMLNodeEmployee,
-                    Employee.XMLEmployeeAtributeID, employee.EmployeeID.ToString());
+                    Employee.XMLEmployeeAttributeID, employee.EmployeeID.ToString());
                  employee.SaveToNode(employeeNode);
             }
         }

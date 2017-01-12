@@ -30,8 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.EmployeeDataGridView = new System.Windows.Forms.DataGridView();
-            this.EditEmployeeButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.DeleteEmployeeButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.AddEmployeeButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.EmployeeTabPage = new System.Windows.Forms.TabPage();
             this.CustomerTabPage = new System.Windows.Forms.TabPage();
             this.CustomerDataGridView = new System.Windows.Forms.DataGridView();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -58,6 +58,16 @@
             this.CustomerNameTextBox = new System.Windows.Forms.TextBox();
             this.ProjectTabPage = new System.Windows.Forms.TabPage();
             this.ProjectDataGridView = new System.Windows.Forms.DataGridView();
+            this.ProjectIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectDataColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectCostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectStatusColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ProjectCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.EmployeeCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EditEmployeeInProject = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProjectEditColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProjectDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.ProjectDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -70,44 +80,33 @@
             this.label12 = new System.Windows.Forms.Label();
             this.StatusComboBox = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.CustomerQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.CustomerDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameEmployeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SurnameEmployeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfEmploymentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateOfEmployment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalaryEmployeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.EditEmployeeButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DeleteEmployeeButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SurnameCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountryCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateAgreementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ProjectIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectDataColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectCostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectStatusColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.ProjectCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.EmployeeCountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EditEmployeeInProject = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ProjectEditColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ProjectDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CustomerQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CustomerDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.SettingsPanel.SuspendLayout();
             this.MenegerTabControl.SuspendLayout();
             this.EmployeeTabPage.SuspendLayout();
             this.CustomerTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.ProjectTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectDataGridView)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // EmployeeDataGridView
@@ -127,7 +126,7 @@
             this.employeeIDDataGridViewTextBoxColumn,
             this.NameEmployeeDataGridViewTextBoxColumn,
             this.SurnameEmployeeDataGridViewTextBoxColumn,
-            this.dateOfEmploymentDataGridViewTextBoxColumn,
+            this.DateOfEmployment,
             this.SalaryEmployeeDataGridViewTextBoxColumn,
             this.EditEmployeeButton,
             this.DeleteEmployeeButton});
@@ -151,29 +150,9 @@
             this.EmployeeDataGridView.TabIndex = 7;
             this.EmployeeDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EmployeeDataGridView_CellClick);
             // 
-            // EditEmployeeButton
+            // employeeBindingSource
             // 
-            this.EditEmployeeButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.EditEmployeeButton.FillWeight = 40F;
-            this.EditEmployeeButton.HeaderText = "Edit";
-            this.EditEmployeeButton.Name = "EditEmployeeButton";
-            this.EditEmployeeButton.ReadOnly = true;
-            this.EditEmployeeButton.Text = "Edit";
-            this.EditEmployeeButton.UseColumnTextForButtonValue = true;
-            this.EditEmployeeButton.Width = 40;
-            // 
-            // DeleteEmployeeButton
-            // 
-            this.DeleteEmployeeButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DeleteEmployeeButton.FillWeight = 50F;
-            this.DeleteEmployeeButton.HeaderText = "Delete";
-            this.DeleteEmployeeButton.Name = "DeleteEmployeeButton";
-            this.DeleteEmployeeButton.ReadOnly = true;
-            this.DeleteEmployeeButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DeleteEmployeeButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DeleteEmployeeButton.Text = "Delete";
-            this.DeleteEmployeeButton.UseColumnTextForButtonValue = true;
-            this.DeleteEmployeeButton.Width = 50;
+            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
             // 
             // SettingsPanel
             // 
@@ -343,7 +322,6 @@
             this.NameCustomerDataGridViewTextBoxColumn,
             this.SurnameCustomerDataGridViewTextBoxColumn,
             this.CountryCustomerDataGridViewTextBoxColumn,
-            this.dateAgreementDataGridViewTextBoxColumn,
             this.CustomerQuantity,
             this.CustomerMoney,
             this.CustomerEdit,
@@ -369,6 +347,10 @@
             this.CustomerDataGridView.TabIndex = 6;
             this.CustomerDataGridView.TabStop = false;
             this.CustomerDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CustomerDataGridView_CellClick);
+            // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(ManagerProject.Customer);
             // 
             // panel1
             // 
@@ -518,6 +500,96 @@
             this.ProjectDataGridView.TabIndex = 7;
             this.ProjectDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProjectDataGridView_CellClick);
             // 
+            // ProjectIDColumn
+            // 
+            this.ProjectIDColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ProjectIDColumn.FillWeight = 30F;
+            this.ProjectIDColumn.HeaderText = "ID:";
+            this.ProjectIDColumn.Name = "ProjectIDColumn";
+            this.ProjectIDColumn.ToolTipText = "ID:";
+            this.ProjectIDColumn.Width = 30;
+            // 
+            // ProjectNameColumn
+            // 
+            this.ProjectNameColumn.FillWeight = 75.52312F;
+            this.ProjectNameColumn.HeaderText = "Name";
+            this.ProjectNameColumn.Name = "ProjectNameColumn";
+            // 
+            // ProjectDataColumn
+            // 
+            this.ProjectDataColumn.FillWeight = 75.52312F;
+            this.ProjectDataColumn.HeaderText = "DataAgrement";
+            this.ProjectDataColumn.Name = "ProjectDataColumn";
+            // 
+            // ProjectCostColumn
+            // 
+            this.ProjectCostColumn.FillWeight = 75.52312F;
+            this.ProjectCostColumn.HeaderText = "Cost";
+            this.ProjectCostColumn.Name = "ProjectCostColumn";
+            // 
+            // ProjectStatusColumn
+            // 
+            this.ProjectStatusColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProjectStatusColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.ProjectStatusColumn.FillWeight = 75.52312F;
+            this.ProjectStatusColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectStatusColumn.HeaderText = "Status";
+            this.ProjectStatusColumn.Name = "ProjectStatusColumn";
+            this.ProjectStatusColumn.Width = 43;
+            // 
+            // ProjectCustomerColumn
+            // 
+            this.ProjectCustomerColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProjectCustomerColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.ProjectCustomerColumn.FillWeight = 75.52312F;
+            this.ProjectCustomerColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectCustomerColumn.HeaderText = "Customer";
+            this.ProjectCustomerColumn.Name = "ProjectCustomerColumn";
+            this.ProjectCustomerColumn.Width = 57;
+            // 
+            // EmployeeCountColumn
+            // 
+            this.EmployeeCountColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.EmployeeCountColumn.FillWeight = 30F;
+            this.EmployeeCountColumn.HeaderText = "EmplCount";
+            this.EmployeeCountColumn.Name = "EmployeeCountColumn";
+            this.EmployeeCountColumn.Width = 83;
+            // 
+            // EditEmployeeInProject
+            // 
+            this.EditEmployeeInProject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.EditEmployeeInProject.FillWeight = 75F;
+            this.EditEmployeeInProject.HeaderText = "EditEmployee";
+            this.EditEmployeeInProject.Name = "EditEmployeeInProject";
+            this.EditEmployeeInProject.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.EditEmployeeInProject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.EditEmployeeInProject.Text = "EditEmployee";
+            this.EditEmployeeInProject.UseColumnTextForButtonValue = true;
+            this.EditEmployeeInProject.Width = 75;
+            // 
+            // ProjectEditColumn
+            // 
+            this.ProjectEditColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ProjectEditColumn.FillWeight = 40F;
+            this.ProjectEditColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectEditColumn.HeaderText = "Edit";
+            this.ProjectEditColumn.Name = "ProjectEditColumn";
+            this.ProjectEditColumn.ReadOnly = true;
+            this.ProjectEditColumn.Text = "Edit";
+            this.ProjectEditColumn.UseColumnTextForButtonValue = true;
+            this.ProjectEditColumn.Width = 31;
+            // 
+            // ProjectDeleteColumn
+            // 
+            this.ProjectDeleteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ProjectDeleteColumn.FillWeight = 60F;
+            this.ProjectDeleteColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ProjectDeleteColumn.HeaderText = "Delete";
+            this.ProjectDeleteColumn.Name = "ProjectDeleteColumn";
+            this.ProjectDeleteColumn.Text = "Delete";
+            this.ProjectDeleteColumn.UseColumnTextForButtonValue = true;
+            this.ProjectDeleteColumn.Width = 60;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label5);
@@ -634,45 +706,6 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "DateAgrementProject";
             // 
-            // CustomerQuantity
-            // 
-            this.CustomerQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CustomerQuantity.FillWeight = 20F;
-            this.CustomerQuantity.HeaderText = "QuantityProject";
-            this.CustomerQuantity.Name = "CustomerQuantity";
-            this.CustomerQuantity.ReadOnly = true;
-            this.CustomerQuantity.Width = 20;
-            // 
-            // CustomerMoney
-            // 
-            this.CustomerMoney.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CustomerMoney.FillWeight = 40F;
-            this.CustomerMoney.HeaderText = "Money";
-            this.CustomerMoney.Name = "CustomerMoney";
-            this.CustomerMoney.ReadOnly = true;
-            // 
-            // CustomerEdit
-            // 
-            this.CustomerEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.CustomerEdit.FillWeight = 50F;
-            this.CustomerEdit.HeaderText = "Edit";
-            this.CustomerEdit.Name = "CustomerEdit";
-            this.CustomerEdit.ReadOnly = true;
-            this.CustomerEdit.Text = "Edit";
-            this.CustomerEdit.UseColumnTextForButtonValue = true;
-            this.CustomerEdit.Width = 29;
-            // 
-            // CustomerDelete
-            // 
-            this.CustomerDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.CustomerDelete.FillWeight = 60F;
-            this.CustomerDelete.HeaderText = "Delete";
-            this.CustomerDelete.Name = "CustomerDelete";
-            this.CustomerDelete.ReadOnly = true;
-            this.CustomerDelete.Text = "Delete";
-            this.CustomerDelete.UseColumnTextForButtonValue = true;
-            this.CustomerDelete.Width = 42;
-            // 
             // employeeIDDataGridViewTextBoxColumn
             // 
             this.employeeIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -688,7 +721,7 @@
             // 
             this.NameEmployeeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NameEmployeeDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.NameEmployeeDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.NameEmployeeDataGridViewTextBoxColumn.FillWeight = 27.84817F;
             this.NameEmployeeDataGridViewTextBoxColumn.HeaderText = "Name";
             this.NameEmployeeDataGridViewTextBoxColumn.Name = "NameEmployeeDataGridViewTextBoxColumn";
             this.NameEmployeeDataGridViewTextBoxColumn.ReadOnly = true;
@@ -697,32 +730,52 @@
             // 
             this.SurnameEmployeeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.SurnameEmployeeDataGridViewTextBoxColumn.DataPropertyName = "Surname";
-            this.SurnameEmployeeDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.SurnameEmployeeDataGridViewTextBoxColumn.FillWeight = 27.84817F;
             this.SurnameEmployeeDataGridViewTextBoxColumn.HeaderText = "Surname";
             this.SurnameEmployeeDataGridViewTextBoxColumn.Name = "SurnameEmployeeDataGridViewTextBoxColumn";
             this.SurnameEmployeeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // dateOfEmploymentDataGridViewTextBoxColumn
+            // DateOfEmployment
             // 
-            this.dateOfEmploymentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dateOfEmploymentDataGridViewTextBoxColumn.DataPropertyName = "Date_Of_Employment";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.FillWeight = 26.0761F;
-            this.dateOfEmploymentDataGridViewTextBoxColumn.HeaderText = "Date_Of_Employment";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.Name = "dateOfEmploymentDataGridViewTextBoxColumn";
-            this.dateOfEmploymentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.DateOfEmployment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DateOfEmployment.DataPropertyName = "DateOfEmployment";
+            this.DateOfEmployment.HeaderText = "Date_Of_Employment";
+            this.DateOfEmployment.Name = "DateOfEmployment";
+            this.DateOfEmployment.ReadOnly = true;
+            this.DateOfEmployment.Width = 135;
             // 
             // SalaryEmployeeDataGridViewTextBoxColumn
             // 
             this.SalaryEmployeeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.SalaryEmployeeDataGridViewTextBoxColumn.DataPropertyName = "Salary";
-            this.SalaryEmployeeDataGridViewTextBoxColumn.FillWeight = 26.0761F;
+            this.SalaryEmployeeDataGridViewTextBoxColumn.FillWeight = 27.84817F;
             this.SalaryEmployeeDataGridViewTextBoxColumn.HeaderText = "Salary";
             this.SalaryEmployeeDataGridViewTextBoxColumn.Name = "SalaryEmployeeDataGridViewTextBoxColumn";
             this.SalaryEmployeeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // employeeBindingSource
+            // EditEmployeeButton
             // 
-            this.employeeBindingSource.DataSource = typeof(ManagerProject.Employee);
+            this.EditEmployeeButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.EditEmployeeButton.FillWeight = 40F;
+            this.EditEmployeeButton.HeaderText = "Edit";
+            this.EditEmployeeButton.Name = "EditEmployeeButton";
+            this.EditEmployeeButton.ReadOnly = true;
+            this.EditEmployeeButton.Text = "Edit";
+            this.EditEmployeeButton.UseColumnTextForButtonValue = true;
+            this.EditEmployeeButton.Width = 40;
+            // 
+            // DeleteEmployeeButton
+            // 
+            this.DeleteEmployeeButton.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DeleteEmployeeButton.FillWeight = 50F;
+            this.DeleteEmployeeButton.HeaderText = "Delete";
+            this.DeleteEmployeeButton.Name = "DeleteEmployeeButton";
+            this.DeleteEmployeeButton.ReadOnly = true;
+            this.DeleteEmployeeButton.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DeleteEmployeeButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DeleteEmployeeButton.Text = "Delete";
+            this.DeleteEmployeeButton.UseColumnTextForButtonValue = true;
+            this.DeleteEmployeeButton.Width = 50;
             // 
             // customerIDDataGridViewTextBoxColumn
             // 
@@ -761,134 +814,70 @@
             this.CountryCustomerDataGridViewTextBoxColumn.Name = "CountryCustomerDataGridViewTextBoxColumn";
             this.CountryCustomerDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // dateAgreementDataGridViewTextBoxColumn
+            // CustomerQuantity
             // 
-            this.dateAgreementDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dateAgreementDataGridViewTextBoxColumn.DataPropertyName = "DateAgreement";
-            this.dateAgreementDataGridViewTextBoxColumn.FillWeight = 60.65695F;
-            this.dateAgreementDataGridViewTextBoxColumn.HeaderText = "DateAgreement";
-            this.dateAgreementDataGridViewTextBoxColumn.Name = "dateAgreementDataGridViewTextBoxColumn";
-            this.dateAgreementDataGridViewTextBoxColumn.ReadOnly = true;
+            this.CustomerQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CustomerQuantity.FillWeight = 20F;
+            this.CustomerQuantity.HeaderText = "ProjectCount";
+            this.CustomerQuantity.Name = "CustomerQuantity";
+            this.CustomerQuantity.ReadOnly = true;
+            this.CustomerQuantity.Width = 91;
             // 
-            // customerBindingSource
+            // CustomerMoney
             // 
-            this.customerBindingSource.DataSource = typeof(ManagerProject.Customer);
+            this.CustomerMoney.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CustomerMoney.FillWeight = 40F;
+            this.CustomerMoney.HeaderText = "Money";
+            this.CustomerMoney.Name = "CustomerMoney";
+            this.CustomerMoney.ReadOnly = true;
             // 
-            // ProjectIDColumn
+            // CustomerEdit
             // 
-            this.ProjectIDColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ProjectIDColumn.FillWeight = 30F;
-            this.ProjectIDColumn.HeaderText = "ID:";
-            this.ProjectIDColumn.Name = "ProjectIDColumn";
-            this.ProjectIDColumn.ToolTipText = "ID:";
-            this.ProjectIDColumn.Width = 30;
+            this.CustomerEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CustomerEdit.FillWeight = 50F;
+            this.CustomerEdit.HeaderText = "Edit";
+            this.CustomerEdit.Name = "CustomerEdit";
+            this.CustomerEdit.ReadOnly = true;
+            this.CustomerEdit.Text = "Edit";
+            this.CustomerEdit.UseColumnTextForButtonValue = true;
+            this.CustomerEdit.Width = 29;
             // 
-            // ProjectNameColumn
+            // CustomerDelete
             // 
-            this.ProjectNameColumn.FillWeight = 75.52312F;
-            this.ProjectNameColumn.HeaderText = "Name";
-            this.ProjectNameColumn.Name = "ProjectNameColumn";
+            this.CustomerDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CustomerDelete.FillWeight = 60F;
+            this.CustomerDelete.HeaderText = "Delete";
+            this.CustomerDelete.Name = "CustomerDelete";
+            this.CustomerDelete.ReadOnly = true;
+            this.CustomerDelete.Text = "Delete";
+            this.CustomerDelete.UseColumnTextForButtonValue = true;
+            this.CustomerDelete.Width = 42;
             // 
-            // ProjectDataColumn
-            // 
-            this.ProjectDataColumn.FillWeight = 75.52312F;
-            this.ProjectDataColumn.HeaderText = "DataAgrement";
-            this.ProjectDataColumn.Name = "ProjectDataColumn";
-            // 
-            // ProjectCostColumn
-            // 
-            this.ProjectCostColumn.FillWeight = 75.52312F;
-            this.ProjectCostColumn.HeaderText = "Cost";
-            this.ProjectCostColumn.Name = "ProjectCostColumn";
-            // 
-            // ProjectStatusColumn
-            // 
-            this.ProjectStatusColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ProjectStatusColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.ProjectStatusColumn.FillWeight = 75.52312F;
-            this.ProjectStatusColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ProjectStatusColumn.HeaderText = "Status";
-            this.ProjectStatusColumn.Name = "ProjectStatusColumn";
-            this.ProjectStatusColumn.Width = 43;
-            // 
-            // ProjectCustomerColumn
-            // 
-            this.ProjectCustomerColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ProjectCustomerColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.ProjectCustomerColumn.FillWeight = 75.52312F;
-            this.ProjectCustomerColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ProjectCustomerColumn.HeaderText = "Customer";
-            this.ProjectCustomerColumn.Name = "ProjectCustomerColumn";
-            this.ProjectCustomerColumn.Width = 57;
-            // 
-            // EmployeeCountColumn
-            // 
-            this.EmployeeCountColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.EmployeeCountColumn.FillWeight = 30F;
-            this.EmployeeCountColumn.HeaderText = "EmployeeCount";
-            this.EmployeeCountColumn.Name = "EmployeeCountColumn";
-            this.EmployeeCountColumn.Width = 30;
-            // 
-            // EditEmployeeInProject
-            // 
-            this.EditEmployeeInProject.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.EditEmployeeInProject.FillWeight = 70F;
-            this.EditEmployeeInProject.HeaderText = "EditEmployee";
-            this.EditEmployeeInProject.Name = "EditEmployeeInProject";
-            this.EditEmployeeInProject.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.EditEmployeeInProject.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.EditEmployeeInProject.Text = "EditEmployee";
-            this.EditEmployeeInProject.UseColumnTextForButtonValue = true;
-            this.EditEmployeeInProject.Width = 70;
-            // 
-            // ProjectEditColumn
-            // 
-            this.ProjectEditColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ProjectEditColumn.FillWeight = 40F;
-            this.ProjectEditColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ProjectEditColumn.HeaderText = "Edit";
-            this.ProjectEditColumn.Name = "ProjectEditColumn";
-            this.ProjectEditColumn.ReadOnly = true;
-            this.ProjectEditColumn.Text = "Edit";
-            this.ProjectEditColumn.UseColumnTextForButtonValue = true;
-            this.ProjectEditColumn.Width = 31;
-            // 
-            // ProjectDeleteColumn
-            // 
-            this.ProjectDeleteColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ProjectDeleteColumn.FillWeight = 60F;
-            this.ProjectDeleteColumn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ProjectDeleteColumn.HeaderText = "Delete";
-            this.ProjectDeleteColumn.Name = "ProjectDeleteColumn";
-            this.ProjectDeleteColumn.Text = "Delete";
-            this.ProjectDeleteColumn.UseColumnTextForButtonValue = true;
-            this.ProjectDeleteColumn.Width = 60;
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(676, 464);
             this.Controls.Add(this.MenegerTabControl);
             this.MinimumSize = new System.Drawing.Size(455, 454);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.MenegerTabControl.ResumeLayout(false);
             this.EmployeeTabPage.ResumeLayout(false);
             this.CustomerTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ProjectTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ProjectDataGridView)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -935,22 +924,8 @@
         private System.Windows.Forms.ComboBox StatusComboBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView ProjectDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameEmployeeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameEmployeeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateOfEmploymentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SalaryEmployeeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn EditEmployeeButton;
-        private System.Windows.Forms.DataGridViewButtonColumn DeleteEmployeeButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameCustomerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameCustomerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCustomerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateAgreementDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerMoney;
-        private System.Windows.Forms.DataGridViewButtonColumn CustomerEdit;
-        private System.Windows.Forms.DataGridViewButtonColumn CustomerDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectIDColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectDataColumn;
@@ -961,6 +936,21 @@
         private System.Windows.Forms.DataGridViewButtonColumn EditEmployeeInProject;
         private System.Windows.Forms.DataGridViewButtonColumn ProjectEditColumn;
         private System.Windows.Forms.DataGridViewButtonColumn ProjectDeleteColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameEmployeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameEmployeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateOfEmployment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalaryEmployeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn EditEmployeeButton;
+        private System.Windows.Forms.DataGridViewButtonColumn DeleteEmployeeButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameCustomerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SurnameCustomerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCustomerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerMoney;
+        private System.Windows.Forms.DataGridViewButtonColumn CustomerEdit;
+        private System.Windows.Forms.DataGridViewButtonColumn CustomerDelete;
     }
 }
 

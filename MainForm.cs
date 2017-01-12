@@ -22,7 +22,8 @@ namespace ManagerProject
         public const string ButtonTextEdit = "Edit";
         public const string MesageDeleteShow = "Delete";
         public const string ExeptionError = "Error";
-
+        public const string XMLNodeManager = "Manager";
+        
         public Manager manager;
         List<int> customerIDList;
         int curentRowIndex = -1;
@@ -85,6 +86,7 @@ namespace ManagerProject
             XmlDocument Doc = new XmlDocument();
             Doc.Load(PathToFile);
             manager.SaveToNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
+            Doc.Save(PathToFile);
         }
 
         internal void LoadToManager()
@@ -107,9 +109,9 @@ namespace ManagerProject
             int employeeID = GenerateNewemployeeID();
             string name = NameTextBox.Text;
             string surname = SurnameTextBox.Text;
-            DateTime date_Of_Employment = DateTime.Parse(EmployeeDateTimePicker.Value.ToString(DateFomat));
+            DateTime dateOfEmployment = DateTime.Parse(EmployeeDateTimePicker.Value.ToString(DateFomat));
             double salary = double.Parse(SalaryTextBox.Text);
-            var employee = new Employee(employeeID, name, surname, date_Of_Employment, salary, manager);
+            var employee = new Employee(employeeID, name, surname, dateOfEmployment, salary, manager);
 
             AddEmployee(employee);
             RefreshTabEmployee();

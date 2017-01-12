@@ -48,8 +48,8 @@ namespace ManagerProject
             XmlNodeList xmlProjectList = projectsNode.SelectNodes(Project.XMLNodeProject);
             foreach (XmlNode projectNode in xmlProjectList)
             {
-                XmlNode attributeID = projectNode.Attributes.GetNamedItem(Project.XMLNodeAttributeID);
-                Project project = this.GetProjectByID(int.Parse(attributeID.Value));
+                var attributeID = XmlNodeHelper.GetNodeAttribute(projectNode, Project.XMLNodeAttributeID);
+                Project project = this.GetProjectByID(int.Parse(attributeID));
                 if (project == null)
                 {
                     project = new Project(this.Manager);
@@ -58,7 +58,7 @@ namespace ManagerProject
                 project.LoadFromNode(projectNode);   
             }
 
-            for (int i = 0; i < this.Count; i++)
+            for (int i = this.Count - 1; i >= 0 ; i--)
             {
                 var project = this[i];
                 string xPath = Project.XMLNodeProject + String.Format("[@{0}='{1}']", Project.XMLNodeAttributeID, project.ProjectID.ToString());
@@ -70,6 +70,16 @@ namespace ManagerProject
 
         internal void SaveToNode(XmlNode projectsNode)
         {
+            XmlNodeList xmlProjectList = projectsNode.SelectNodes(Project.XMLNodeProject);
+            foreach (XmlNode node in xmlProjectList)
+            {
+                int projectID = int.Parse(XmlNodeHelper.GetNodeAttribute(node, Project.XMLNodeAttributeID));
+                if (this.ListProjects.IndexOf(this.GetProjectByID(projectID)) < 0)
+                {
+                    node.ParentNode.RemoveChild(node);
+                }
+            }
+
             if (this.Count != 0)
             {
                 for (var i = 0; i < this.Count; i++)

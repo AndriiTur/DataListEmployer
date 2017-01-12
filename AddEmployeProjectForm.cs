@@ -14,16 +14,8 @@ namespace ManagerProject
 {
     public partial class AddEmployeProjectForm : Form
     {
-        public const string PathToFile = "WriteData.xml";
-        public const string XMLNodeEmployees = "Employees";
-        public const string XMLNodeCustomers = "Customers";
         public const string ExeptionError = "Error";
-        public const string XMLNodeManager = "Manager";
-        public const string XMLNodeProjects = "Projects";
-        public const string XMLNodeProject = "Project";
-        public const string XMLProjectAtributeID = "projectID";
-        public const string XMLEmployeeProject = "Employee";
-
+        
         List<string> employeeComboBoxList;
         List<int> employeeIDComboBoxList;
 

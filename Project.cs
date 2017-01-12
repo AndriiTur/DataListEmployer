@@ -11,18 +11,17 @@ namespace ManagerProject
     {
         public enum ProjestStatus {start, active, suspended, done }
 
-        public const string XmlAtributeEmployeeID = "employeeID";
+        public const string XmlAttributeEmployeeID = "employeeID";
         public const string XMLNodeProject = "Project";
         public const string XMLNodeAttributeID = "projectID";
-        public const string XMLProjectAtributeName = "name";
-        public const string XMLProjectAtributeCost = "cost";
-        public const string XMLProjectAtributeStatus = "status";
-        public const string XMLProjectAtributeCustomer = "customer";
-        public const string XMLProjectAtributeDateAgreement = "dateAgreement";
+        public const string XMLProjectAttributeName = "name";
+        public const string XMLProjectAttributeCost = "cost";
+        public const string XMLProjectAttributeStatus = "status";
+        public const string XMLProjectAttributeCustomer = "customer";
+        public const string XMLProjectAttributeDateAgreement = "dateAgreement";
         public const string DateFormat = "dd.MM.yyyy HH:mm";
         public const string XMLNodeEmployee = "Employee";
-        public const string XMLEmployeeAtributeID = "employeeID";
-
+    
         public int ProjectID { get; private set; }
         public string Name { get; set; }
         public DateTime DateAgreement { get; private set; }
@@ -33,7 +32,7 @@ namespace ManagerProject
 
         public Project(int projectID, string name, DateTime dateAgreement, 
                        double cost, ProjestStatus status , 
-                       int customerID,List<int> employees, Manager manager) : base(manager)
+                       int customerID,List<int> employeesID, Manager manager) : base(manager)
         {
             this.ProjectID = projectID;
             this.Name = name;
@@ -41,7 +40,7 @@ namespace ManagerProject
             this.Cost = cost;
             this.Status = status;
             this.CustomerID = customerID;
-            this.EmployeesID = employees;
+            this.EmployeesID = employeesID;
         }
 
         public Project(Manager manager) : base(manager)
@@ -57,35 +56,35 @@ namespace ManagerProject
 
         public void LoadFromNode(XmlNode projectNode)
         {
-            this.ProjectID= int.Parse(projectNode.Attributes.GetNamedItem(XMLNodeAttributeID).Value);
-            this.Name = projectNode.Attributes.GetNamedItem(XMLProjectAtributeName).Value;
-            this.DateAgreement = DateTime.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeDateAgreement).Value);
-            this.Cost = double.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeCost).Value);
-            this.Status = (ProjestStatus)Enum.Parse(typeof(ProjestStatus), projectNode.Attributes.GetNamedItem(XMLProjectAtributeStatus).Value.ToString());
-            this.CustomerID = int.Parse(projectNode.Attributes.GetNamedItem(XMLProjectAtributeCustomer).Value);
+            this.ProjectID= int.Parse(XmlNodeHelper.GetNodeAttribute(projectNode, XMLNodeAttributeID));
+            this.Name = XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeName);
+            this.DateAgreement = DateTime.Parse(XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeDateAgreement));
+            this.Cost = double.Parse(XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeCost));
+            this.Status = (ProjestStatus)Enum.Parse(typeof(ProjestStatus), XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeStatus).ToString());
+            this.CustomerID = int.Parse(XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeCustomer));
             for (XmlNode node = projectNode.FirstChild; node != null; node = node.NextSibling)
-                this.EmployeesID.Add(int.Parse(node.Attributes.GetNamedItem(XmlAtributeEmployeeID).Value));
+                this.EmployeesID.Add(int.Parse(XmlNodeHelper.GetNodeAttribute(node, XmlAttributeEmployeeID)));
         }
 
         public void SaveToNode(XmlNode projectNode)
         {
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLNodeAttributeID, this.ProjectID.ToString());
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeName, this.Name);
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeDateAgreement, this.DateAgreement.ToString(DateFormat));
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeCost, this.Cost.ToString());
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeStatus, this.Status.ToString());
-            XmlNodeHelper.SetNodeAtribute(projectNode, XMLProjectAtributeCustomer, this.CustomerID.ToString());
+            XmlNodeHelper.SetNodeAttribute(projectNode, XMLNodeAttributeID, this.ProjectID.ToString());
+            XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeName, this.Name);
+            XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeDateAgreement, this.DateAgreement.ToString(DateFormat));
+            XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeCost, this.Cost.ToString());
+            XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeStatus, this.Status.ToString());
+            XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeCustomer, this.CustomerID.ToString());
             
             for (int i = 0; i < this.EmployeesID.Count; i++)
             {
                 XmlNode projectEmployeeNode = XmlNodeHelper.RequiredNode(projectNode, Project.XMLNodeEmployee,
-                    Project.XmlAtributeEmployeeID, this.EmployeesID[i].ToString());
+                    Project.XmlAttributeEmployeeID, this.EmployeesID[i].ToString());
             }
 
             XmlNodeList xmlProjectList = projectNode.SelectNodes(Project.XMLNodeEmployee);
             foreach (XmlNode node in xmlProjectList)
             {
-                int employeeInProjectId = int.Parse(node.Attributes.GetNamedItem(Project.XmlAtributeEmployeeID).Value);
+                int employeeInProjectId = int.Parse(XmlNodeHelper.GetNodeAttribute(node, Project.XmlAttributeEmployeeID));
                 if (this.EmployeesID.IndexOf(employeeInProjectId) < 0)
                 {
                     node.ParentNode.RemoveChild(node);
