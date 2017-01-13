@@ -278,32 +278,6 @@ namespace ManagerProject
             StatusComboBox.SelectedText = "Choise...";
         }
 
-        private void UpdateAddButtonVisibility()
-        {
-            if ((SurnameTextBox.Text != "") &&
-                (NameTextBox.Text != "") &&
-                (SalaryTextBox.Text != "")
-            )
-                AddEmployeeButton.Visible = true;
-        }
-
-        private void UpdateAddCustomerButtonVisibility()
-        {
-            if ((CustomerSurnameTextBox.Text != "") &&
-                (CustomerNameTextBox.Text != "") &&
-                (CountryTextBox.Text != "")
-                )
-                AddCutomerButton.Visible = true;
-        }
-
-        private void UpdateAddProjectButtonVisibility()
-        {
-            if ((ProjectNameTextBox.Text != "") &&
-                (ProjectCostTextBox.Text != "")
-                )
-                AddProjectButton.Visible = true;
-        }
-
         internal void LoadProjectInfoToCustomer(Customer customer)
         {
             int customerIndex = manager.Customers.IndexOf(customer);
@@ -499,13 +473,32 @@ namespace ManagerProject
                 ProjectDataGridView.ReadOnly = true;
         }
 
-        private ToolTip ToolTipAdd()
+        private void UpdateAddButtonVisibility()
         {
-            ToolTip tt = new ToolTip();
-            tt.IsBalloon = true;
-            tt.InitialDelay = 0;
-            tt.ShowAlways = true;
-            return tt;
+            if ((SurnameTextBox.Text == "") ||
+                (NameTextBox.Text == "") ||
+                (SalaryTextBox.Text == "")
+            )
+                AddEmployeeButton.Visible = false;
+            else
+                AddEmployeeButton.Visible = true;
+        }
+
+        private void UpdateAddCustomerButtonVisibility()
+        {
+            if ((CustomerSurnameTextBox.Text != "") &&
+                (CustomerNameTextBox.Text != "") &&
+                (CountryTextBox.Text != "")
+                )
+                AddCutomerButton.Visible = true;
+        }
+
+        private void UpdateAddProjectButtonVisibility()
+        {
+            if ((ProjectNameTextBox.Text != "") &&
+                (ProjectCostTextBox.Text != "")
+                )
+                AddProjectButton.Visible = true;
         }
 
         private void SurnameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -529,6 +522,15 @@ namespace ManagerProject
                 && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
             this.UpdateAddButtonVisibility();
+        }
+
+        private ToolTip ToolTipAdd()
+        {
+            ToolTip tt = new ToolTip();
+            tt.IsBalloon = true;
+            tt.InitialDelay = 0;
+            tt.ShowAlways = true;
+            return tt;
         }
 
         private void SurnameTextBox_Enter(object sender, EventArgs e)

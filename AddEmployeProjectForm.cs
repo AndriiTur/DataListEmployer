@@ -31,10 +31,8 @@ namespace ManagerProject
 
         private void AddEmployeToProjectButton_Click(object sender, EventArgs e)
         {
-            string[] words = EmployeesComboBox.Text.Split(' ');
             int employeeID = employeeIDComboBoxList[employeeComboBoxList.IndexOf(EmployeesComboBox.SelectedValue.ToString())];
-            string name = words[0];
-            string surname = words[1];
+            CurentProject.EmployeesID.Add(employeeID);
             RefreshForm2();
         }
 
