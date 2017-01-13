@@ -475,29 +475,33 @@ namespace ManagerProject
 
         private void UpdateAddButtonVisibility()
         {
-            if ((SurnameTextBox.Text == "") ||
-                (NameTextBox.Text == "") ||
-                (SalaryTextBox.Text == "")
+            if ((SurnameTextBox.Text != "") &&
+                (NameTextBox.Text != "") &&
+                (SalaryTextBox.Text != "")
             )
-                AddEmployeeButton.Visible = false;
-            else
                 AddEmployeeButton.Visible = true;
+            else
+                AddEmployeeButton.Visible = false;
         }
 
         private void UpdateAddCustomerButtonVisibility()
         {
-            if ((CustomerSurnameTextBox.Text != "") &&
-                (CustomerNameTextBox.Text != "") &&
-                (CountryTextBox.Text != "")
+            if ((CustomerSurnameTextBox.Text == "") ||
+                (CustomerNameTextBox.Text == "") ||
+                (CountryTextBox.Text == "")
                 )
+                AddCutomerButton.Visible = false;
+            else
                 AddCutomerButton.Visible = true;
         }
 
         private void UpdateAddProjectButtonVisibility()
         {
-            if ((ProjectNameTextBox.Text != "") &&
-                (ProjectCostTextBox.Text != "")
+            if ((ProjectNameTextBox.Text == "") ||
+                (ProjectCostTextBox.Text == "")
                 )
+                AddProjectButton.Visible = false;
+            else
                 AddProjectButton.Visible = true;
         }
 
@@ -505,6 +509,10 @@ namespace ManagerProject
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
             this.UpdateAddButtonVisibility();
         }
 
@@ -512,6 +520,10 @@ namespace ManagerProject
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void SurnameTextBox_TextChanged(object sender, EventArgs e)
+        {
             this.UpdateAddButtonVisibility();
         }
 
@@ -521,6 +533,10 @@ namespace ManagerProject
                 && e.KeyChar != Convert.ToChar(44)
                 && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void SalaryTextBox_TextChanged(object sender, EventArgs e)
+        {
             this.UpdateAddButtonVisibility();
         }
 
@@ -557,6 +573,10 @@ namespace ManagerProject
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void CustomerNameTextBox_TextChanged(object sender, EventArgs e)
+        {
             UpdateAddCustomerButtonVisibility();
         }
 
@@ -564,6 +584,10 @@ namespace ManagerProject
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void CustomerSurnameTextBox_TextChanged(object sender, EventArgs e)
+        {
             UpdateAddCustomerButtonVisibility();
         }
 
@@ -571,6 +595,10 @@ namespace ManagerProject
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void CountryTextBox_TextChanged(object sender, EventArgs e)
+        {
             UpdateAddCustomerButtonVisibility();
         }
 
@@ -578,6 +606,10 @@ namespace ManagerProject
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void ProjectNameTextBox_TextChanged(object sender, EventArgs e)
+        {
             UpdateAddProjectButtonVisibility();
         }
 
@@ -587,6 +619,10 @@ namespace ManagerProject
                 && e.KeyChar != Convert.ToChar(44)
                 && e.KeyChar != Convert.ToChar(8))
             { e.Handled = true; }
+        }
+
+        private void ProjectCostTextBox_TextChanged(object sender, EventArgs e)
+        {
             UpdateAddProjectButtonVisibility();
         }
 
@@ -595,9 +631,11 @@ namespace ManagerProject
             RefreshTabEmployee();
             RefreshTabProject();
             RefreshTabCustomer();
-            AddCutomerButton.Visible = false;
-            AddEmployeeButton.Visible = false;
+            UpdateAddButtonVisibility();
+            UpdateAddCustomerButtonVisibility();
+            UpdateAddProjectButtonVisibility();
         }
+
     }
     public class CustomerInProject
     {
