@@ -42,20 +42,25 @@ namespace ManagerProject
 
         public void LoadFromNode(XmlNode employeeNode)
         {
-            this.EmployeeID = int.Parse(XmlNodeHelper.GetNodeAttribute(employeeNode,XMLEmployeeAttributeID));
+            string timeStr = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement);
+            DateTime time;
+            this.EmployeeID = XmlNodeHelper.GetNodeAttributeI(employeeNode,XMLEmployeeAttributeID);
             this.Name = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeName);
             this.Surname = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname);
-            this.DateOfEmployment = DateTime.Parse(XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement));
+            if (DateTime.TryParse(timeStr, out time))
+                this.DateOfEmployment = time;
+            else
+            this.DateOfEmployment = new DateTime();
             this.Salary = double.Parse(XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSalary));
         }
 
         public void SaveToNode(XmlNode employeeNode)
         {
-            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeID, this.EmployeeID.ToString());
-            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeName, this.Name, XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeName));
-            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname, this.Surname, XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname));
-            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement, this.DateOfEmployment.ToString(DateFormat), XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement));
-            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSalary, this.Salary.ToString(), XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSalary));
+            XmlNodeHelper.SetNodeAttributeI(employeeNode, XMLEmployeeAttributeID, this.EmployeeID);
+            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeName, this.Name);
+            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname, this.Surname);
+            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement, this.DateOfEmployment.ToString(DateFormat));
+            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSalary, this.Salary.ToString());
 
         }
     }

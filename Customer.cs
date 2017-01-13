@@ -40,16 +40,21 @@ namespace ManagerProject
 
         public void LoadFromNode(XmlNode customerNode)
         {
-            this.CustomerID = int.Parse(XmlNodeHelper.GetNodeAttribute(customerNode,XMLCustomerAttributeID));
+            string timeStr = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeDateAgreement);
+            DateTime time;
+            this.CustomerID = XmlNodeHelper.GetNodeAttributeI(customerNode,XMLCustomerAttributeID);
             this.Name = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeName);
             this.Surname = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeSurname); 
             this.Country = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeCountry);
-            this.DateOfAgreement = DateTime.Parse(XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeDateAgreement));
+            if (DateTime.TryParse(timeStr, out time))
+                this.DateOfAgreement = time;
+            else
+                this.DateOfAgreement = new DateTime();
         }
 
         public void SaveToNode(XmlNode customerNode)
         {
-            XmlNodeHelper.SetNodeAttribute(customerNode, XMLCustomerAttributeID, this.CustomerID.ToString());
+            XmlNodeHelper.SetNodeAttributeI(customerNode, XMLCustomerAttributeID, this.CustomerID);
             XmlNodeHelper.SetNodeAttribute(customerNode, XMLCustomerAttributeName, this.Name);
             XmlNodeHelper.SetNodeAttribute(customerNode, XMLCustomerAttributeSurname, this.Surname);
             XmlNodeHelper.SetNodeAttribute(customerNode, XMLCustomerAttributeCountry, this.Country);

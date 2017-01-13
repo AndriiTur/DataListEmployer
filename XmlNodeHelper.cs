@@ -43,7 +43,11 @@ namespace ManagerProject
 
         public static void SetNodeAttributeI(XmlNode node, string attributeName, int value, int defaultValue = 0)
         {
-            SetNodeAttribute(node, attributeName, value.ToString());
+            int intValue;
+            if (int.TryParse(value.ToString(), out intValue))
+                SetNodeAttribute(node, attributeName, intValue.ToString());
+            else
+                defaultValue.ToString();
         }
 
         public static string GetNodeAttribute(XmlNode node, string attributeName, string defaultValue = "")
