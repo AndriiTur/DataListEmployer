@@ -233,10 +233,8 @@ namespace ManagerProject
                 ProjectStatus.Clear();
             if (ProjectDataGridView.Rows.Count >= 0)
                 ProjectDataGridView.Rows.Clear();
-            ProjectStatus.Add(Project.ProjestStatus.start.ToString());
-            ProjectStatus.Add(Project.ProjestStatus.active.ToString());
-            ProjectStatus.Add(Project.ProjestStatus.suspended.ToString());
-            ProjectStatus.Add(Project.ProjestStatus.done.ToString());
+            foreach (Project.ProjestStatus status in Enum.GetValues(typeof(Project.ProjestStatus)))
+                ProjectStatus.Add(status.ToString());
             if (manager.Customers.Count != 0)
             {
 

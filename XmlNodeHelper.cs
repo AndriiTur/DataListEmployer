@@ -33,7 +33,7 @@ namespace ManagerProject
             if (value == defaultValue)
                 return;
 
-            if ((defaultValue == null) || (value != defaultValue))
+            if (GetNodeAttribute(node, attributeName,value) != value)
             {
                 XmlAttribute atribute = node.OwnerDocument.CreateAttribute(attributeName);
                 atribute.Value = value;
