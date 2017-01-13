@@ -33,11 +33,11 @@ namespace ManagerProject
             if (value == defaultValue)
                 return;
 
-            if (GetNodeAttribute(node, attributeName,value) != value)
+            if (defaultValue != value)
             {
-                XmlAttribute atribute = node.OwnerDocument.CreateAttribute(attributeName);
-                atribute.Value = value;
-                node.Attributes.Append(atribute);
+                XmlAttribute attribute = node.OwnerDocument.CreateAttribute(attributeName);
+                attribute.Value = value;
+                node.Attributes.Append(attribute);
             }
         }
 

@@ -242,8 +242,6 @@ namespace ManagerProject
                 {
                     var customerProject = new CustomerInProject(manager.Customers[i].Name.ToString() + " " + manager.Customers[i].Surname.ToString(), manager.Customers[i].CustomerID);
                     customersOnProject.Add(customerProject);
-                    //customerIDList.Add(customer.CustomerID);
-                    //customerInfo.Add(customer.Name.ToString() + " " + customer.Surname.ToString());
                 }
             }
             ProjectCustomerComboBox.DataSource = customersOnProject;
