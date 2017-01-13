@@ -434,12 +434,6 @@ namespace ManagerProject
                 CustomerDataGridView.ReadOnly = true;
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            var form2 = new AddEmployeProjectForm();
-            form2.Close();
-        }
-
         private void ProjectDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == EditEmployeeInProject.Index && e.RowIndex >= 0)
