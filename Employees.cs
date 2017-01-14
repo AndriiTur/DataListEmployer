@@ -36,6 +36,8 @@ namespace ManagerProject
 
         public void Remove(Employee employee)
         {
+            //if (this.EmployeeHasProject(employee))
+            //    throw new Exception("");
             ListEmployees.Remove(employee);
         }
 

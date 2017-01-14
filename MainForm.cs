@@ -459,34 +459,25 @@ namespace ManagerProject
 
         private void UpdateAddButtonVisibility()
         {
-            if ((SurnameTextBox.Text != "") &&
+            bool allValuesAreSet = (SurnameTextBox.Text != "") &&
                 (NameTextBox.Text != "") &&
-                (SalaryTextBox.Text != "")
-            )
-                AddEmployeeButton.Visible = true;
-            else
-                AddEmployeeButton.Visible = false;
+                (SalaryTextBox.Text != "");
+            
+            AddEmployeeButton.Visible = allValuesAreSet;
         }
 
         private void UpdateAddCustomerButtonVisibility()
         {
-            if ((CustomerSurnameTextBox.Text == "") ||
+            bool existEmptyValue = (CustomerSurnameTextBox.Text == "") ||
                 (CustomerNameTextBox.Text == "") ||
-                (CountryTextBox.Text == "")
-                )
-                AddCutomerButton.Visible = false;
-            else
-                AddCutomerButton.Visible = true;
+                (CountryTextBox.Text == "");
+            AddCutomerButton.Visible = !existEmptyValue;
+            
         }
 
         private void UpdateAddProjectButtonVisibility()
         {
-            if ((ProjectNameTextBox.Text == "") ||
-                (ProjectCostTextBox.Text == "")
-                )
-                AddProjectButton.Visible = false;
-            else
-                AddProjectButton.Visible = true;
+            AddProjectButton.Visible = (ProjectNameTextBox.Text != "") && (ProjectCostTextBox.Text != "");
         }
 
         private void SurnameTextBox_KeyPress(object sender, KeyPressEventArgs e)

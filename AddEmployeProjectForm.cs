@@ -66,7 +66,7 @@ namespace ManagerProject
             EmployesInProjectDataGridView.Rows.Clear();
             for (var i = 0; i < CurentProject.Manager.Employees.Count; i ++)
             {
-                if (!ExistsEmployeeById(CurentProject.Manager.Employees[i].EmployeeID))
+                if (ExistsEmployeeById(CurentProject.Manager.Employees[i].EmployeeID))
                 {
                     employeeComboBoxList.Add(CurentProject.Manager.Employees[i].Name + " " + CurentProject.Manager.Employees[i].Surname);
                     employeeIDComboBoxList.Add(CurentProject.Manager.Employees[i].EmployeeID);
@@ -88,12 +88,7 @@ namespace ManagerProject
 
         internal bool ExistsEmployeeById(int employeeID)
         {
-            if (CurentProject.EmployeesID.IndexOf(employeeID) < 0)
-            {
-                return false;
-            }
-            else
-                return true;
+            return CurentProject.EmployeesID.IndexOf(employeeID) < 0;
         }
     }
 }
