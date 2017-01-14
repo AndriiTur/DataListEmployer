@@ -36,9 +36,20 @@ namespace ManagerProject
 
         public void Remove(Employee employee)
         {
-            //if (this.EmployeeHasProject(employee))
-            //    throw new Exception("");
+            if (this.EmployeeHasProject(employee))
+                throw new Exception(string.Format("Employee {0}  {1} can't be Deleted, because has project",
+                    employee.Name,employee.Surname));
             ListEmployees.Remove(employee);
+        }
+
+        private bool EmployeeHasProject(Employee employee)
+        {
+            for (int i = 0; i < Manager.Projects.Count; i++)
+            {
+                if (Manager.Projects[i].EmployeesID.IndexOf(employee.EmployeeID) >= 0)
+                    return true;
+            }
+            return false;
         }
 
         internal void LoadFromNode(XmlNode employeesNode)

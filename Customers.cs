@@ -35,7 +35,20 @@ namespace ManagerProject
 
         public void Remove(Customer customer)
         {
+            if (this.CustomerHasProject(customer))
+                throw new Exception(string.Format("Cstomer {0}  {1} can't be Deleted, because has project",
+                    customer.Name, customer.Surname));
             ListCustomers.Remove(customer);
+        }
+
+        private bool CustomerHasProject(Customer customer)
+        {
+            for (int i = 0; i < customer.Manager.Projects.Count; i++)
+            {
+                if (Manager.Projects[i].CustomerID == customer.CustomerID)
+                    return true;
+            }
+            return false;
         }
 
         public int IndexOf(Customer customer)
