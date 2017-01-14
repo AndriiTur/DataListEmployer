@@ -61,12 +61,9 @@ namespace ManagerProject
         internal void RefreshForm2()
         {
             int row = 0;
-            if (employeeComboBoxList.Count > 0)
-                employeeComboBoxList.Clear();
-            if (employeeIDComboBoxList.Count > 0)
-                employeeComboBoxList.Clear();
-            if (EmployesInProjectDataGridView.Rows.Count > 0)
-                EmployesInProjectDataGridView.Rows.Clear();
+            employeeComboBoxList.Clear();
+            employeeIDComboBoxList.Clear();
+            EmployesInProjectDataGridView.Rows.Clear();
             for (var i = 0; i < CurentProject.Manager.Employees.Count; i ++)
             {
                 if (!ExistsEmployeeById(CurentProject.Manager.Employees[i].EmployeeID))

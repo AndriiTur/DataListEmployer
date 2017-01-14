@@ -184,8 +184,7 @@ namespace ManagerProject
 
         internal void RefreshTabEmployee()
         {
-            if (EmployeeDataGridView.Rows.Count > 0)
-                EmployeeDataGridView.Rows.Clear();
+            employeeBindingSource.Clear();
             for (int i = 0; i < manager.Employees.Count; i++)
             {
                 employeeBindingSource.Add(manager.Employees[i]);
@@ -199,8 +198,7 @@ namespace ManagerProject
 
         internal void RefreshTabCustomer()
         {
-            if (CustomerDataGridView.Rows.Count > 0)
-                CustomerDataGridView.Rows.Clear();
+            customerBindingSource.Clear();
             for (int i = 0; i < manager.Customers.Count; i++)
             {
                 customerBindingSource.Add(manager.Customers[i]);
@@ -224,25 +222,16 @@ namespace ManagerProject
 
             var ProjectStatus = new List<string>();
 
-            if (StatusComboBox.Items.Count > 0)
-                ProjectStatus.Clear();
             int rowIndex = 0;
-            if (customerIDList.Count > 0)
-                customerIDList.Clear();
-            if (ProjectStatus.Count > 0)
-                ProjectStatus.Clear();
-            if (ProjectDataGridView.Rows.Count >= 0)
-                ProjectDataGridView.Rows.Clear();
+            customerIDList.Clear();
+            ProjectDataGridView.Rows.Clear();
             foreach (Project.ProjestStatus status in Enum.GetValues(typeof(Project.ProjestStatus)))
                 ProjectStatus.Add(status.ToString());
-            if (manager.Customers.Count != 0)
+            
+            for (int i = 0; i < manager.Customers.Count; i++)
             {
-
-                for (int i = 0; i < manager.Customers.Count; i++)
-                {
-                    var customerProject = new CustomerInProject(manager.Customers[i].Name.ToString() + " " + manager.Customers[i].Surname.ToString(), manager.Customers[i].CustomerID);
-                    customersOnProject.Add(customerProject);
-                }
+                var customerProject = new CustomerInProject(manager.Customers[i].Name.ToString() + " " + manager.Customers[i].Surname.ToString(), manager.Customers[i].CustomerID);
+                customersOnProject.Add(customerProject);
             }
             ProjectCustomerComboBox.DataSource = customersOnProject;
             ProjectCustomerComboBox.DisplayMember = "CustomerName";
@@ -261,10 +250,7 @@ namespace ManagerProject
                 ProjectCustomerColumn.DisplayMember = "CustomerName";
                 ProjectCustomerColumn.ValueMember = "CustomerID";
                 ProjectDataGridView[ProjectCustomerColumn.Index, rowIndex].Value = manager.Projects[i].CustomerID;
-                if (manager.Projects[i].EmployeesID.Count > 0)
-                    ProjectDataGridView[EmployeeCountColumn.Index, rowIndex].Value = manager.Projects[i].EmployeesID.Count.ToString();
-                else
-                    ProjectDataGridView[EmployeeCountColumn.Index, rowIndex].Value = "0";
+                ProjectDataGridView[EmployeeCountColumn.Index, rowIndex].Value = manager.Projects[i].EmployeesID.Count.ToString();
                 rowIndex++;
             }
             ProjectDateTimePicker.Value = DateTime.Now;
