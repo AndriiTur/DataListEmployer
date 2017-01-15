@@ -60,6 +60,16 @@ namespace ManagerProject
             SetNodeAttribute(node, attributeName, value.ToString(), defaultValue.ToString());
         }
 
+        public static void SetNodeAttributeDT(XmlNode node, string attributeName, DateTime value)
+        {
+            SetNodeAttributeDT(node, attributeName, value, new DateTime());
+        }
+
+        public static void SetNodeAttributeF(XmlNode node, string attributeName, float value, float defaultValue = 0)
+        {
+            SetNodeAttribute(node, attributeName, value.ToString(), defaultValue.ToString());
+        }
+
         public static string GetNodeAttribute(XmlNode node, string attributeName, string defaultValue = "")
         {
             if (node == null)
@@ -83,13 +93,22 @@ namespace ManagerProject
         public static DateTime GetNodeAttributeDT(XmlNode node, string attributeName, DateTime defaultValue, string dateFormat)
         {
             DateTime dateValue;
-            string strValue = GetNodeAttribute(node, attributeName, 
+            string strValue = GetNodeAttribute(node, attributeName,
                 defaultValue.ToString(dateFormat));
             if (DateTime.TryParse(strValue, out dateValue))
                 return dateValue;
             return defaultValue;
         }
-        
+
+        public static float GetNodeAttributeF(XmlNode node, string attributeName, float defaultValue = 0)
+        {
+            float floatValue;
+            string strValue = GetNodeAttribute(node, attributeName,defaultValue.ToString());
+            if (float.TryParse(strValue, out floatValue))
+                return floatValue;
+            return defaultValue;
+        }
+
         public static DateTime GetNodeAttributeDT(XmlNode node, string attributeName, string dateFormat)
         {
             return GetNodeAttributeDT(node, attributeName, new DateTime(), dateFormat);

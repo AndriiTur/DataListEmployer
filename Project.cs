@@ -25,13 +25,13 @@ namespace ManagerProject
         public int ProjectID { get; private set; }
         public string Name { get; set; }
         public DateTime DateAgreement { get; private set; }
-        public int Cost { get; set; }
+        public float Cost { get; set; }
         public ProjestStatus Status { get; set; }
         public int CustomerID { get; set; }
         public List<int> EmployeesID{ get; set; }
 
         public Project(int projectID, string name, DateTime dateAgreement, 
-                       int cost, ProjestStatus status , 
+                       float cost, ProjestStatus status , 
                        int customerID,List<int> employeesID, Manager manager) : base(manager)
         {
             this.ProjectID = projectID;
@@ -59,7 +59,7 @@ namespace ManagerProject
             this.ProjectID = XmlNodeHelper.GetNodeAttributeI(projectNode, XMLNodeAttributeID);
             this.Name = XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeName);
             this.DateAgreement = XmlNodeHelper.GetNodeAttributeDT(projectNode, XMLProjectAttributeDateAgreement,DateFormat);
-            this.Cost = XmlNodeHelper.GetNodeAttributeI(projectNode, XMLProjectAttributeCost);
+            this.Cost = XmlNodeHelper.GetNodeAttributeF(projectNode, XMLProjectAttributeCost);
             this.Status = (ProjestStatus)Enum.Parse(typeof(ProjestStatus), XmlNodeHelper.GetNodeAttribute(projectNode, XMLProjectAttributeStatus).ToString());
             this.CustomerID = XmlNodeHelper.GetNodeAttributeI(projectNode, XMLProjectAttributeCustomer);
             for (XmlNode node = projectNode.FirstChild; node != null; node = node.NextSibling)
@@ -71,7 +71,7 @@ namespace ManagerProject
             XmlNodeHelper.SetNodeAttributeI(projectNode, XMLNodeAttributeID, this.ProjectID);
             XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeName, this.Name);
             XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeDateAgreement, this.DateAgreement.ToString(DateFormat));
-            XmlNodeHelper.SetNodeAttributeI(projectNode, XMLProjectAttributeCost, this.Cost);
+            XmlNodeHelper.SetNodeAttributeF(projectNode, XMLProjectAttributeCost, this.Cost);
             XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeStatus, this.Status.ToString());
             XmlNodeHelper.SetNodeAttribute(projectNode, XMLProjectAttributeCustomer, this.CustomerID.ToString());
             

@@ -20,9 +20,9 @@ namespace ManagerProject
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfEmployment { get; private set; }
-        public int Salary { get; set; }
+        public float Salary { get; set; }
 
-        public Employee(int emploeeID, string name, string surname, DateTime dateOfEmployment, int salary,Manager manager) : base(manager) 
+        public Employee(int emploeeID, string name, string surname, DateTime dateOfEmployment, float salary,Manager manager) : base(manager) 
         {
             this.EmployeeID = emploeeID;
             this.Name = name;
@@ -46,7 +46,7 @@ namespace ManagerProject
             this.Name = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeName);
             this.Surname = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname);
             this.DateOfEmployment = XmlNodeHelper.GetNodeAttributeDT(employeeNode, XMLEmployeeAttributeDateOfEmployeement, DateFormat);
-            this.Salary = XmlNodeHelper.GetNodeAttributeI(employeeNode, XMLEmployeeAttributeSalary);
+            this.Salary = XmlNodeHelper.GetNodeAttributeF(employeeNode, XMLEmployeeAttributeSalary);
         }
 
         public void SaveToNode(XmlNode employeeNode)
@@ -55,7 +55,7 @@ namespace ManagerProject
             XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeName, this.Name);
             XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname, this.Surname);
             XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement, this.DateOfEmployment.ToString(DateFormat));
-            XmlNodeHelper.SetNodeAttributeI(employeeNode, XMLEmployeeAttributeSalary, this.Salary);
+            XmlNodeHelper.SetNodeAttributeF(employeeNode, XMLEmployeeAttributeSalary, this.Salary);
 
         }
     }
