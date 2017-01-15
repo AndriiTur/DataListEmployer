@@ -32,24 +32,32 @@ namespace ManagerProject
             if (node == null)
                 return;
 
+            XmlAttribute attribute = (XmlAttribute)node.Attributes.GetNamedItem(attributeName);
             if (value == defaultValue)
-                return;
-
-            if (defaultValue != value)
             {
-                XmlAttribute attribute = node.OwnerDocument.CreateAttribute(attributeName);
+                if (attribute != null)
+                    attribute.ParentNode.RemoveChild(attribute);
+            }
+            else
+            {
+                if (attribute == null)
+                {
+                    attribute = node.OwnerDocument.CreateAttribute(attributeName);
+                    node.Attributes.Append(attribute);
+                    
+                }
                 attribute.Value = value;
-                node.Attributes.Append(attribute);
             }
         }
 
         public static void SetNodeAttributeI(XmlNode node, string attributeName, int value, int defaultValue = 0)
         {
-            int intValue;
-            if (int.TryParse(value.ToString(), out intValue))
-                SetNodeAttribute(node, attributeName, intValue.ToString());
-            else
-                defaultValue.ToString();
+            SetNodeAttribute(node, attributeName, value.ToString(), defaultValue.ToString());
+        }
+
+        public static void SetNodeAttributeDT(XmlNode node, string attributeName, DateTime value, DateTime defaultValue)
+        {
+            SetNodeAttribute(node, attributeName, value.ToString(), defaultValue.ToString());
         }
 
         public static string GetNodeAttribute(XmlNode node, string attributeName, string defaultValue = "")
@@ -84,7 +92,7 @@ namespace ManagerProject
         
         public static DateTime GetNodeAttributeDT(XmlNode node, string attributeName, string dateFormat)
         {
-            return GetNodeAttributeDT(node, attributeName, dateFormat);
+            return GetNodeAttributeDT(node, attributeName, new DateTime(), dateFormat);
         }
     }
 }

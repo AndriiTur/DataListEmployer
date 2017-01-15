@@ -110,7 +110,7 @@ namespace ManagerProject
             string name = NameTextBox.Text;
             string surname = SurnameTextBox.Text;
             DateTime dateOfEmployment = DateTime.Parse(EmployeeDateTimePicker.Value.ToString(DateFomat));
-            double salary = double.Parse(SalaryTextBox.Text);
+            int salary = int.Parse(SalaryTextBox.Text);
             var employee = new Employee(employeeID, name, surname, dateOfEmployment, salary, manager);
 
             AddEmployee(employee);
@@ -149,7 +149,7 @@ namespace ManagerProject
             int projectsID = GenerateNewProjectID();
             string name = ProjectNameTextBox.Text;
             DateTime dateAgreement = DateTime.Parse(ProjectDateTimePicker.Text);
-            double cost = double.Parse(ProjectCostTextBox.Text);
+            int cost = int.Parse(ProjectCostTextBox.Text);
             Project.ProjestStatus status = (Project.ProjestStatus)Enum.Parse(typeof(Project.ProjestStatus), StatusComboBox.SelectedItem.ToString());
             int customer = customerIDList[ProjectCustomerComboBox.SelectedIndex];
             List<int> employees = new List<int> { };

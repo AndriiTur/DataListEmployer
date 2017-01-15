@@ -82,7 +82,7 @@ namespace ManagerProject
             XmlNodeList xmlEmployeesList = employeesNode.SelectNodes(Employee.XMLNodeEmployee);
             foreach (XmlNode node in xmlEmployeesList)
             {
-                int employeeID = int.Parse(XmlNodeHelper.GetNodeAttribute(node, Employee.XMLEmployeeAttributeID));
+                int employeeID = XmlNodeHelper.GetNodeAttributeI(node, Employee.XMLEmployeeAttributeID);
                 if (this.ListEmployees.IndexOf(this.GetEmployeeByID(employeeID)) < 0)
                 {
                     node.ParentNode.RemoveChild(node);
