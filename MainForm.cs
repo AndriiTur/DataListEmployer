@@ -515,35 +515,6 @@ namespace ManagerProject
             this.UpdateAddButtonVisibility();
         }
 
-        private ToolTip ToolTipAdd()
-        {
-            ToolTip tt = new ToolTip();
-            tt.IsBalloon = true;
-            tt.InitialDelay = 0;
-            tt.ShowAlways = true;
-            return tt;
-        }
-
-        private void SurnameTextBox_Enter(object sender, EventArgs e)
-        {
-            ToolTipAdd().SetToolTip(SurnameTextBox, "Only Letter");
-        }
-
-        private void NameTextBox_Enter(object sender, EventArgs e)
-        {
-            ToolTipAdd().SetToolTip(NameTextBox, "Only Letter");
-        }
-
-        private void EmployeeDateTimePicker_Enter(object sender, EventArgs e)
-        {
-            ToolTipAdd().SetToolTip(EmployeeDateTimePicker, "Enter date DD.MM.Year and time 00:00");
-        }
-
-        private void SalaryTextBox_Enter(object sender, EventArgs e)
-        {
-            ToolTipAdd().SetToolTip(SalaryTextBox, "Enter digit 1,234");
-        }
-
         private void CustomerNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
@@ -611,6 +582,74 @@ namespace ManagerProject
             UpdateAddProjectButtonVisibility();
         }
 
+        private ToolTip ToolTipAdd()
+        {
+            ToolTip tt = new ToolTip();
+            tt.IsBalloon = true;
+            tt.InitialDelay = 0;
+            tt.ShowAlways = true;
+            return tt;
+        }
+
+        private void ProjectNameTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(ProjectNameTextBox, "Only Letter");
+        }
+
+        private void ProjectCostTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(ProjectCostTextBox, "Only Digits");
+        }
+
+        private void ProjectCustomerComboBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(ProjectCustomerComboBox, "Choise Customer");
+        }
+
+        private void StatusComboBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(StatusComboBox, "Choise Project Status");
+        }
+
+        private void NameTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(NameTextBox, "Only Letter");
+        }
+
+        private void SurnameTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(SurnameTextBox, "Only Letter");
+        }
+
+        private void EmployeeDateTimePicker_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(EmployeeDateTimePicker, "Enter Date");
+        }
+
+        private void SalaryTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(SalaryTextBox, "Only Digits");
+        }
+
+        private void CustomerNameTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(CustomerNameTextBox, "Only Letter");
+        }
+
+        private void CustomerSurnameTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(CustomerSurnameTextBox, "Only Letter");
+        }
+
+        private void CountryTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(CountryTextBox, "Only Letter");
+        }
+
+        private void AgreementDateTimePicker_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTipAdd().SetToolTip(AgreementDateTimePicker, "Enter Date");
+        }
     }
     public class CustomerInProject
     {
