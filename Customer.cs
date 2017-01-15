@@ -40,16 +40,11 @@ namespace ManagerProject
 
         public void LoadFromNode(XmlNode customerNode)
         {
-            string timeStr = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeDateAgreement);
-            DateTime time;
             this.CustomerID = XmlNodeHelper.GetNodeAttributeI(customerNode,XMLCustomerAttributeID);
             this.Name = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeName);
             this.Surname = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeSurname); 
             this.Country = XmlNodeHelper.GetNodeAttribute(customerNode, XMLCustomerAttributeCountry);
-            if (DateTime.TryParse(timeStr, out time))
-                this.DateOfAgreement = time;
-            else
-                this.DateOfAgreement = new DateTime();
+            this.DateOfAgreement = XmlNodeHelper.GetNodeAttributeDT(customerNode, XMLCustomerAttributeDateAgreement, DateFormat);
         }
 
         public void SaveToNode(XmlNode customerNode)

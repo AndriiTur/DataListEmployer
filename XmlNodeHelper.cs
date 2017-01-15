@@ -5,8 +5,10 @@ namespace ManagerProject
 {
     public class XmlNodeHelper
     {
+
         public static XmlNode RequiredNode(XmlNode parentNode, string xPath, string attribute = "", string value = "")
         {
+
             string newXPath = xPath;
             if (attribute != "")
                 newXPath = newXPath + String.Format("[@{0}='{1}']", attribute, value);
@@ -68,6 +70,21 @@ namespace ManagerProject
             if (int.TryParse(strValue, out intValue))
                 return intValue;
             return defaultValue;
+        }
+
+        public static DateTime GetNodeAttributeDT(XmlNode node, string attributeName, DateTime defaultValue, string dateFormat)
+        {
+            DateTime dateValue;
+            string strValue = GetNodeAttribute(node, attributeName, 
+                defaultValue.ToString(dateFormat));
+            if (DateTime.TryParse(strValue, out dateValue))
+                return dateValue;
+            return defaultValue;
+        }
+        
+        public static DateTime GetNodeAttributeDT(XmlNode node, string attributeName, string dateFormat)
+        {
+            return GetNodeAttributeDT(node, attributeName, dateFormat);
         }
     }
 }

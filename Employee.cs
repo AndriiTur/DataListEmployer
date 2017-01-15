@@ -20,9 +20,9 @@ namespace ManagerProject
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfEmployment { get; private set; }
-        public double Salary { get; set; }
+        public int Salary { get; set; }
 
-        public Employee(int emploeeID, string name, string surname, DateTime dateOfEmployment, double salary,Manager manager) : base(manager) 
+        public Employee(int emploeeID, string name, string surname, DateTime dateOfEmployment, int salary,Manager manager) : base(manager) 
         {
             this.EmployeeID = emploeeID;
             this.Name = name;
@@ -42,16 +42,11 @@ namespace ManagerProject
 
         public void LoadFromNode(XmlNode employeeNode)
         {
-            string timeStr = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement);
-            DateTime time;
             this.EmployeeID = XmlNodeHelper.GetNodeAttributeI(employeeNode,XMLEmployeeAttributeID);
             this.Name = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeName);
             this.Surname = XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname);
-            if (DateTime.TryParse(timeStr, out time))
-                this.DateOfEmployment = time;
-            else
-            this.DateOfEmployment = new DateTime();
-            this.Salary = double.Parse(XmlNodeHelper.GetNodeAttribute(employeeNode, XMLEmployeeAttributeSalary));
+            this.DateOfEmployment = XmlNodeHelper.GetNodeAttributeDT(employeeNode, XMLEmployeeAttributeDateOfEmployeement, DateFormat);
+            this.Salary = XmlNodeHelper.GetNodeAttributeI(employeeNode, XMLEmployeeAttributeSalary);
         }
 
         public void SaveToNode(XmlNode employeeNode)
@@ -60,7 +55,7 @@ namespace ManagerProject
             XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeName, this.Name);
             XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSurname, this.Surname);
             XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeDateOfEmployeement, this.DateOfEmployment.ToString(DateFormat));
-            XmlNodeHelper.SetNodeAttribute(employeeNode, XMLEmployeeAttributeSalary, this.Salary.ToString());
+            XmlNodeHelper.SetNodeAttributeI(employeeNode, XMLEmployeeAttributeSalary, this.Salary);
 
         }
     }
