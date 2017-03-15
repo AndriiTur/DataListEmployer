@@ -23,28 +23,28 @@ namespace ManagerProject
             Projects = new Projects(this);
         }
 
-        public void LoadFromNode(XmlNode managerNode)
-        {
-            XmlNode employeesNode = XmlNodeHelper.RequiredNode(managerNode, Employees.XMLNodeEmployees);
-            Employees.LoadFromNode(employeesNode);
+        //public void LoadFromNode(XmlNode managerNode)
+        //{
+        //    XmlNode employeesNode = XmlNodeHelper.RequiredNode(managerNode, Employees.XMLNodeEmployees);
+        //    Employees.LoadFromNode(employeesNode);
 
-            XmlNode customersNode = XmlNodeHelper.RequiredNode(managerNode, Customers.XMLNodeCustomers);
-            Customers.LoadFromNode(customersNode);
+        //    XmlNode customersNode = XmlNodeHelper.RequiredNode(managerNode, Customers.XMLNodeCustomers);
+        //    Customers.LoadFromNode(customersNode);
 
-            XmlNode projectsNode = XmlNodeHelper.RequiredNode(managerNode, Projects.XMLNodeProjects);
-            Projects.LoadFromNode(projectsNode);
-        }
+        //    XmlNode projectsNode = XmlNodeHelper.RequiredNode(managerNode, Projects.XMLNodeProjects);
+        //    Projects.LoadFromNode(projectsNode);
+        //}
 
-        public void SaveToNode(XmlNode managerNode)
-        {
-            XmlNode employeesNode = XmlNodeHelper.RequiredNode(managerNode, Employees.XMLNodeEmployees);
-            Employees.SaveToNode(employeesNode);
+        //public void SaveToNode(XmlNode managerNode)
+        //{
+        //    XmlNode employeesNode = XmlNodeHelper.RequiredNode(managerNode, Employees.XMLNodeEmployees);
+        //    Employees.SaveToNode(employeesNode);
 
-            XmlNode customersNode = XmlNodeHelper.RequiredNode(managerNode, Customers.XMLNodeCustomers);
-            Customers.SaveToNode(customersNode);
+        //    XmlNode customersNode = XmlNodeHelper.RequiredNode(managerNode, Customers.XMLNodeCustomers);
+        //    Customers.SaveToNode(customersNode);
 
-            XmlNode projectsNode = XmlNodeHelper.RequiredNode(managerNode, Projects.XMLNodeProjects);
-            Projects.SaveToNode(projectsNode);
-        }
+        //    XmlNode projectsNode = XmlNodeHelper.RequiredNode(managerNode, Projects.XMLNodeProjects);
+        //    Projects.SaveToNode(projectsNode);
+        //}
     }
 }

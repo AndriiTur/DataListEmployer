@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using System.Xml;
 namespace ManagerProject
@@ -58,5 +60,7 @@ namespace ManagerProject
             XmlNodeHelper.SetNodeAttributeF(employeeNode, XMLEmployeeAttributeSalary, this.Salary);
 
         }
+
+        
     }
 }

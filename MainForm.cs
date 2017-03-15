@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -33,14 +34,18 @@ namespace ManagerProject
             manager = new Manager();
             customerIDList = new List<int> { };
             InitializeComponent();
-            LoadToManager();
+            RefreshTabEmployee();
+            manager.Customers.LoadCustomersFromSQL();
+            //LoadToManager();
             EmployeeDataGridView.SelectionChanged += PrintText;
         }
 
+     
         protected override void OnActivated(EventArgs e)
         {
             EmployeeDataGridView.ClearSelection();
             CustomerDataGridView.ClearSelection();
+            ProjectDataGridView.ClearSelection();
         }
 
         void PrintText(object sender, EventArgs e)
@@ -48,151 +53,147 @@ namespace ManagerProject
             // MessageBox.Show(sender.ToString());
         }
 
-        internal int GenerateNewemployeeID()
-        {
-            int iD = 0;
-            for (int i = 0; i < manager.Employees.Count; i++)
-            {
-                if (manager.Employees[i].EmployeeID >= iD)
-                    iD = manager.Employees[i].EmployeeID;
-            }
-            return iD += 1;
-        }
+        //internal int GenerateNewemployeeID()
+        //{
+        //    int iD = 0;
+        //    for (int i = 0; i < manager.Employees.Count; i++)
+        //    {
+        //        if (manager.Employees[i].EmployeeID >= iD)
+        //            iD = manager.Employees[i].EmployeeID;
+        //    }
+        //    return iD += 1;
+        //}
 
-        internal int GenerateNewcustomerID()
-        {
-            int iD = 0;
-            for (int i = 0; i < manager.Customers.Count; i++)
-            {
-                if (manager.Customers[i].CustomerID >= iD)
-                    iD = manager.Customers[i].CustomerID;
-            }
-            return iD += 1;
-        }
+        //internal int GenerateNewcustomerID()
+        //{
+        //    int iD = 0;
+        //    for (int i = 0; i < manager.Customers.Count; i++)
+        //    {
+        //        if (manager.Customers[i].CustomerID >= iD)
+        //            iD = manager.Customers[i].CustomerID;
+        //    }
+        //    return iD += 1;
+        //}
 
-        internal int GenerateNewProjectID()
-        {
-            int iD = 0;
-            for (int i = 0; i < manager.Projects.Count; i++)
-            {
-                if (manager.Projects[i].ProjectID >= iD)
-                    iD = manager.Projects[i].ProjectID;
-            }
-            return iD += 1;
-        }
+        //internal int GenerateNewProjectID()
+        //{
+        //    int iD = 0;
+        //    for (int i = 0; i < manager.Projects.Count; i++)
+        //    {
+        //        if (manager.Projects[i].ProjectID >= iD)
+        //            iD = manager.Projects[i].ProjectID;
+        //    }
+        //    return iD += 1;
+        //}
 
-        internal void SaveAllToFile()
-        {
-            XmlDocument Doc = new XmlDocument();
-            Doc.Load(PathToFile);
-            manager.SaveToNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
-            Doc.Save(PathToFile);
-        }
+        //internal void SaveAllToFile()
+        //{
+        //    //XmlDocument Doc = new XmlDocument();
+        //    //Doc.Load(PathToFile);
+        //    //manager.SaveToNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
+        //    //Doc.Save(PathToFile);
+        //}
 
-        internal void LoadToManager()
-        {
-            XmlDocument Doc = new XmlDocument();
-            Doc.Load(PathToFile);
-            manager.LoadFromNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
-            RefreshTabEmployee();
-            RefreshTabProject();
-            RefreshTabCustomer();
-        }
+        //internal void LoadToManager()
+        //{
+        //    XmlDocument Doc = new XmlDocument();
+        //    Doc.Load(PathToFile);
+        //    manager.LoadFromNode(XmlNodeHelper.RequiredNode(Doc, XMLNodeManager));
+        //    RefreshTabEmployee();
+        //    RefreshTabProject();
+        //    RefreshTabCustomer();
+        //}
 
-        internal void AddEmployee(Employee employee)
-        {
-            manager.Employees.Add(employee);
-        }
+        //internal void AddEmployee(Employee employee)
+        //{
+        //    manager.Employees.Add(employee);
+        //}
 
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
-            int employeeID = GenerateNewemployeeID();
-            string name = NameTextBox.Text;
-            string surname = SurnameTextBox.Text;
-            DateTime dateOfEmployment = DateTime.Parse(EmployeeDateTimePicker.Value.ToString(DateFomat));
-            float salary = float.Parse(SalaryTextBox.Text);
-            var employee = new Employee(employeeID, name, surname, dateOfEmployment, salary, manager);
+            SaveEmployeeInSQL();
+            //    int employeeID = GenerateNewemployeeID();
+            //    string name = NameTextBox.Text;
+            //    string surname = SurnameTextBox.Text;
+            //    DateTime dateOfEmployment = DateTime.Parse(EmployeeDateTimePicker.Value.ToString(DateFomat));
+            //    float salary = float.Parse(SalaryTextBox.Text);
+            //    var employee = new Employee(employeeID, name, surname, dateOfEmployment, salary, manager);
 
-            AddEmployee(employee);
-            RefreshTabEmployee();
-            SaveAllToFile();
-            AddEmployeeButton.Visible = false;
+            //    AddEmployee(employee);
+            //    RefreshTabEmployee();
+            //    SaveAllToFile();
+            //    AddEmployeeButton.Visible = false;
         }
 
-        internal void AddCustomer(Customer customer)
-        {
-            manager.Customers.Add(customer);
-        }
+        //internal void AddCustomer(Customer customer)
+        //{
+        //    manager.Customers.Add(customer);
+        //}
 
         private void AddCutomerButton_Click(object sender, EventArgs e)
         {
-            int customerID = GenerateNewcustomerID();
-            string name = CustomerNameTextBox.Text;
-            string surname = CustomerSurnameTextBox.Text;
-            string country = CountryTextBox.Text;
-            DateTime dateAgreement = DateTime.Parse(AgreementDateTimePicker.Value.ToString(DateFomat));
-            var customer = new Customer(customerID, name, surname, country, dateAgreement, manager);
+            SaveCustomerInSQL();
+            //int customerID = GenerateNewcustomerID();
+            //    string name = CustomerNameTextBox.Text;
+            //    string surname = CustomerSurnameTextBox.Text;
+            //    string country = CountryTextBox.Text;
+            //    DateTime dateAgreement = DateTime.Parse(AgreementDateTimePicker.Value.ToString(DateFomat));
+            //    var customer = new Customer(customerID, name, surname, country, dateAgreement, manager);
 
-            AddCustomer(customer);
-            SaveAllToFile();
-            RefreshTabCustomer();
-            AddCutomerButton.Visible = false;
+            //    AddCustomer(customer);
+            //    SaveAllToFile();
+            //    RefreshTabCustomer();
+            //    AddCutomerButton.Visible = false;
         }
 
-        internal void AddProject(Project project)
-        {
-            manager.Projects.Add(project);
-        }
+        //internal void AddProject(Project project)
+        //{
+        //    manager.Projects.Add(project);
+        //}
 
         private void AddProjectButton_Click(object sender, EventArgs e)
         {
-            int projectsID = GenerateNewProjectID();
-            string name = ProjectNameTextBox.Text;
-            DateTime dateAgreement = DateTime.Parse(ProjectDateTimePicker.Text);
-            float cost = float.Parse(ProjectCostTextBox.Text);
-            Project.ProjestStatus status = (Project.ProjestStatus)Enum.Parse(typeof(Project.ProjestStatus), StatusComboBox.SelectedItem.ToString());
-            int customer = customerIDList[ProjectCustomerComboBox.SelectedIndex];
-            List<int> employees = new List<int> { };
-            var project = new Project(projectsID, name, dateAgreement, cost, status, customer, employees, manager);
+            //    int projectsID = GenerateNewProjectID();
+            //    string name = ProjectNameTextBox.Text;
+            //    DateTime dateAgreement = DateTime.Parse(ProjectDateTimePicker.Text);
+            //    float cost = float.Parse(ProjectCostTextBox.Text);
+            //    Project.ProjestStatus status = (Project.ProjestStatus)Enum.Parse(typeof(Project.ProjestStatus), StatusComboBox.SelectedItem.ToString());
+            //    int customer = customerIDList[ProjectCustomerComboBox.SelectedIndex];
+            //    List<int> employees = new List<int> { };
+            //    var project = new Project(projectsID, name, dateAgreement, cost, status, customer, employees, manager);
 
-            AddProject(project);
-            SaveAllToFile();
-            RefreshTabProject();
-            AddProjectButton.Visible = false;
-        }
+            //    AddProject(project);
+            //    SaveAllToFile();
+            //    RefreshTabProject();
+            //    AddProjectButton.Visible = false;
+         }
 
-        internal void RemoveEmployee(int val)
-        {
-            manager.Employees.Remove(manager.Employees[val]);
-            RefreshTabEmployee();
-            SaveAllToFile();
-        }
+        //internal void RemoveCustomer(int val)
+        //{
+        //    manager.Customers.Remove(manager.Customers[val]);
+        //    RefreshTabCustomer();
+        //    SaveAllToFile();
+        //}
 
-        internal void RemoveCustomer(int val)
-        {
-            manager.Customers.Remove(manager.Customers[val]);
-            RefreshTabCustomer();
-            SaveAllToFile();
-        }
-
-        internal void RemoveProject(int val)
-        {
-            manager.Projects.Remove(manager.Projects[val]);
-            RefreshTabProject();
-            SaveAllToFile();
-        }
+        //internal void RemoveProject(int val)
+        //{
+        //    manager.Projects.Remove(manager.Projects[val]);
+        //    RefreshTabProject();
+        //    SaveAllToFile();
+        //}
 
         internal void RefreshTabEmployee()
         {
+            manager.Employees.LoadEmployeesFromSQL();
             employeeBindingSource.Clear();
             for (int i = 0; i < manager.Employees.Count; i++)
             {
                 employeeBindingSource.Add(manager.Employees[i]);
             }
-            NameTextBox.Clear();
-            SurnameTextBox.Clear();
+            NameEmployeeTextBox.Clear();
+            SurnameEmployeeTextBox.Clear();
             EmployeeDateTimePicker.Value = DateTime.Now;
-            SalaryTextBox.Clear();
+            SalaryEmployeeTextBox.Clear();
             EmployeeDataGridView.ClearSelection();
         }
 
@@ -288,7 +289,7 @@ namespace ManagerProject
                     DialogResult dialogResult = MessageBox.Show(DialogAskMesage, MesageDeleteShow, MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        RemoveEmployee(e.RowIndex);
+                        DeleteEmployeeFromSQL(e.RowIndex);
                     }
                     else if (dialogResult == DialogResult.No)
                     {
@@ -315,7 +316,7 @@ namespace ManagerProject
                 {
                     if (EmployeeDataGridView.CurrentCell.Value.ToString() == ButtonTextSave)
                     {
-                        SaveAllToFile();
+                        EditEmployeeInSQL(curentRowIndex);
                         EditEmployeeButton.UseColumnTextForButtonValue = true;
                         EmployeeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         employeeBindingSource.EndEdit();
@@ -327,7 +328,7 @@ namespace ManagerProject
             }
             if (e.ColumnIndex > employeeIDDataGridViewTextBoxColumn.Index
                 && e.ColumnIndex <= SalaryEmployeeDataGridViewTextBoxColumn.Index
-                && e.RowIndex == curentRowIndex && e.ColumnIndex != dateOfEmploymentDataGridViewTextBoxColumn.Index)
+                && e.RowIndex == curentRowIndex && e.ColumnIndex != DateOfEmployment.Index)
             {
                 EmployeeDataGridView.ReadOnly = false;
                 EmployeeDataGridView.BeginEdit(false);
@@ -345,7 +346,7 @@ namespace ManagerProject
                     DialogResult dialogResult = MessageBox.Show(DialogAskMesage, MesageDeleteShow, MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        RemoveCustomer(e.RowIndex);
+                        DeleteCustomerFromSQL(e.RowIndex);
                     }
                     else if (dialogResult == DialogResult.No)
                     {
@@ -372,7 +373,7 @@ namespace ManagerProject
                 {
                     if (CustomerDataGridView.CurrentCell.Value.ToString() == ButtonTextSave)
                     {
-                        SaveAllToFile();
+                        EditCustomerInSQL(curentRowIndex);
                         CustomerEdit.UseColumnTextForButtonValue = true;
                         CustomerDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         customerBindingSource.EndEdit();
@@ -401,7 +402,7 @@ namespace ManagerProject
                 AddEmployeProjectForm.CurentProject = manager.Projects[e.RowIndex];
                 AddEmployeProjectForm.RefreshForm2();
                 AddEmployeProjectForm.ShowDialog();
-                SaveAllToFile();
+                //SaveAllToFile();
                 AddEmployeProjectForm.Dispose();
             }
             if (e.ColumnIndex == ProjectDeleteColumn.Index && e.RowIndex >= 0)
@@ -411,7 +412,7 @@ namespace ManagerProject
                     DialogResult dialogResult = MessageBox.Show(DialogAskMesage, MesageDeleteShow, MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        RemoveProject(e.RowIndex);
+                        //RemoveProject(e.RowIndex);
                     }
                     else if (dialogResult == DialogResult.No)
                     {
@@ -439,7 +440,7 @@ namespace ManagerProject
                     {
                         ProjectDataGridView[ProjectEditColumn.Index, curentRowIndex].Value = ButtonTextEdit;
                         ProjectEditColumn.UseColumnTextForButtonValue = true;
-                        SaveAllToFile();
+                        //SaveAllToFile();
                         ProjectDataGridView.EndEdit();
                         ProjectDataGridView.ReadOnly = true;
                         curentRowIndex = -1;
@@ -459,9 +460,9 @@ namespace ManagerProject
 
         private void UpdateAddButtonVisibility()
         {
-            bool allValuesAreSet = (SurnameTextBox.Text != "") &&
-                (NameTextBox.Text != "") &&
-                (SalaryTextBox.Text != "");
+            bool allValuesAreSet = (SurnameEmployeeTextBox.Text != "") &&
+                (NameEmployeeTextBox.Text != "") &&
+                (SalaryEmployeeTextBox.Text != "");
             
             AddEmployeeButton.Visible = allValuesAreSet;
         }
@@ -613,12 +614,12 @@ namespace ManagerProject
 
         private void NameTextBox_MouseEnter(object sender, EventArgs e)
         {
-            ToolTipAdd().SetToolTip(NameTextBox, "Only Letter");
+            ToolTipAdd().SetToolTip(NameEmployeeTextBox, "Only Letter");
         }
 
         private void SurnameTextBox_MouseEnter(object sender, EventArgs e)
         {
-            ToolTipAdd().SetToolTip(SurnameTextBox, "Only Letter");
+            ToolTipAdd().SetToolTip(SurnameEmployeeTextBox, "Only Letter");
         }
 
         private void EmployeeDateTimePicker_MouseEnter(object sender, EventArgs e)
@@ -628,7 +629,7 @@ namespace ManagerProject
 
         private void SalaryTextBox_MouseEnter(object sender, EventArgs e)
         {
-            ToolTipAdd().SetToolTip(SalaryTextBox, "Only Digits");
+            ToolTipAdd().SetToolTip(SalaryEmployeeTextBox, "Only Digits");
         }
 
         private void CustomerNameTextBox_MouseEnter(object sender, EventArgs e)
@@ -650,6 +651,129 @@ namespace ManagerProject
         {
             ToolTipAdd().SetToolTip(AgreementDateTimePicker, "Enter Date");
         }
+
+        public void SaveEmployeeInSQL()
+        {
+            string name = NameEmployeeTextBox.Text;
+            string surname = SurnameEmployeeTextBox.Text;
+            string dateOfEmployment = EmployeeDateTimePicker.Value.ToString("yyyy-MM-dd");
+            string salary = SalaryEmployeeTextBox.Text;
+                
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+            string oString = String.Format("INSERT INTO Employees(Name, Surname, DateOfEmployment, Salary)" +
+                    "VALUES ('{0}', '{1}', '{2}', '{3}')", name, surname, dateOfEmployment, salary);
+            SqlConnection sqlConnection1 = new SqlConnection(con);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = oString;
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+            cmd.ExecuteNonQuery();
+            sqlConnection1.Close();
+            RefreshTabEmployee();
+        }
+
+        public void EditEmployeeInSQL(int rowIndex)
+        {
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                int employeeID = int.Parse(EmployeeDataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                string name = EmployeeDataGridView.Rows[rowIndex].Cells[1].Value.ToString();
+                string surname = EmployeeDataGridView.Rows[rowIndex].Cells[2].Value.ToString();
+                string dateOfEmployment = (DateTime.Parse(EmployeeDataGridView.Rows[rowIndex].Cells["DateOfEmployment"].Value.ToString())).ToString("yyyy-MM-dd");
+                string salary = EmployeeDataGridView.Rows[rowIndex].Cells[4].Value.ToString();
+                string oString = String.Format("UPDATE Employees SET" +
+                    " Name = '{0}', Surname = '{1}', DateOfEmployment = '{2}', Salary = '{3}' " +
+                    "WHERE EmployeeID = {4}", name, surname, dateOfEmployment, salary, employeeID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                oCmd.ExecuteNonQuery();
+                myConnection.Close();
+                RefreshTabEmployee();
+            }
+        }
+
+        public void DeleteEmployeeFromSQL(int rowIndex)
+        {
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                int employeeID = int.Parse(EmployeeDataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                string oString = String.Format("DELETE FROM Employees WHERE EmployeeID = {0}", employeeID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                oCmd.ExecuteNonQuery();
+                myConnection.Close();
+                RefreshTabEmployee();
+            }
+        }
+
+        public void SaveCustomerInSQL()
+        {
+            string name = NameEmployeeTextBox.Text;
+            string surname = SurnameEmployeeTextBox.Text;
+            string dateOfEmployment = EmployeeDateTimePicker.Value.ToString("yyyy-MM-dd");
+            string salary = SalaryEmployeeTextBox.Text;
+
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+            string oString = String.Format("INSERT INTO Employees(Name, Surname, DateOfEmployment, Salary)" +
+                    "VALUES ('{0}', '{1}', '{2}', '{3}')", name, surname, dateOfEmployment, salary);
+            SqlConnection sqlConnection1 = new SqlConnection(con);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = oString;
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+            cmd.ExecuteNonQuery();
+            sqlConnection1.Close();
+            RefreshTabEmployee();
+        }
+
+        public void EditCustomerInSQL(int rowIndex)
+        {
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                int employeeID = int.Parse(EmployeeDataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                string name = EmployeeDataGridView.Rows[rowIndex].Cells[1].Value.ToString();
+                string surname = EmployeeDataGridView.Rows[rowIndex].Cells[2].Value.ToString();
+                string dateOfEmployment = (DateTime.Parse(EmployeeDataGridView.Rows[rowIndex].Cells["DateOfEmployment"].Value.ToString())).ToString("yyyy-MM-dd");
+                string salary = EmployeeDataGridView.Rows[rowIndex].Cells[4].Value.ToString();
+                string oString = String.Format("UPDATE Employees SET" +
+                    " Name = '{0}', Surname = '{1}', DateOfEmployment = '{2}', Salary = '{3}' " +
+                    "WHERE EmployeeID = {4}", name, surname, dateOfEmployment, salary, employeeID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                oCmd.ExecuteNonQuery();
+                myConnection.Close();
+                RefreshTabEmployee();
+            }
+        }
+
+        public void DeleteCustomerFromSQL(int rowIndex)
+        {
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                int employeeID = int.Parse(EmployeeDataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                string oString = String.Format("DELETE FROM Employees WHERE EmployeeID = {0}", employeeID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                oCmd.ExecuteNonQuery();
+                myConnection.Close();
+                RefreshTabEmployee();
+            }
+        }
+
     }
     public class CustomerInProject
     {
