@@ -35,8 +35,6 @@ namespace ManagerProject
             customerIDList = new List<int> { };
             InitializeComponent();
             RefreshTabEmployee();
-            manager.Customers.LoadCustomersFromSQL();
-            //LoadToManager();
             EmployeeDataGridView.SelectionChanged += PrintText;
         }
 
@@ -111,7 +109,7 @@ namespace ManagerProject
 
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
-            SaveEmployeeInSQL();
+            SaveEmployeeToSQL();
             //    int employeeID = GenerateNewemployeeID();
             //    string name = NameTextBox.Text;
             //    string surname = SurnameTextBox.Text;
@@ -132,7 +130,7 @@ namespace ManagerProject
 
         private void AddCutomerButton_Click(object sender, EventArgs e)
         {
-            SaveCustomerInSQL();
+            SaveCustomerToSQL();
             //int customerID = GenerateNewcustomerID();
             //    string name = CustomerNameTextBox.Text;
             //    string surname = CustomerSurnameTextBox.Text;
@@ -185,6 +183,7 @@ namespace ManagerProject
         internal void RefreshTabEmployee()
         {
             manager.Employees.LoadEmployeesFromSQL();
+
             employeeBindingSource.Clear();
             for (int i = 0; i < manager.Employees.Count; i++)
             {
@@ -199,6 +198,8 @@ namespace ManagerProject
 
         internal void RefreshTabCustomer()
         {
+            manager.Customers.LoadCustomersFromSQL();
+
             customerBindingSource.Clear();
             for (int i = 0; i < manager.Customers.Count; i++)
             {
@@ -213,7 +214,7 @@ namespace ManagerProject
 
             for (int i = 0; i < manager.Customers.Count; i++)
             {
-                LoadProjectInfoToCustomer(manager.Customers[i]);
+                LoadProjectInfoToCustomer(manager.Customers[i].CustomerID, i);
             }
         }
 
@@ -263,21 +264,71 @@ namespace ManagerProject
             StatusComboBox.SelectedText = "Choise...";
         }
 
-        internal void LoadProjectInfoToCustomer(Customer customer)
+        internal void LoadProjectInfoToCustomer(int customerID,int customerIndex)
         {
-            int customerIndex = manager.Customers.IndexOf(customer);
-            double money = 0;
-            int quantity = 0;
-            for (int i = 0; i < manager.Projects.Count; i++)
+            //int customerIndex = manager.Customers.IndexOf(customer);
+            //double money = 0;
+            //int quantity = 0;
+            //for (int i = 0; i < manager.Projects.Count; i++)
+            //{
+            //    if (manager.Projects[i].CustomerID == customer.CustomerID)
+            //    {
+            //        quantity += 1;
+            //        money += manager.Projects[i].Cost;
+            //    }
+            //}
+
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
             {
-                if (manager.Projects[i].CustomerID == customer.CustomerID)
+                string oString = String.Format(
+                       "SELECT * " +
+                       "FROM ( " +
+                          "SELECT SUM(gp.Cost) AS sum " +
+                          "FROM ( " +
+                             "SELECT pr.ProjectID, pr.CustomerID, pr.Cost " + 
+                             "FROM Projects pr " +
+                             "GROUP BY pr.ProjectID, pr.CustomerID, pr.Cost " +
+                          ") gp " +
+                          "WHERE gp.CustomerID = '{0}' " +
+                       ") re", customerID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
                 {
-                    quantity += 1;
-                    money += manager.Projects[i].Cost;
+                    while (oReader.Read())
+                    {
+                        CustomerDataGridView[CustomerMoney.Index, customerIndex].Value = oReader["sum"].ToString();
+                    }
+                    myConnection.Close();
                 }
             }
-            CustomerDataGridView[CustomerMoney.Index, customerIndex].Value = money.ToString();
-            CustomerDataGridView[CustomerQuantity.Index, customerIndex].Value = quantity.ToString();
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = String.Format(
+                       "SELECT * " +
+                       "FROM ( " +
+                          "SELECT COUNT(*) AS co " +
+                          "FROM ( " +
+                            "SELECT ProjectID, CustomerID, Cost " +
+                            "FROM Projects " +
+                            "WHERE CustomerID = {0} " +
+                            "GROUP BY ProjectID, CustomerID, Cost " +
+                          ") gp " +
+                       ") re" , customerID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        CustomerDataGridView[CustomerQuantity.Index, customerIndex].Value = oReader["co"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
         }
 
         private void EmployeeDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -652,7 +703,7 @@ namespace ManagerProject
             ToolTipAdd().SetToolTip(AgreementDateTimePicker, "Enter Date");
         }
 
-        public void SaveEmployeeInSQL()
+        public void SaveEmployeeToSQL()
         {
             string name = NameEmployeeTextBox.Text;
             string surname = SurnameEmployeeTextBox.Text;
@@ -713,16 +764,78 @@ namespace ManagerProject
             }
         }
 
-        public void SaveCustomerInSQL()
+        public void SaveCustomerToSQL()
         {
-            string name = NameEmployeeTextBox.Text;
-            string surname = SurnameEmployeeTextBox.Text;
-            string dateOfEmployment = EmployeeDateTimePicker.Value.ToString("yyyy-MM-dd");
-            string salary = SalaryEmployeeTextBox.Text;
+            string name = CustomerNameTextBox.Text;
+            string surname = CustomerSurnameTextBox.Text;
+            string dateOfAreement = AgreementDateTimePicker.Value.ToString("yyyy-MM-dd");
+            string country = CountryTextBox.Text;
 
             string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
-            string oString = String.Format("INSERT INTO Employees(Name, Surname, DateOfEmployment, Salary)" +
-                    "VALUES ('{0}', '{1}', '{2}', '{3}')", name, surname, dateOfEmployment, salary);
+            string oString = String.Format("INSERT INTO Customers(Name, Surname, DateOfAreement, Country) " +
+                    "VALUES ('{0}', '{1}', '{2}', '{3}')", name, surname, dateOfAreement, country);
+            SqlConnection sqlConnection1 = new SqlConnection(con);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = oString;
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+            cmd.ExecuteNonQuery();
+            sqlConnection1.Close();
+            RefreshTabCustomer();
+        }
+
+        public void EditCustomerInSQL(int rowIndex)
+        {
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                int customerID = int.Parse(CustomerDataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                string name = CustomerDataGridView.Rows[rowIndex].Cells[1].Value.ToString();
+                string surname = CustomerDataGridView.Rows[rowIndex].Cells[2].Value.ToString();
+                string dateOfAreement = (DateTime.Parse(CustomerDataGridView.Rows[rowIndex].Cells[3].Value.ToString())).ToString("yyyy-MM-dd");
+                string country = CustomerDataGridView.Rows[rowIndex].Cells[4].Value.ToString();
+                string oString = String.Format("UPDATE Customers SET" +
+                    " Name = '{0}', Surname = '{1}', DateOfAreement = '{2}', Country = '{3}' " +
+                    "WHERE CustomerID= {4}", name, surname, dateOfAreement, country, customerID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                oCmd.ExecuteNonQuery();
+                myConnection.Close();
+                RefreshTabCustomer();
+            }
+        }
+
+        public void DeleteCustomerFromSQL(int rowIndex)
+        {
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                int customerID = int.Parse(CustomerDataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                string oString = String.Format("DELETE FROM Customers WHERE CustomerID = {0}", customerID);
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                oCmd.ExecuteNonQuery();
+                myConnection.Close();
+                RefreshTabCustomer();
+            }
+        }
+
+        public void SaveProjectToSQL()
+        {
+            string name = ProjectNameTextBox.Text;
+            string dateOfAgreement = ProjectDateTimePicker.Value.ToString("yyyy-MM-dd");
+            string cost = ProjectCostTextBox.Text;
+            string customerID = ProjectCostTextBox.Text;
+            string status = ProjectCostTextBox.Text;
+            
+            string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
+            string oString = String.Format("INSERT INTO Employees(Name, DateOfAgreement, Cost, CustomerID, Status) " +
+                    "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", name, dateOfAgreement, cost, customerID, status);
             SqlConnection sqlConnection1 = new SqlConnection(con);
 
             SqlCommand cmd = new SqlCommand();
@@ -736,7 +849,7 @@ namespace ManagerProject
             RefreshTabEmployee();
         }
 
-        public void EditCustomerInSQL(int rowIndex)
+        public void EditProjectInSQL(int rowIndex)
         {
             string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
 
@@ -758,7 +871,7 @@ namespace ManagerProject
             }
         }
 
-        public void DeleteCustomerFromSQL(int rowIndex)
+        public void DeleteProjectFromSQL(int rowIndex)
         {
             string con = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\job\projects\ManagerProject\ManagerProject\Manager.mdf;Integrated Security=True;Connect Timeout=30";
 
